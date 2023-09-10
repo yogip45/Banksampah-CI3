@@ -35,4 +35,11 @@ Akses Aplikasi Menggunakan Web Browser
 - Masuk dengan akun pengguna atau daftar jika Anda belum memiliki akun.
 - Mulai menggunakan aplikasi
 ```
+
+## Tampilan Aplikasi
+
+- Login
+![Login Page](https://i.ibb.co/cKW8xBw/Screenshot-2023-09-10-204626.png)
+- Dashboard
+![Dashboard](https://i.ibb.co/51kyZMW/Screenshot-2023-09-10-204934.png)
     
