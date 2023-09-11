@@ -24,7 +24,7 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-4">
-                                            <form role="form" action="<?php echo base_url().'jenissampah/tambah_aksi';?>" method="POST">                                                
+                                            <form role="form" action="<?php echo base_url().'index.php/jenissampah/tambah_aksi';?>" method="POST">                                                
                                                 <div class="form-group">
                                                     <label>Jenis Sampah</label>
                                                     <input type="text" class="form-control" placeholder="Besi, Kardus" name="nama_sampah" required>
@@ -95,7 +95,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                <?php echo anchor('jenissampah/hapus/'.$sampah->id, '<button type="button" class="btn btn-danger">OK</button>'); ?>
+                                                                <?php echo anchor('index.php/jenissampah/hapus/'.$sampah->id, '<button type="button" class="btn btn-danger">OK</button>'); ?>
                                                             </div>
                                                         </div>
                                                     </div>

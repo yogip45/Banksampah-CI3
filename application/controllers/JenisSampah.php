@@ -45,7 +45,7 @@ class JenisSampah extends CI_Controller {
 			
 				$this->m_jns_sampah->input_data($data,'jns_sampah');
 				$this->session->set_flashdata('sukses','Data Berhasil Ditambahkan');
-				redirect('/jenissampah/index');
+				redirect('index.php/jenissampah/index');
 				} else {
 					$this->load->view('index.php/error/403');
 				}
@@ -61,7 +61,7 @@ class JenisSampah extends CI_Controller {
 				$where = array ('id'=>$id);
 				$this->m_jns_sampah->hapus_data($where, 'jns_sampah');
 				$this->session->set_flashdata('hapus','Data Berhasil Dihapus');
-				redirect('/jenissampah/index');
+				redirect('index.php/jenissampah/index');
 			} else {
 				$this->load->view('index.php/error/403');
 			}
