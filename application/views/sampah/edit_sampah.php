@@ -30,7 +30,16 @@
                                                     <label>Harga</label>
                                                     <input type="number" class="form-control" value="<?php echo $sampah->harga ?>" name="harga">
                                                     <input type="hidden" class="form-control" value="Kg" name="satuan">
-                                                </div>                                                                                                                                                
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Kategori</label>
+                                                    <select class="form-control" name="kategori">
+                                                        <option value="Plastik" <?php echo ($sampah->kategori == 'Plastik') ? 'selected' : ''; ?>>Plastik</option>
+                                                        <option value="Kertas" <?php echo ($sampah->kategori == 'Kertas') ? 'selected' : ''; ?>>Kertas</option>
+                                                        <option value="Logam" <?php echo ($sampah->kategori == 'Logam') ? 'selected' : ''; ?>>Logam</option>
+                                                        <option value="Lain - Lain" <?php echo ($sampah->kategori == 'Lain - Lain') ? 'selected' : ''; ?>>Lain - Lain</option>
+                                                    </select>
+                                                </div>
                                                 <button type="submit" class="btn btn-success">Simpan</button>                                                
                                                 <!-- <button type="reset" class="btn btn-warning">Reset</button>                                                 -->
                                                 <a href="/banksampah/index.php/jenissampah/index" class="btn btn-danger">Batal</a>                                                

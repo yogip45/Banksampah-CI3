@@ -30,17 +30,19 @@
                                                     <input type="text" class="form-control" placeholder="Besi, Kardus" name="nama_sampah" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Harga</label>
+                                                    <label>Harga /kg</label>
                                                     <input type="number" class="form-control" placeholder="Rp." name="harga" required>
                                                     <input type="hidden" class="form-control" value="Kg" name="satuan">
                                                 </div>
-                                                <!-- <div class="form-group">
-                                                    <label>Satuan</label>
-                                                    <select class="form-control" name="" disabled>                                                        
-                                                        <option value="Kg">Kg</option>
-                                                        <option value="g">g</option>
+                                                <div class="form-group">
+                                                    <label>Kategori</label>
+                                                    <select class="form-control" name="kategori">                                                        
+                                                        <option value="Plastik">Plastik</option>
+                                                        <option value="Kertas">Kertas</option>
+                                                        <option value="Logam">Logam</option>
+                                                        <option value="Lain - Lain">Lain - Lain</option>
                                                     </select>
-                                                </div>                                                                                                 -->
+                                                </div>                                                                                                
                                                 <button type="submit" class="btn btn-success">Tambah</button>                                                
                                                 <button type="reset" class="btn btn-warning">Reset</button>                                                
                                             </form>
@@ -59,8 +61,8 @@
                                                 <tr>
                                                     <th>No.</th>
                                                     <th>Jenis Sampah</th>
+                                                    <th>Kategori</th>
                                                     <th>Harga</th>
-                                                    <!-- <th>Satuan</th> -->
                                                     <th>Tanggal Update</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -71,7 +73,8 @@
                                                 foreach ($jns_sampah as $sampah) : ?>
                                                 <tr>
                                                     <td><?php echo $no++ ?></td>                                                    
-                                                    <td><?php echo $sampah->nama_sampah ?></td>                                                    
+                                                    <td><?php echo $sampah->nama_sampah ?></td>                                                   
+                                                    <td><?php echo $sampah->kategori ?></td>                                                   
                                                     <td><?php echo $sampah->harga ?> /kg</td>                                                                                                        
                                                     <td><?php echo date('d M Y', strtotime($sampah->diubah)) ?></td>                                                    
                                                     <td class="aksi-column" >                                                        

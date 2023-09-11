@@ -36,11 +36,13 @@ class JenisSampah extends CI_Controller {
 				$nama_sampah = $this->input->post('nama_sampah');
 				$harga = $this->input->post('harga');
 				$satuan = $this->input->post('satuan');
+				$kategori = $this->input->post('kategori');
 			
 				$data = array(
 				'nama_sampah' => $nama_sampah,
 				'harga' => $harga,
 				'satuan' => $satuan,
+				'kategori' => $kategori,
 				);
 			
 				$this->m_jns_sampah->input_data($data,'jns_sampah');
@@ -99,11 +101,13 @@ class JenisSampah extends CI_Controller {
 				$nama_sampah = $this->input->post('nama_sampah');
 				$harga = $this->input->post('harga');
 				$satuan = $this->input->post('satuan');
+				$kategori = $this->input->post('kategori');
 
 				$data = array(
 					'nama_sampah'=> $nama_sampah,
 					'harga'=> $harga,
 					'satuan'=> $satuan,
+					'kategori'=> $kategori,
 				);
 
 				$where = array(
