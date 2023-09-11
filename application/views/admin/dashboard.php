@@ -110,8 +110,8 @@
                                             <i class="fa fa-trash fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge"><?= $jumlah['sampah'] ?> Kg</div>
-                                            <div>Total Sampah</div>
+                                            <div class="huge"><?= $jumlah['sampah'] ?></div>
+                                            <div>Total Sampah (Kg)</div>
                                         </div>
                                     </div>
                                 </div>

@@ -187,7 +187,7 @@ class User extends CI_Controller {
 		$foto = $_FILES['foto'];				
 		$id_user = $this->input->post('id_user');						
 		$config['upload_path'] = './assets/foto';
-		$config['allowed_types'] = 'jpg|png';
+		$config['allowed_types'] = 'jpg|png';		
 		$this->load->library('upload',$config);
 	
 		if (!$this->upload->do_upload('foto')) {

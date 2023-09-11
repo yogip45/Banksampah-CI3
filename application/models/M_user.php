@@ -56,4 +56,22 @@
             ->get();
       return $data->row_array();
     }
+
+    public function get_foto($id_user){
+      $this->db->select('foto');
+      $this->db->where('id_user', $id_user);
+      $query = $this->db->get('tb_user');
+
+      if ($query->num_rows() > 0) {
+          $row = $query->row();
+          return $row->foto;
+      } else {
+          return null;
+      }
+    }
+    public function update_foto($id_user, $foto){
+      $data = array('foto' => $foto);
+      $this->db->where('id_user', $id_user);
+      $this->db->update('tb_user', $data);
+    }
   }
