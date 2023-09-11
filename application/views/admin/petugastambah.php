@@ -53,7 +53,7 @@
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                                 <button type="reset" class="btn btn-warning">Reset</button>
-                                                <a href="/banksampah/index.php/petugas/index"  type="reset" class="btn btn-danger">Batal</a>
+                                                <a href="/banksampah/index.php/admin/petugasindex"  type="reset" class="btn btn-danger">Batal</a>
                                             </div>
                                         </div>
                                     </form>

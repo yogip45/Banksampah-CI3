@@ -35,9 +35,12 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/banksampah/index.php/setoran/setoranindex">Setor</a>
-                                </li>
+                                </li>                                
                                 <li>
                                     <a href="#">Pencairan</a>
+                                </li>
+                                <li <?php if (strpos(current_url(), '/setoran/pernasabah') !== false) echo 'class="active"'; ?>>
+                                    <a href="/banksampah/index.php/setoran/pernasabah">Nasabah</a>
                                 </li>
                             </ul>
                         </li>

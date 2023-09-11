@@ -32,6 +32,27 @@ class Setoran extends CI_Controller {
 				redirect('/index.php/auth');
 			}				
 	}
+	public function pernasabah()
+	{
+			if ($this->session->userdata('email')) {
+				if ($this->session->userdata('role')==2 || $this->session->userdata('role')==3) {
+					$keyword = $this->input->post('keyword');
+					$data['title'] = "Dashboard - Data Transaksi Nasabah";
+					$data['transaksi'] = $this->m_setoran->get_keyword($keyword);
+					$data['user'] = $this->m_user->get_user();
+					// $data['nasabah'] = $this->m_setoran->tampil_data()->result();
+					$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
+					$this->load->view('template/header',$data);
+					$this->load->view('template/top',$data);
+					$this->load->view('template/sidebar',$data);
+					$this->load->view('transaksi/pernasabah',$data);	
+				} else {
+					$this->load->view('error/403');
+				}
+			} else {			
+				redirect('/index.php/auth');
+			}				
+	}
 	public function tambah_setoran()
 	{
 		if ($this->session->userdata('email')) {
@@ -103,8 +124,38 @@ class Setoran extends CI_Controller {
 			} else {
 				$this->load->view('error/403');
 			}
+		} else {
+			redirect('/index.php/auth');
 		}
-	}	
+	}
+
+	public function search()
+	{
+		if ($this->session->userdata('email')) {
+			if ($this->session->userdata('role')==2||$this->session->userdata('role')==3) {
+
+				$this->load->model('m_setoran');
+				$keyword = $this->input->post('keyword');
+				$nama = $this->input->post('nama');		
+				$data['transaksi'] = $this->m_setoran->get_keyword($keyword);
+		
+				$this->session->set_flashdata('nama', $nama);
+				$this->session->set_flashdata('keyword', $keyword);
+		
+				$data['title'] = "Dashboard - Data Transaksi Nasabah";
+				$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
+							$data['user'] = $this->m_user->get_user();
+							$this->load->view('template/header',$data);
+							$this->load->view('template/top',$data);
+							$this->load->view('template/sidebar',$data);
+							$this->load->view('transaksi/pernasabah',$data);
+			} else {
+				$this->load->view('error/403');
+			}
+		} else {
+			redirect('/index.php/auth');
+		}
+	}
 
 
 }

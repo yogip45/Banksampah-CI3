@@ -44,6 +44,9 @@
                                 <li>
                                     <a href="buttons.html">Pencairan</a>
                                 </li>
+                                <li <?php if (strpos(current_url(), '/setoran/pernasabah') !== false) echo 'class="active"'; ?>>
+                                    <a href="/banksampah/index.php/setoran/pernasabah">Nasabah</a>
+                                </li>
                             </ul>
                         </li>
                         <li <?php if (strpos(current_url(), '/user/myprofile') !== false) echo 'class="active"'; ?>>

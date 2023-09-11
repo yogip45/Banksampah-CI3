@@ -27,11 +27,7 @@
                             <?php echo anchor('index.php/setoran/tambah_setoran/', '<button class="btn btn-info"><i class="fa fa-plus"></i> Tambah</button>'); ?>                                
                             </div>
                             <br>                            
-                            <div class="panel panel-default">
-                                <!-- <div class="panel-heading">
-                                    DataTables Advanced Tables
-                                </div> -->
-                                <!-- /.panel-heading -->
+                            <div class="panel panel-default">                               
                                 <div class="panel-body">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered table-hover" id="dataNasabah">
@@ -40,12 +36,10 @@
                                                     <th>No.</th>
                                                     <th>Id Setor</th>
                                                     <th>Tanggal Setor</th>
-                                                    <th>NIN</th>
                                                     <th>Jenis Sampah</th>
                                                     <th>Berat</th>                                                    
                                                     <th>Harga</th>                                                    
                                                     <th>Total</th>                                               
-                                                    <th>Id Admin</th>                                             
                                                     <th>Aksi</th>                                             
                                                 </tr>
                                             </thead>
@@ -57,19 +51,14 @@
                                                     <td><?php echo $no++?></td>
                                                     <td><?php echo $data->id_setor ?></td>
                                                     <td><?php echo date('d M Y', strtotime($data->tanggal_setor)) ?></td>
-                                                    <td><?php echo $data->nin ?></td>
                                                     <td><?php echo $data->jenis_sampah ?></td>
                                                     <td><?php echo $data->berat ?></td>                                                    
                                                     <td><?php echo $data->harga ?></td>                                                    
                                                     <td><?php echo $data->total ?></td>                                                    
-                                                    <td><?php echo $data->id_admin ?></td>                                                    
                                                     <td>                                                    
                                                         <button type="button" class="btn btn-outline btn-success" data-toggle="modal" data-target="#detailModal<?php echo $data->nin; ?>">
                                                         <i class="fa fa-bars fa-fw"></i>
                                                         </button>
-                                                        <?php echo anchor('index.php/petugas/edit_nasabah/'.$data->id_setor, '<button type="button" class="btn btn-outline btn-warning"><i class="fa fa-edit fa-fw"></i></button>'); ?>
-                                                        <button type="button" class="btn btn-outline btn-danger" data-toggle="modal" data-target="#hapusModal<?php echo $data->id_setor; ?>">
-                                                        <i class="fa fa-trash fa-fw"></i></button>
                                                     </td>                                                    
                                                     <?php endforeach; ?>
                                                 </div>                                                                                                            
@@ -88,7 +77,7 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Detail Nasabah</h5>                                                            
+                                                            <h5 class="modal-title" id="exampleModalLabel">Detail Transaksi</h5>                                                            
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -96,7 +85,7 @@
                                                         <div class="modal-body">
                                                         <table class="table">
                                                             <tr>
-                                                                <th>User Id</th>
+                                                                <th>Id Setor</th>
                                                                 <td><?php echo $data->id_setor ?></td>                                                                
                                                             </tr>
                                                             <tr>
@@ -104,49 +93,29 @@
                                                                 <td><?php echo $data->nin ?></td>
                                                             </tr>
                                                             <tr>
+                                                                <th>Tanggal Setor</th>
+                                                                <td><?php echo date('d M Y H:i', strtotime($data->tanggal_setor)) ?></td>
+                                                            </tr>
+                                                            <tr>
                                                                 <th>Nama</th>
                                                                 <td><?php echo $data->nama ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Alamat</th>
-                                                                <td><?php echo $data->alamat_lengkap ?></td>
+                                                                <th>Harga</th>
+                                                                <td><?php echo $data->harga ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Email</th>
-                                                                <td><?php echo $data->email ?></td>
-                                                            </tr>                                                            
-                                                            <tr>
-                                                                <th>Saldo</th>
-                                                                <td>Rp. <?php echo $data->saldo ?></td>
+                                                                <th>Qty</th>
+                                                                <td><?php echo $data->berat ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Tanggal Dibuat</th>
-                                                                <td><?php echo date('d M Y H:i', strtotime($data->dibuat)) ?></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Dibuat Oleh</th>
-                                                                <td><?php echo $data->dibuat_oleh ?></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Status Akun</th>
-                                                                <td>
-                                                                    <?php
-                                                                    $statusText = ($data->is_active == 1) ? 'Aktif' : 'Tidak Aktif';
-                                                                    $statusClass = ($data->is_active == 1) ? 'text-primary' : 'text-danger';
-                                                                    ?>
-                                                                        <span class="<?php echo $statusClass; ?>"><?php echo $statusText; ?></span>
-                                                                </td>
+                                                                <th>Total</th>
+                                                                <td><?php echo $data->total ?></td>
                                                             </tr>
                                                             <!-- Tambahkan baris ini sesuai dengan kolom yang lain -->
                                                         </table>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                        <button type="button" class="btn btn-warning" data-dismiss="modal" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_setor; ?>">Reset Password</button>                                                         
-                                                        <?php if ($data->is_active == 1): ?>
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_setor; ?>">Non Aktifkan Akun</button>
-                                                        <?php else: ?>
-                                                            <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_setor; ?>">Aktifkan Akun</button>
-                                                        <?php endif; ?>
+                                                        <div class="modal-footer">                                                                                                                  
                                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
                                                         </div>
                                                         </div>
