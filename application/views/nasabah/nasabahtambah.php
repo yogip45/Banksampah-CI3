@@ -30,6 +30,16 @@
                                                 <?= form_error('email','<small class=" text-danger form-text text-muted">', '</small>') ?>
                                             </div>                                                                                                                                                         
                                             <div class="form-group col-md-8">
+                                                <label for="inputRw">Password</label>                                                                                                   
+                                                <input type="password" class="form-control" id="inputPassword1" name="password1">
+                                                <?= form_error('password1','<small class="text-danger form-text text-muted">', '</small>') ?>                                           
+                                            </div>                                                                                                                   
+                                            <div class="form-group col-md-8">
+                                                <label for="inputRw">Konfirmasi Password</label>
+                                                <input type="password" class="form-control" id="inputPassword2" name="password2">                                                
+                                                <?= form_error('password2','<small class="text-danger form-text text-muted">', '</small>') ?>                                           
+                                            </div>                                         
+                                            <div class="form-group col-md-8">
                                                 <label for="inputKecamatan">Asal Desa</label>
                                                 <input type="text" class="form-control" id="inputDesa" name="desa" value="<?= set_value('desa')?>">
                                                 <?= form_error('desa','<small class=" text-danger form-text text-muted">', '</small>') ?>
@@ -56,16 +66,6 @@
                                                     <?= form_error('alamat_lengkap','<small class=" text-danger form-text text-muted">', '</small>') ?>
                                                 </div>                                                                   
                                             </div>
-                                            <div class="form-group col-md-8">
-                                                <label for="inputRw">Password</label>                                                                                                   
-                                                <input type="password" class="form-control" id="inputPassword1" name="password1">
-                                                <?= form_error('password1','<small class="text-danger form-text text-muted">', '</small>') ?>                                           
-                                            </div>                                                                                                                           
-                                            <div class="form-group col-md-8">
-                                                <label for="inputRw">Konfirmasi Password</label>
-                                                <input type="password" class="form-control" id="inputPassword2" name="password2">                                                
-                                                <?= form_error('password2','<small class="text-danger form-text text-muted">', '</small>') ?>                                           
-                                            </div>                                         
                                         <div class="form-group">
                                             <input type="hidden" name="saldo" value="0">
                                         </div>                                                                                                                           
