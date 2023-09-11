@@ -4,7 +4,7 @@
 # Aplikasi Pencatatan Transaksi Banksampah Cikrak
 
 Ini adalah projek yang saya kerjakan selama melaksanakan magang di Diskominfo Kabupaten Kebumen. Aplikasi ini
-berfungsi untuk melakukan pencatatan terhadap transaksi yang dilakukan di banksampah cikrak di Desa Jatimulyo
+berfungsi untuk melakukan pencatatan terhadap transaksi yang dilakukan di banksampah cikrak di Desa Jatimulyo. Projek ini masih dalam tahap pengembangan sampai saat ini
 
 
 ## Dibuat Oleh
