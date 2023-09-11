@@ -42,3 +42,5 @@ Akses Aplikasi Menggunakan Web Browser
 
 ![Dashboard](https://i.ibb.co/51kyZMW/Screenshot-2023-09-10-204934.png)
 
+![Dashboard](https://pasteboard.co/G34HpitCkckW.png)
+
