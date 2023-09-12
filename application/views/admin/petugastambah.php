@@ -19,36 +19,29 @@
                                 <div class="panel-body">
                                     <form role="form" action="<?php echo base_url().'index.php/admin/create_petugas';?>" method="POST">                                                                                                                                                             
                                             <div class="form-group col-md-8">
-                                                <label for="inputDesa">Nama Lengkap</label>
+                                                <label for="inputNama">Nama Lengkap</label>
                                                 <input type="text" class="form-control" id="inputNama" name="nama" value="<?= set_value('nama')?>">  
                                                 <?= form_error('nama','<small class=" text-danger form-text text-muted">', '</small>') ?>                                          
                                             </div>                                                                                                                                                                                                                                                                                                                                                                                                               
                                             <div class="form-group col-md-8">
-                                                <label for="inputRw">Email</label>
+                                                <label for="inputEmail">Email</label>
                                                 <input type="text" class="form-control" id="inputEmail" name="email" value="<?= set_value('email')?>">
                                                 <?= form_error('email','<small class=" text-danger form-text text-muted">', '</small>') ?>
                                             </div>                                                                                                                           
                                             <div class="form-group col-md-8">
-                                                <label for="inputRw">No HP</label>
+                                                <label for="inputHp">No HP</label>
                                                 <input type="number" class="form-control" id="inputHp" name="no_hp" value="<?= set_value('no_hp')?>">
                                                 <?= form_error('no_hp','<small class=" text-danger form-text text-muted">', '</small>') ?>
                                             </div>                                                                                                                           
                                             <div class="form-group col-md-8">
-                                                <label for="inputRw">Password</label>                                                                                                   
+                                                <label for="inputPassword1">Password</label>                                                                                                   
                                                 <input type="password" class="form-control" id="inputPassword1" name="password1">
                                                 <?= form_error('password1','<small class="text-danger form-text text-muted">', '</small>') ?>                                           
                                             </div>                                                                                                                           
                                             <div class="form-group col-md-8">
-                                                <label for="inputRw">Konfirmasi Password</label>
+                                                <label for="inputPassword2">Konfirmasi Password</label>
                                                 <input type="password" class="form-control" id="inputPassword2" name="password2">                                                
-                                            </div>                                                                                                                           
-                                            <div class="form-group col-md-8">
-                                                <label>Level</label>
-                                                <select class="form-control" name="role_id">
-                                                    <option value="2" <?= set_select('role', '2'); ?>>Petugas</option>
-                                                    <option value="3" <?= set_select('role', '3'); ?>>Super Admin</option>                                                    
-                                                </select>                                                                                                
-                                            </div>                                                                                                                                                                   
+                                            </div>                                                                                                                                                                                                                                                                                                                                          
                                         <div class="form-row">
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-primary">Submit</button>

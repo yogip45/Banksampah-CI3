@@ -44,7 +44,7 @@
                                                     </p>                                                    
                                                     <p class="card-text">                                                        
                                                         <small class="text-muted">
-                                                            | Terakhir Login <?= date('d M Y H:i', strtotime($nasabah['last_login'])) ?>                                                            
+                                                            Terakhir Login <?= date('d M Y H:i', strtotime($nasabah['last_login'])) ?>                                                            
                                                         </small>
                                                     </p>                                                    
                                                 </div>

@@ -124,7 +124,8 @@ class Petugas extends CI_Controller {
 		} else {			
 			$kodeunik = 'U' . uniqid();
 			$nin = getAutoNumber('tb_nasabah','nin','NSB','7');
-			$nama = $this->input->post('nama');		
+			$nama = $this->input->post('nama');
+			$jk = $this->input->post('jk');	
 			$rt = $this->input->post('rt');		
 			$rw = $this->input->post('rw');		
 			$desa = $this->input->post('desa');		
@@ -149,12 +150,13 @@ class Petugas extends CI_Controller {
 				'id_user' =>$kodeunik,
 				'nin' => $nin,
 				'nama' => $nama,
+				'jk' => $jk,
 				'rt' => $rt,
 				'rw' => $rw,
 				'desa' => $desa,
 				'kecamatan' => $kecamatan,
-				'alamat_lengkap' => $alamat_lengkap,
-				'saldo' => 0,				
+				'alamat_lengkap' => $alamat_lengkap,				
+				'saldo' => 0,
 			);
 			
 			$this->m_user->input_data($data,'tb_user');

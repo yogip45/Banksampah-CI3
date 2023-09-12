@@ -11,7 +11,7 @@
                     </div>
                     <!-- /.row -->
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <?php if ($this->session->flashdata('sukses')): ?>
                                 <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
                             <?php endif; ?>
@@ -19,10 +19,6 @@
                                 <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
                             <?php endif; ?>
                             <div class="panel panel-default">
-                                <!-- <div class="panel-heading">
-                                    DataTables Advanced Tables
-                                </div> -->
-                                <!-- /.panel-heading -->
                                 <div class="panel-body">
                                     <?php echo form_open('index.php/setoran/search') ?> 
                                             <div class="form-group col-md-6">
@@ -65,7 +61,7 @@
                                                                 <th style="text-align: center;">Aksi</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody>                                                            
                                                         <?php
                                                             $no = 1;
                                                             foreach ($nasabah as $data) : ?>
@@ -214,7 +210,7 @@
                     "url": "//cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",
                     "sEmptyTable": "Tidak ada data yang tersedia"
                 },
-                "responsive": true, // Aktifkan ekstensi Responsive                        
+                "responsive": false, // Aktifkan ekstensi Responsive                        
             });
         });
         </script>

@@ -78,7 +78,7 @@ class Setoran extends CI_Controller {
 			if ($this->session->userdata('role')==2||$this->session->userdata('role')==3) {
 				
 				$this->load->model('m_nasabah');
-				$this->load->model('m_jns_sampah');
+				$this->load->model('m_jns_sampah');				
 		
 				$this->form_validation->set_rules('nin','Nin','required|trim',
 				array('required'=>'Nomor Induk Harus Diisi')
@@ -150,10 +150,10 @@ class Setoran extends CI_Controller {
 							$this->load->view('template/sidebar',$data);
 							$this->load->view('transaksi/pernasabah',$data);
 			} else {
-				$this->load->view('error/403');
+				$this->load->view('error/403');				
 			}
 		} else {
-			redirect('/index.php/auth');
+			redirect('/index.php/auth');			
 		}
 	}
 

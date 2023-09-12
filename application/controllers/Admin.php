@@ -24,7 +24,7 @@ class Admin extends CI_Controller {
 	{		
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role')==3) {
-				$data['title'] = "Dashboard | Home";
+				$data['title'] = "Dashboard - Home";
 				$data['user'] = $this->m_petugas->get_petugas();
 				$data['jumlah'] = $this->m_petugas->hitung();
 				$this->load->view('template/header',$data);
@@ -44,7 +44,7 @@ class Admin extends CI_Controller {
 		//HARUS LOGIN DAN ROLE = 3 (SuperAdmin)
 		if ($this->session->userdata('email')) {			
 			if ($this->session->userdata('role') == 3) {					
-					$data['title'] = "Dashboard | Home";
+					$data['title'] = "Dashboard - Data Petugas";
 					$data['user'] = $this->m_petugas->get_petugas();					
 					$data['petugas'] = $this->m_petugas->tampil_data()->result();
 					$this->load->view('template/header', $data);
@@ -113,8 +113,8 @@ class Admin extends CI_Controller {
 			$nama = $this->input->post('nama');        
 			$email = $this->input->post('email');        
 			$no_hp = $this->input->post('no_hp');        
-			$role = $this->input->post('role_id');        
-			$password = $this->input->post('password1');                                
+			$role = '2';
+			$password = $this->input->post('password1');                               
 			
 			$data = array(
 					//data ke tabel user            
