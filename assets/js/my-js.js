@@ -38,3 +38,5 @@ $(document).ready(function () {
     responsive: true,
   });
 });
+
+//COPY PASSWORD BARU SETELAH RESET

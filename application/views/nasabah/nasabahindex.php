@@ -217,6 +217,33 @@
                                                 </div>
                                                 <?php endforeach; ?>
                                             <!-- MODAL KONFIRMASI HAPUS NASABAH -->
+                                            <!-- MODAL PASSWORD RESET BARU -->
+                                            <div class="modal fade" id="tampilPassword" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="hapusModalLabel">Password Baru Anda</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <?php $reset_password = $this->session->flashdata('password');  ?>
+                                                                        <h5 class="text-center" id="isi_password"><?= $reset_password; ?></h5>
+                                                                    </div>
+                                                                    <div class="col-lg-6 text-center">
+                                                                        <button class="btn btn-outline-light text-dark" id="copyButton" onclick="copyToClipboard('isi_password')">Copy</button>
+                                                                    </div>
+                                                                </div>                                                                    
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            <!-- MODAL PASSWORD RESET BARU -->
                                     </div>
                                     <!-- /.table-responsive -->                                    
                                 </div>
@@ -234,6 +261,37 @@
 
         </div>
         <!-- /#wrapper -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                // Mengecek apakah ada nilai dalam session "reset_pass"
+                var resetPassValue = "<?= $reset_password; ?>";
+                if (resetPassValue != "") {
+                    // Cek apakah modal sudah pernah ditampilkan
+                    $("#tampilPassword").modal("show");
+                }
+        });        
+        </script>
+        <script>
+            function copyToClipboard(elementId) {
+            var copyText = document.getElementById(elementId);
+            var textArea = document.createElement("textarea");
+
+            textArea.value = copyText.textContent;
+            document.body.appendChild(textArea);
+
+            textArea.select();
+            document.execCommand("copy");
+
+            document.body.removeChild(textArea);
+
+            // Menonaktifkan tombol setelah berhasil disalin
+            var copyButton = document.getElementById("copyButton");
+            copyButton.textContent = "copied";
+            copyButton.disabled = true;
+            }
+        </script>
 
         <!-- jQuery -->
         <script src="<?php echo base_url()?>assets/js/jquery.min.js"></script>

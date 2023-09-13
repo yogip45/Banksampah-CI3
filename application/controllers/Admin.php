@@ -27,9 +27,9 @@ class Admin extends CI_Controller {
 				$data['title'] = "Dashboard - Home";
 				$data['user'] = $this->m_petugas->get_petugas();
 				$data['jumlah'] = $this->m_petugas->hitung();
-				$this->load->view('template/header',$data);
-				$this->load->view('template/top', $data);
-				$this->load->view('template/sidebar',$data);
+				$this->load->view('newtemplate/header',$data);
+				$this->load->view('newtemplate/top', $data);
+				$this->load->view('newtemplate/sidebar',$data);
 				$this->load->view('admin/dashboard',$data);
 			} else {
 				$this->load->view('error/403');
