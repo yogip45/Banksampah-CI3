@@ -47,11 +47,11 @@ class Admin extends CI_Controller {
 					$data['title'] = "Dashboard - Data Petugas";
 					$data['user'] = $this->m_petugas->get_petugas();					
 					$data['petugas'] = $this->m_petugas->tampil_data()->result();
-					$this->load->view('template/header', $data);
-					$this->load->view('template/top', $data);
-					$this->load->view('template/sidebar');
-					$this->load->view('admin/petugasindex', $data);
-					// var_dump($data);
+					$this->load->view('newtemplate/header', $data);
+					$this->load->view('newtemplate/top', $data);
+					$this->load->view('newtemplate/sidebar');
+					$this->load->view('admin/petugasindex', $data);					
+					$this->load->view('newtemplate/footer');					
 			} else {					
 					$this->load->view('error/403');
 			}
@@ -65,10 +65,11 @@ class Admin extends CI_Controller {
 			if ($this->session->userdata('email')) {
 				$data['title'] = 'Dashboard - Tambah Data Petugas';			
 				$data['user'] = $this->m_petugas->get_petugas();
-				$this->load->view('template/header',$data);
-				$this->load->view('template/top',$data);
-				$this->load->view('template/sidebar');
+				$this->load->view('newtemplate/header',$data);
+				$this->load->view('newtemplate/top',$data);
+				$this->load->view('newtemplate/sidebar');
 				$this->load->view('admin/petugastambah');
+				$this->load->view('newtemplate/footer');
 			} else {			
 				redirect('index.php/auth');
 			}

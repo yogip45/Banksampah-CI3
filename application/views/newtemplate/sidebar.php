@@ -8,7 +8,7 @@
           <img src="<?php echo base_url()?>adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?= $user['nama_petugas']  ?></a>
         </div>
       </div>
 
@@ -30,7 +30,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link <?php echo (strpos($_SERVER['REQUEST_URI'], '/banksampah/index.php/admin/dashboard') !== false) ? 'active' : ''; ?>">
+          <a href="/banksampah/index.php/admin/dashboard" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'dashboard') ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -38,12 +38,29 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex' || 'admin' && $this->uri->segment(2) == 'edit_petugas'
+            || 'admin' && $this->uri->segment(2) == 'tambah_petugas') ? 'active' : ''; ?>">
+
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                Widgets
+                Pengguna
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/banksampah/index.php/admin/petugasindex" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex') ? 'active' : ''; ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Petugas</p>
+                </a>
+              </li>                            
+              <li class="nav-item">
+                <a href="/banksampah/index.php/admin/nasabahindex" class="nav-link <?= ($this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex') ? 'active' : ''; ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nasabah</p>
+                </a>
+              </li>                            
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">

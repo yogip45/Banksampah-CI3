@@ -1,15 +1,3 @@
-// TOGGLE SHOW PASSWORD
-$(document).on("click", ".show-password-button", function () {
-  const targetInputId = $(this).data("target");
-  const input = $("#" + targetInputId);
-
-  if (input.attr("type") === "password") {
-    input.attr("type", "text");
-  } else {
-    input.attr("type", "password");
-  }
-});
-
 // LOADING SCREEN
 const loader = document.querySelector(".loader");
 window.addEventListener("load", () => {
