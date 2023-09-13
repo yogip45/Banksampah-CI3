@@ -142,48 +142,9 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="<?php echo base_url()?>assets/js/startmin.js"></script>
-
-        <!-- SCIPT UNTUK AMBIL HARGA SAMPAH DR DROPDOWN -->
-        <script>
-            var jenisSampah = document.getElementById('jenisSampah');
-            // Mendapatkan elemen input harga
-            var inputHarga = document.getElementById('inputHarga');
-            // Menambahkan event listener ketika pilihan jenis sampah berubah
-            jenisSampah.addEventListener('change', function() {
-                // Mendapatkan harga dari atribut data-harga opsi yang dipilih
-                var selectedOption = jenisSampah.options[jenisSampah.selectedIndex];
-                var harga = selectedOption.getAttribute('data-harga');
-                // Mengisi nilai input harga dengan harga yang ditemukan
-                inputHarga.value = harga;
-            });
-            </script>
-        <!-- SCIPT UNTUK AMBIL HARGA SAMPAH DR DROPDOWN -->
-
-        <!-- SCIPT UNTUK AMBIL NIN dan NAMA DR MODAL NASABAH -->
-        <script>
-            function pilih_nasabah(nin,nama){
-                inputNin.value = nin;
-                inputNama.value = nama;
-                
-            }
-        </script>
-        <!-- SCIPT UNTUK AMBIL NIN dan NAMA DR MODAL NASABAH -->
-        <script>
-            const loader = document.querySelector(".loader");
-            window.addEventListener("load",() => {
-                loader.classList.add("loader--hidden");
-                loader.addEventListener("transitioned", ()=>{
-                    document.body.removeChild(document.querySelector(".loader"));
-                });
-            })
-        </script>
-        <script>
-            window.setTimeout(function(){
-                $(".alert").fadeTo(500,0).slideUp(500, function(){
-                    $(this).remove();
-                });
-            }, 3000);
-        </script>
+        <script src="<?= base_url() ?>/assets/js/my-js.js"></script>
+        <script src="<?= base_url() ?>/assets/js/trans-js.js"></script>
+        
         <script src="<?php echo base_url()?>assets/js/dataTables/jquery.dataTables.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/dataTables/dataTables.bootstrap.min.js"></script>      
         <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>  
