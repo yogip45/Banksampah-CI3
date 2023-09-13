@@ -45,10 +45,11 @@ class Petugas extends CI_Controller {
 					$data['title'] = "Dashboard - Data Nasabah";
 					$data['user'] = $this->m_user->get_user();
 					$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
-					$this->load->view('template/header',$data);
-					$this->load->view('template/top',$data);
-					$this->load->view('template/sidebar',$data);
+					$this->load->view('newtemplate/header',$data);
+					$this->load->view('newtemplate/top',$data);
+					$this->load->view('newtemplate/sidebar');
 					$this->load->view('nasabah/nasabahindex',$data);	
+					$this->load->view('newtemplate/footer');
 				} else {
 					$this->load->view('error/403');
 				}

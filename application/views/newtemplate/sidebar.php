@@ -50,13 +50,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/banksampah/index.php/admin/petugasindex" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex') ? 'active' : ''; ?>">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-user nav-icon"></i>
                   <p>Petugas</p>
                 </a>
               </li>                            
               <li class="nav-item">
-                <a href="/banksampah/index.php/admin/nasabahindex" class="nav-link <?= ($this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex') ? 'active' : ''; ?>">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="/banksampah/index.php/petugas/nasabahindex" class="nav-link <?= ($this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex') ? 'active' : ''; ?>">
+                  <i class="far fa-user nav-icon"></i>
                   <p>Nasabah</p>
                 </a>
               </li>                            

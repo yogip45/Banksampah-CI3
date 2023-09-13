@@ -104,10 +104,11 @@ class Admin extends CI_Controller {
 		if ($this->form_validation->run() == false) {
 			$data['title'] = "Dashboard - Tambah Data Petugas";
 			$data['user'] = $this->m_petugas->get_petugas();
-			$this->load->view('template/header',$data);
-			$this->load->view('template/top',$data);
-			$this->load->view('template/sidebar');
+			$this->load->view('newtemplate/header',$data);
+			$this->load->view('newtemplate/top',$data);
+			$this->load->view('newtemplate/sidebar');
 			$this->load->view('admin/petugastambah');
+			$this->load->view('newtemplate/footer');
 		} else {
 			$pembuat = $this->m_petugas->get_petugas();      
 			$kodeunik = 'U' . uniqid();
@@ -149,10 +150,11 @@ class Admin extends CI_Controller {
 				$data['title'] = 'Dashboard - Edit Data Petugas';
 				$data['user'] = $this->m_petugas->get_petugas();												
 				$data['petugas'] = $this->m_petugas->get_user_petugas_data($id_user);
-				$this->load->view('template/header',$data);
-				$this->load->view('template/top',$data);
-				$this->load->view('template/sidebar',$data);
-				$this->load->view('admin/petugasedit', $data);
+				$this->load->view('newtemplate/header',$data);
+				$this->load->view('newtemplate/top',$data);
+				$this->load->view('newtemplate/sidebar');
+				$this->load->view('admin/petugasedit');
+				$this->load->view('newtemplate/footer');
 			} else {			
 			redirect('/index.php/auth');
 		}

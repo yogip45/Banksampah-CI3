@@ -28,3 +28,11 @@ $(document).ready(function () {
 });
 
 //COPY PASSWORD BARU SETELAH RESET
+$(document).ready(function () {
+  // Mengecek apakah ada nilai dalam session "reset_pass"
+  var resetPassValue = "<?php echo $reset_password; ?>";
+  if (resetPassValue != "") {
+    // Cek apakah modal sudah pernah ditampilkan
+    $("#modalResetPass").modal("show");
+  }
+});
