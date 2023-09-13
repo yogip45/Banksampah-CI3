@@ -96,52 +96,11 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="<?php echo base_url()?>assets/js/startmin.js"></script>
+        <script src="<?= base_url() ?>/assets/js/my-js.js"></script>
 
-
-        <!-- <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var inputRt = document.getElementById("inputRt");
-            var inputRw = document.getElementById("inputRw");
-            var inputRtrw = document.getElementById("rtrw");
-
-            inputRw.addEventListener("input", function () {
-                var rtValue = inputRt.value;
-                var rwValue = inputRw.value;
-                
-                inputRtrw.value = rtValue + "/" + rwValue;
-            });
-        });
-        </script> -->
-        <script>
-            const loader = document.querySelector(".loader");
-            window.addEventListener("load",() => {
-                loader.classList.add("loader--hidden");
-                loader.addEventListener("transitioned", ()=>{
-                    document.body.removeChild(document.querySelector(".loader"));
-                });
-            })
-        </script>
-        <script>
-            window.setTimeout(function(){
-                $(".alert").fadeTo(500,0).slideUp(500, function(){
-                    $(this).remove();
-                });
-            }, 3000);
-        </script>
         <script src="<?php echo base_url()?>assets/js/dataTables/jquery.dataTables.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/dataTables/dataTables.bootstrap.min.js"></script>      
         <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>  
-        <script>
-            $(document).ready(function () {
-                $('#dataNasabah').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",
-                    "sEmptyTable": "Tidak ada data yang tersedia"
-                },
-                "responsive": true, // Aktifkan ekstensi Responsive                        
-            });
-        });
-        </script>
         <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></s>
             
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->

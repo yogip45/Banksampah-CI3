@@ -258,55 +258,14 @@
         <script src="<?php echo base_url()?>assets/js/startmin.js"></script>
 
         <!-- TOGGLE SHOW PASSWORD -->
-        <script>
-            $(document).on('click', '.show-password-button', function() {
-                const targetInputId = $(this).data('target');
-                const input = $('#' + targetInputId);
-                
-                if (input.attr('type') === 'password') {
-                    input.attr('type', 'text');
-                } else {
-                    input.attr('type', 'password');
-                }
-            });
-            </script>
-        <!-- TOGGLE SHOW PASSWORD -->
+
+        <script src = "<?= base_url() ?>assets/js/my-js.js"></script>
         
-        <!-- LOADING SCREEN -->
-        <script>
-            const loader = document.querySelector(".loader");
-            window.addEventListener("load",() => {
-                loader.classList.add("loader--hidden");
-                loader.addEventListener("transitioned", ()=>{
-                    document.body.removeChild(document.querySelector(".loader"));
-                });
-            })
-        </script>
-        <!-- LOADING SCREEN -->
-        <!-- REMOVE ALERT OTOMATIS -->
-        <script>
-            window.setTimeout(function(){
-                $(".alert").fadeTo(500,0).slideUp(500, function(){
-                    $(this).remove();
-                });
-            }, 3000);
-            </script>
         <!-- REMOVE ALERT OTOMATIS -->
         <script src="<?php echo base_url()?>assets/js/dataTables/jquery.dataTables.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/dataTables/dataTables.bootstrap.min.js"></script>      
         <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>  
-        <!-- DATA TABLES -->
-        <script>
-            $(document).ready(function () {
-                $('#dataNasabah').DataTable({
-                    "language": {
-                        "url": "//cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",
-                        "sEmptyTable": "Tidak ada data yang tersedia"
-                    },
-                "responsive": true,                       
-            });
-        });
-        </script>
+        <!-- DATA TABLES -->        
         <!-- DATA TABLES -->
         <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></s>
             
