@@ -233,7 +233,7 @@ class Admin extends CI_Controller {
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role') == 2 || $this->session->userdata('role') == 3) {
 						$this->load->model('m_user');
-						$default_password = 'password@_';
+						$default_password = generate_password(6);
 						$where = array('id_user' => $id_user);
 						$table = 'tb_user';
 						// Hash default password							
@@ -243,6 +243,7 @@ class Admin extends CI_Controller {
 							'default_password' => 1, // Mengatur default_password menjadi 1
 							'diedit' => date('Y-m-d H:i:s'));					
 						$this->m_user->reset_password($where, $data, $table);
+						$this->session->set_flashdata('password', $default_password);
 						$this->session->set_flashdata('sukses', 'Password berhasil direset');
 						redirect('/index.php/admin/petugasindex');
 			} else {

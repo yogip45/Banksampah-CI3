@@ -232,6 +232,33 @@
                             </div>                                            
                             <?php endforeach; ?>
                         <!-- RESET PASSWD -->
+                        <!-- TAMPIL PASSWORD BARU -->
+                            <?php $reset_password = $this->session->flashdata('password'); ?>
+                            <?php if ($reset_password != NULL) : ?>
+                                <div class="modal fade" id="tampilPassword" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="hapusModalLabel">Password Baru</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <h5 class="text-bold" id="isi_password"><?= $reset_password; ?></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif ?>
+                        <!-- TAMPIL PASSWORD BARU -->
               </div>
               <!-- /.card-body -->
             </div>
@@ -253,4 +280,15 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->    
+<!-- ./wrapper -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function () {
+// Mengecek apakah ada nilai dalam session "reset_pass"
+var resetPassValue = "<?php echo $reset_password; ?>";
+if (resetPassValue != "") {
+// Cek apakah modal sudah pernah ditampilkan
+$("#tampilPassword").modal("show");
+}
+});
+</script>  

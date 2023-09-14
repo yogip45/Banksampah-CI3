@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= $title; ?></title>
+  <link rel="icon" href="<?= base_url()?>assets/logo/logo.png" type="image/png">
+
 
   <!-- Google Font: Source Sans Pro -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">

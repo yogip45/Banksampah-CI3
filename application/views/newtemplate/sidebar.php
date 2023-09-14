@@ -59,7 +59,7 @@
                 </a>
               </li>                            
               <li class="nav-item">
-                <a href="/banksampah/index.php/petugas/nasabahindex" class="nav-link <?= ($this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex') ? 'active' : ''; ?>">
+                <a href="/banksampah/index.php/petugas/nasabahindex" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex') ? 'active' : ''; ?>">
                   <i class="far fa-user nav-icon"></i>
                   <p>Nasabah</p>
                 </a>
@@ -67,7 +67,8 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
+            )  ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Transaksi
@@ -76,7 +77,8 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/banksampah/index.php/setoran/setoranindex" class="nav-link">
+                <a href="/banksampah/index.php/setoran/setoranindex" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
+                )  ? 'active' : ''; ?>"">
                   <p> Setor</p>
                 </a>
               </li>
