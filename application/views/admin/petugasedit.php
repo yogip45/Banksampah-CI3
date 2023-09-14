@@ -31,7 +31,7 @@
                 <form role="form" action="<?php echo base_url().'index.php/admin/update_petugas';?>" method="POST" class="col-8">                                                                                                                                                             
                       <div class="form-group col-md-8">
                           <label for="inputNama">Nama Lengkap</label>
-                          <input type="text" class="form-control" id="inputNama" name="nama" value="<?= $data->nama_petugas?>">  
+                          <input type="text" class="form-control" id="inputNama" name="nama_petugas" value="<?= $data->nama_petugas?>">  
                           <input type="hidden" class="form-control" id="inputNama" name="id_user" value="<?= $data->id_user?>">  
                           <?= form_error('nama','<small class="text-danger">', '</small>') ?>                                          
                       </div>                                                                                                                                                                                                                                                                                                                                                                                                               
@@ -44,15 +44,6 @@
                           <input type="number" class="form-control" id="inputHp" name="no_hp" value="<?= $data->no_hp?>">
                           <?= form_error('no_hp','<small class="text-danger">', '</small>') ?>
                       </div>                                                                                                                           
-                      <div class="form-group col-md-8">
-                          <label for="inputPassword1">Password</label>                                                                                                   
-                          <input type="password" class="form-control" id="inputPassword1" name="password1">
-                          <?= form_error('password1','<small class="text-danger">', '</small>') ?>                                           
-                      </div>                                                                                                                           
-                      <div class="form-group col-md-8">
-                          <label for="inputPassword2">Konfirmasi Password</label>
-                          <input type="password" class="form-control" id="inputPassword2" name="password2">                                                
-                      </div>                                                                                                                                                                                                                                                                                                                                          
                       <div class="form-group">
                           <div class="col-md-12">
                               <button type="submit" class="btn btn-primary">Submit</button>

@@ -169,17 +169,11 @@ class Admin extends CI_Controller {
 
 			$id_user = $this->input->post('id_user');						
 			$nama = $this->input->post('nama_petugas');		
-			$username = $this->input->post('username');		
-			$email = $this->input->post('email');		
 			$hp = $this->input->post('no_hp');		
-			$level = $this->input->post('role');		
 
 			$data = array(				
 				'nama_petugas' => $nama,
-				'username' => $username,				
-				'email' => $email,			
 				'no_hp' => $hp,				
-				'role' => $level,
 				'diedit' => date('Y-m-d H:i:s'),					
 			);		
 			
