@@ -6,6 +6,7 @@
   <title><?= $title; ?></title>
 
   <!-- Google Font: Source Sans Pro -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/fontawesome-free/css/all.min.css">
@@ -27,6 +28,15 @@
   <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/summernote/summernote-bs4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
   <title>Dashboard - Bank Sampah</title>
+
+        <style>
+            .address-cell {
+            max-width: 200px; /* Sesuaikan dengan lebar maksimum yang Anda inginkan */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        </style>
 
         <style>
             .loader {

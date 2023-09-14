@@ -64,12 +64,13 @@ class Petugas extends CI_Controller {
 			if ($this->session->userdata('role')==3 || $this->session->userdata('role')==2 ) {
 				$data['title'] = "Dashboard - Form Tambah Nasabah";
 				$data['user'] = $this->m_user->get_user();
-				$this->load->view('template/header',$data);
-				$this->load->view('template/top',$data);
-				$this->load->view('template/sidebar',$data);
+				$this->load->view('newtemplate/header',$data);
+				$this->load->view('newtemplate/top',$data);
+				$this->load->view('newtemplate/sidebar',$data);
 				$this->load->view('nasabah/nasabahtambah',$data);
+				$this->load->view('newtemplate/footer');
 			} else {
-				redirect('/index.php/auth');
+				$this->load->view('error/403');
 			}
 		} else {	
 			redirect('/index.php/auth');
@@ -118,10 +119,11 @@ class Petugas extends CI_Controller {
 		if ($this->form_validation->run() == false) {
 			$data['title'] = "Dashboard - Tambah Nasabah";
 			$data['user'] = $this->m_user->get_user();
-			$this->load->view('template/header',$data);
-			$this->load->view('template/top',$data);
-			$this->load->view('template/sidebar');
+			$this->load->view('newtemplate/header',$data);
+			$this->load->view('newtemplate/top',$data);
+			$this->load->view('newtemplate/sidebar');
 			$this->load->view('nasabah/nasabahtambah');
+			$this->load->view('newtemplate/footer');
 		} else {			
 			$kodeunik = 'U' . uniqid();
 			$nin = getAutoNumber('tb_nasabah','nin','NSB','7');
@@ -201,10 +203,11 @@ public function hapus_nasabah($id_user)
 				$this->load->model('m_user');
 				// $where = array('id_user'=>$id_user);		
 				$data['nasabah'] = $this->m_nasabah->get_user_nasabah_data($id_user);
-				$this->load->view('template/header',$data);
-				$this->load->view('template/top',$data);
-				$this->load->view('template/sidebar',$data);
+				$this->load->view('newtemplate/header',$data);
+				$this->load->view('newtemplate/top',$data);
+				$this->load->view('newtemplate/sidebar',$data);
 				$this->load->view('nasabah/nasabahedit',$data);
+				$this->load->view('newtemplate/footer',$data);
 			} else {
 				redirect('/index.php/auth');
 			}
@@ -223,16 +226,14 @@ public function hapus_nasabah($id_user)
 			$id_user = $this->input->post('id_user');		
 			$rt = $this->input->post('rt');		
 			$rw = $this->input->post('rw');		
+			$jk = $this->input->post('jk');		
 			$desa = $this->input->post('desa');
 			$kecamatan = $this->input->post('kecamatan');		
 			$alamat_lengkap = $this->input->post('alamat_lengkap');		
-			$email = $this->input->post('email');			
-			$saldo = $this->input->post('saldo');
 			
 			$data = array(
 				//auto generate nin
 				'role' => 1,
-				'email' => $email,				
 				'diedit' => date('Y-m-d H:i:s'),
 			);
 			$data1 = array(											
@@ -242,7 +243,7 @@ public function hapus_nasabah($id_user)
 				'desa' => $desa,
 				'kecamatan' => $kecamatan,
 				'alamat_lengkap' => $alamat_lengkap,
-				'saldo' => 0,
+				'jk' => $jk,
 			);
 			
 			$where = array(
@@ -251,7 +252,7 @@ public function hapus_nasabah($id_user)
 			
 			$this->m_user->update_data($where,$data,'tb_user');
 			$this->m_nasabah->update_data($where,$data1,'tb_nasabah');
-			$this->session->set_flashdata('edit','Data Berhasil Diubah');
+			$this->session->set_flashdata('edit','Data Berhasil Diubah!');
 			redirect('/index.php/petugas/nasabahindex');
 		} else {
 			redirect('/index.php/auth');
@@ -287,7 +288,9 @@ public function hapus_nasabah($id_user)
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role') == 2 || $this->session->userdata('role') == 3) {
 						$this->load->model('m_user');
+						$this->load->model('m_nasabah');
 						$default_password = generate_password(6);
+						$nasabah = $this->m_nasabah->get_user_nasabah_data($id_user);
 						$where = array('id_user' => $id_user);
 						$table = 'tb_user';
 						// Hash default password							
@@ -297,8 +300,9 @@ public function hapus_nasabah($id_user)
 							'default_password' => 1, // Mengatur default_password menjadi 1
 							'diedit' => date('Y-m-d H:i:s'));
 						$this->m_user->reset_password($where, $data, $table);
-						$this->session->set_flashdata('sukses', 'Password berhasil direset');									
+						$this->session->set_flashdata('sukses', 'Password berhasil direset');						
 						$this->session->set_flashdata('password', $default_password);
+						$this->session->set_flashdata('nasabah', $nasabah['nama']);
 						redirect('/index.php/petugas/nasabahindex');
 			} else {
 				$this->load->view('error/403');																	 

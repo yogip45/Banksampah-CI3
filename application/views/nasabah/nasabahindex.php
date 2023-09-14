@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Nsaabah</h1>
+            <h1>Data Nasabah</h1>
           </div>
           <div class="col-sm-6">            
             <ol class="breadcrumb float-sm-right">
@@ -30,10 +30,10 @@
                 <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
             <?php endif; ?>
             <?php if ($this->session->flashdata('edit')): ?>
-                <div class="alert alert-danger"><?php echo $this->session->flashdata('edit'); ?></div>
+                <div class="alert alert-success"><?php echo $this->session->flashdata('edit'); ?></div>
             <?php endif; ?>
             <!-- ALERT -->                                                
-            <?php echo anchor('/index.php/admin/tambah_nasabah/', '<button class="btn btn-info"><i class="fa fa-plus"></i> Tambah</button>'); ?>
+            <?php echo anchor('/index.php/petugas/tambah_nasabah/', '<button class="btn btn-info"><i class="fa fa-plus"></i> Tambah</button>'); ?>
             <br>
             <br>
             <div class="card">
@@ -58,13 +58,13 @@
                             <td><?php echo $no++?></td>
                             <td><?php echo $data->nin ?></td>
                             <td><?php echo $data->nama ?></td>
-                            <td><?php echo $data->alamat_lengkap ?></td>
+                            <td class="address-cell"><?php echo $data->alamat_lengkap ?></td>
                             <td><?php echo $data->email ?></td>                                                    
-                            <td>                                                    
+                            <td class="text-center">                                                    
                                 <button type="button" class="btn btn-outline btn-success" data-toggle="modal" data-target="#detailModal<?php echo $data->nin; ?>">
                                 <i class="fa fa-bars fa-fw"></i>
                                 </button>
-                                <?php echo anchor('index.php/petugas/edit_nasabah/'.$data->id_user, '<button type="button" class="btn btn-outline btn-warning"><i class="fa fa-edit fa-fw"></i></button>'); ?>
+                                <?php echo anchor('index.php/petugas/edit_nasabah/'.$data->id_user, '<button type="button" class="btn btn-outline btn-warning"><i class="fa fa-edit fa-fw text-white"></i></button>'); ?>
                                 <button type="button" class="btn btn-outline btn-danger" data-toggle="modal" data-target="#hapusModal<?php echo $data->id_user; ?>">
                                 <i class="fa fa-trash fa-fw"></i></button>
                             </td>                                                    
@@ -133,7 +133,7 @@
                                     </table>
                                 </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-dismiss="modal" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_user; ?>">Reset Password</button>                                                         
+                                <button type="button" class="btn btn-warning text-white" data-dismiss="modal" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_user; ?>">Reset Password</button>                                                         
                                 <?php if ($data->is_active == 1): ?>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Non Aktifkan Akun</button>
                                 <?php else: ?>
@@ -217,31 +217,31 @@
                     <!-- KONFIRMASI HAPUS -->
                     <?php endforeach; ?>
                     <!-- TAMPIL PASSWORD BARU -->
-                    <div class="modal fade" id="tampilPassword" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="hapusModalLabel">Password Baru Anda</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <?php $reset_password = $this->session->flashdata('password');  ?>
-                                        <h5 class="text-center" id="isi_password"><?= $reset_password; ?></h5>
+                    <?php $reset_password = $this->session->flashdata('password'); ?>
+                    <?php if ($reset_password != NULL) : ?>
+                        <div class="modal fade" id="tampilPassword" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="hapusModalLabel">Password Baru</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <div class="col-lg-6 text-center">
-                                        <button class="btn btn-outline-light text-dark" id="copyButton" onclick="copyToClipboard('isi_password')">Copy</button>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <h5 class="text-bold" id="isi_password"><?= $reset_password; ?></h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>                                                                    
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif ?>
                     <!-- TAMPIL PASSWORD BARU -->
               </div>
               <!-- /.card-body -->
@@ -264,4 +264,15 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->    
+<!-- ./wrapper -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function () {
+// Mengecek apakah ada nilai dalam session "reset_pass"
+var resetPassValue = "<?php echo $reset_password; ?>";
+if (resetPassValue != "") {
+// Cek apakah modal sudah pernah ditampilkan
+$("#tampilPassword").modal("show");
+}
+});
+</script>

@@ -21,10 +21,11 @@ class Setoran extends CI_Controller {
 					$data['title'] = "Dashboard - Data Setoran";
 					$data['user'] = $this->m_user->get_user();
 					$data['nasabah'] = $this->m_setoran->tampil_data()->result();
-					$this->load->view('template/header',$data);
-					$this->load->view('template/top',$data);
-					$this->load->view('template/sidebar',$data);
+					$this->load->view('newtemplate/header',$data);
+					$this->load->view('newtemplate/top',$data);
+					$this->load->view('newtemplate/sidebar',$data);
 					$this->load->view('transaksi/setoranindex',$data);	
+					$this->load->view('newtemplate/footer');
 				} else {
 					$this->load->view('error/403');
 				}
@@ -42,10 +43,12 @@ class Setoran extends CI_Controller {
 					$data['user'] = $this->m_user->get_user();
 					// $data['nasabah'] = $this->m_setoran->tampil_data()->result();
 					$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
-					$this->load->view('template/header',$data);
-					$this->load->view('template/top',$data);
-					$this->load->view('template/sidebar',$data);
+					$this->load->view('newtemplate/header',$data);
+					$this->load->view('newtemplate/top',$data);
+					$this->load->view('newtemplate/sidebar',$data);
 					$this->load->view('transaksi/pernasabah',$data);	
+					$this->load->view('newtemplate/footer',$data);
+
 				} else {
 					$this->load->view('error/403');
 				}
@@ -61,10 +64,11 @@ class Setoran extends CI_Controller {
 				$data['user'] = $this->m_user->get_user();
 				$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
 				$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
-				$this->load->view('template/header',$data);
-				$this->load->view('template/top',$data);
-				$this->load->view('template/sidebar',$data);
+				$this->load->view('newtemplate/header',$data);
+				$this->load->view('newtemplate/top',$data);
+				$this->load->view('newtemplate/sidebar',$data);
 				$this->load->view('transaksi/setorantambah',$data);
+				$this->load->view('newtemplate/footer',$data);
 			} else {
 				$this->load->view('error/403');
 			}
@@ -97,10 +101,11 @@ class Setoran extends CI_Controller {
 						$data['user'] = $this->m_user->get_user();
 						$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
 						$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
-						$this->load->view('template/header',$data);
-						$this->load->view('template/top',$data);
-						$this->load->view('template/sidebar',$data);
+						$this->load->view('newtemplate/header',$data);
+						$this->load->view('newtemplate/top',$data);
+						$this->load->view('newtemplate/sidebar',$data);
 						$this->load->view('transaksi/setorantambah',$data);
+						$this->load->view('newtemplate/footer',$data);
 				} else {
 					$id_setor = getAutoNumber('tb_setoran','id_setor','ST-','10');
 					$nin = $this->input->post('nin');
@@ -145,10 +150,11 @@ class Setoran extends CI_Controller {
 				$data['title'] = "Dashboard - Data Transaksi Nasabah";
 				$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
 							$data['user'] = $this->m_user->get_user();
-							$this->load->view('template/header',$data);
-							$this->load->view('template/top',$data);
-							$this->load->view('template/sidebar',$data);
+							$this->load->view('newtemplate/header',$data);
+							$this->load->view('newtemplate/top',$data);
+							$this->load->view('newtemplate/sidebar',$data);
 							$this->load->view('transaksi/pernasabah',$data);
+							$this->load->view('newtemplate/footer',$data);
 			} else {
 				$this->load->view('error/403');				
 			}
