@@ -1,240 +1,225 @@
-<div class="loader"></div>
-<div id="page-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Profile Saya</h1>
-                <div class="row">
-                    <div class="col-lg-12">
-                            <!-- ALERT TINDAKAN -->
-                            <div class="col-md-12">
-                            <?php if ($this->session->flashdata('sukses')): ?>
-                                <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
-                            <?php endif; ?>
-                            <?php if ($this->session->flashdata('error')): ?>
-                                <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
-                            <?php endif; ?>
-                            </div>
-                            <!-- ALERT TINDAKAN -->
-                        <div class="col-md-12">
-                            <div class="panel panel-default">                                                                
-                                <div class="panel-body">
-                                <!-- BODY -->
-                                    <div class="card mb-3" style="max-width: 640px;">
-                                        <div class="row no-gutters">
-                                            <div class="image-crop col-md-4">
-                                                <img src="<?= base_url() ?>assets/foto/<?= $nasabah['foto'] ?>" alt="Foto Profile">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h3 class="card-title"><?= $nasabah['nama'] ?></h3>
-                                                    <h5 class="card-title">
-                                                        <?= $nasabah['email'] ?> |
-                                                        <?= $nasabah['username'] ?> | 
-                                                        <span style="<?= $nasabah['role'] == 3 ? 'color: red;' : ($nasabah['role'] == 2 ? 'color: green;' : ($nasabah['role'] == 1 ? 'color: green;' : '')) ?>">
-                                                            <?= $nasabah['role'] == 3 ? 'Admin' : ($nasabah['role'] == 2 ? 'Petugas' : ($nasabah['role'] == 1 ? 'Nasabah' : '')) ?>
-                                                        </span>
-                                                    </h5>
-                                                    <p class="card-text"><?= $nasabah['alamat_lengkap'] ?></p>
-                                                    <p class="card-text"> Saldo : Rp. <?= $nasabah['saldo'] ?></p>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">
-                                                            Bergabung <?= date('d M Y', strtotime($nasabah['dibuat'])) ?>                                                            
-                                                        </small>                                                        
-                                                    </p>                                                    
-                                                    <p class="card-text">                                                        
-                                                        <small class="text-muted">
-                                                            Terakhir Login <?= date('d M Y H:i', strtotime($nasabah['last_login'])) ?>                                                            
-                                                        </small>
-                                                    </p>                                                    
-                                                </div>
-                                            </div>                                                    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h5 class="card-title">Edit Profile</h5>
-                                </div>
-                                <div class="panel-body">
-                                    <!-- BODY -->
-                                    <form role="form" action="<?php echo base_url().'index.php/user/update_profile';?>" method="POST">                                                                                                                                                             
-                                            <div class="form-group col-md-6">
-                                                <label for="inputDesa">Nama Lengkap</label>
-                                                <input type="text" class="form-control" id="inputNama" name="nama" value="<?= $nasabah['nama']?>">  
-                                                <?= form_error('nama','<small class=" text-danger form-text text-muted">', '</small>') ?>                                          
-                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                               
-                                            <div class="form-group col-md-6">
-                                                <label for="inputAlamat">Email</label>
-                                                <input type="text" class="form-control" id="inputAlamat" name="email" value="<?= $nasabah['email']?>" disabled>
-                                                <?= form_error('email','<small class=" text-danger form-text text-muted">', '</small>') ?>
-                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                                            <div class="form-group col-md-6">
-                                                <label for="inputAlamat">Alamat</label>
-                                                <input type="text" class="form-control" id="inputEmail" name="alamat" value="<?= $nasabah['alamat_lengkap']?>">
-                                                <input type="hidden" name="id_user" value="<?= $nasabah['id_user'] ?>">
-                                                <?= form_error('alamat','<small class=" text-danger form-text text-muted">', '</small>') ?>
-                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-                                        <div class="form-row">
-                                            
-                                            <div class="col-md-12">
-                                                <button type="submit" class="btn btn-primary">Simpan</button>                                                
-                                            </div>
-                                        </div>
-                                    </form>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h5 class="card-title">Ganti Foto Profil</h5>
-                                </div>                                
-                                <div class="panel-body">
-                                <!-- BODY -->
-                                    <div class="card mb-3" style="max-width: 540px;">
-                                        <div class="row no-gutters">                                            
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <?= form_open_multipart('index.php/user/updatefoto');?>                                                                                                    
-                                                        <div class="form-group col-md-4">                                                          
-                                                            <input type="file" name="foto" accept=".png, .jpg">
-                                                            <input type="hidden" name="id_user" value="<?= $nasabah['id_user'] ?>">
-                                                        </div>
-                                                        <div class="form-row">
-                                                            <div class="col-md-12">
-                                                                <button type="submit" class="btn btn-primary">Simpan</button>                                                
-                                                            </div>
-                                                        </div>                                                    
-                                                    <?= form_close();?>
-                                                </div>
-                                            </div>                                                    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                </div>                
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-md-12">
-                            <div class="panel panel-danger">
-                                <div class="panel-heading">
-                                    <h5 class="card-title">Update Password</h5>
-                                </div>                                
-                                <div class="panel-body">
-                                <!-- BODY -->
-                                    <div class="card mb-3" style="max-width: 640px;">
-                                        <div class="row no-gutters">                                            
-                                            <div class="col-md-12">
-                                                <div class="card-body">                                                    
-                                                    <form role="form" action="<?php echo base_url().'index.php/user/update_password';?>" method="POST">                                                                                                                                                             
-                                                            <div class="form-group col-md-8">
-                                                                <label for="inputDesa">Password Lama</label>
-                                                                <input type="password" class="form-control" id="inputPassword" name="passwordold">  
-                                                                <?= form_error('passwordold','<small class=" text-danger form-text text-muted">', '</small>') ?>                                          
-                                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                            <div class="form-group col-md-8">
-                                                                <label for="inputAlamat">Password Baru</label>
-                                                                <input type="password" class="form-control" id="inputPassword" name="password1">
-                                                                <?= form_error('password1','<small class=" text-danger form-text text-muted">', '</small>') ?>
-                                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                                                            <div class="form-group col-md-8">
-                                                                <label for="inputEmail">Konfirmasi Password Baru</label>
-                                                                <input type="password" class="form-control" id="inputPassword" name="password2">
-                                                                <?= form_error('password2','<small class=" text-danger form-text text-muted">', '</small>') ?>
-                                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-                                                            <div class="form-row">
-                                                                <div class="col-md-12">
-                                                                <button type="submit" class="btn btn-danger">Simpan</button>                                                
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>                                                    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
-            </div>
-            <!-- /#page-wrapper -->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="loader"></div>
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Profile Saya</h1>
+          </div>
+          <div class="col-sm-6">            
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">User</a></li>
+              <li class="breadcrumb-item active">Profil Saya</li>
+            </ol>
+          </div>
         </div>
-    </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <?php if ($this->session->flashdata('sukses')): ?>
+                <div class="alert alert-primary"><?php echo $this->session->flashdata('sukses'); ?></div>
+            <?php endif; ?>
+            <?php if ($this->session->flashdata('hapus')): ?>
+                <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
+            <?php endif; ?>
+            <?php if ($this->session->flashdata('gagal')): ?>
+                <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
+            <?php endif; ?>
+            <!-- ALERT -->                                                
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <!-- MYPROFILE -->
+                <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                    <div class="col-md-3">
+
+                        <!-- Profile Image -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body box-profile">
+                                <div class="text-center">
+                                <img class="profile-user-img img-fluid img-circle"
+                                    src="<?= base_url() ?>assets/foto/<?= $nasabah['foto'] ?>"
+                                    alt="User profile picture">
+                                </div>
+
+                                <h3 class="profile-username text-center"><?= $nasabah['nama'] ?></h3>
+
+                                <p class="text-muted text-center"><?= $nasabah['email'] ?></p>
+
+                                <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>Last Login</b> <a class="float-right"><?= date('d M H:i', strtotime($nasabah['last_login'])) ?></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Saldo</b> <a class="float-right">Rp. <?= $nasabah['saldo'] ?></a>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- About Me Box -->
+                        <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Diri</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <strong><i class="fas fa-user mr-1"></i> Jenis Kelamin</strong>
+
+                            <p class="text-muted">
+                                <?= $nasabah['jk']; ?>
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fas fa-user mr-1"></i> Username</strong>
+
+                            <p class="text-muted">
+                            <?= $nasabah['username'] ?>
+                            </p>
+                            
+                            <hr>
+                            <strong><i class="fas fa-home mr-1"></i> Alamat</strong>
+
+                            <p class="text-muted">
+                            <?= $nasabah['alamat_lengkap'] ?>
+                            </p>
+                            <hr>
+                            <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                            <p class="text-muted">Nothing worth nothing</p>
+                        </div>
+                        <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-9">
+                        <!-- FORM EDIT PROFILE -->
+                        <div class="card card-primary card-outline">
+                          <div class="card-header">
+                              <h3 class="card-title">Edit Profile</h3>
+                          </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                <div class="active tab-pane" id="settings">
+                                    <form class="form-horizontal" action="<?php echo base_url().'index.php/user/update_profile';?>" method="POST">
+                                    <div class="form-group row">
+                                        <label for="inputNama" class="col-sm-2 col-form-label">Nama</label>
+                                        <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputNama" placeholder="Nama Lengkap" name="nama" value="<?= $nasabah['nama']?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputAlamat" class="col-sm-2 col-form-label">Alamat</label>
+                                        <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputAlamat" name="alamat_lengkap" placeholder="Alamat" value="<?= $nasabah['alamat_lengkap']?>">
+                                        <input type="hidden" name="id_user" value="<?= $nasabah['id_user'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FORM EDIT PROFILE -->
+                        <!-- FORM EDIT PROFILE -->
+                        <div class="card card-primary card-outline">
+                          <div class="card-header">
+                              <h3 class="card-title">Foto Profile</h3>
+                          </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                <div class="active tab-pane" id="settings">
+                                    <?= form_open_multipart('index.php/user/updatefoto');?>                                                                                                    
+                                    <div class="form-group">
+                                        <!-- <label for="inputFoto">File input</label> -->
+                                        <div class="input-group">
+                                        <div class="custom-file col-md-8">
+                                            <input type="file" class="custom-file-input" id="inputFoto" name="foto">
+                                            <label class="custom-file-label" for="inputFoto">Choose file</label>
+                                        </div>
+                                        <div class="form-group">
+                                        <input type="hidden" name="id_user" value="<?= $nasabah['id_user'] ?>">
+                                        </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                    </div>
+                                    <?= form_close();?>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FORM EDIT PROFILE -->
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+                </section>
+                <!-- MYPROFILE -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->            
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
 </div>
-
-<!-- Include JavaScript files -->
-<script src="<?php echo base_url()?>assets/js/jquery.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/metisMenu.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/startmin.js"></script>
-<script src="<?php echo base_url()?>assets/js/dataTables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/dataTables/dataTables.bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<!-- ./wrapper -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function () {
+// Mengecek apakah ada nilai dalam session "reset_pass"
+var resetPassValue = "<?php echo $reset_password; ?>";
+if (resetPassValue != "") {
+// Cek apakah modal sudah pernah ditampilkan
+$("#tampilPassword").modal("show");
+}
+});
+</script>
 
 <script>
-    const toggleForm = document.getElementById('toggleForm');
-    const editForm = document.getElementById('editForm');
-    const formInputs = editForm.querySelectorAll('input, textarea');
-    
-    toggleForm.addEventListener('change', function () {
-        formInputs.forEach(input => {
-            input.disabled = !toggleForm.checked;
-        });
+$(document).ready(function() {
+    // Saat input file berubah
+    $('#inputFoto').change(function() {
+        // Ambil nama file yang diunggah
+        var fileName = $(this).val().split('\\').pop();
+        // Tampilkan nama file di label
+        $(this).next('.custom-file-label').html(fileName);
     });
+});
 </script>
-
-<script>
-    const loader = document.querySelector(".loader");
-    window.addEventListener("load", () => {
-        loader.classList.add("loader--hidden");
-        loader.addEventListener("transitioned", () => {
-            document.body.removeChild(document.querySelector(".loader"));
-        });
-    });
-</script>
-
-<script>
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function() {
-            $(this).remove();
-        });
-    }, 3000);
-</script>
-
-<script>
-    $(document).ready(function () {
-        $('#dataNasabah').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",
-                "sEmptyTable": "Tidak ada data yang tersedia"
-            },
-            "responsive": true
-        });
-    });
-</script>
-</body>
-</html>

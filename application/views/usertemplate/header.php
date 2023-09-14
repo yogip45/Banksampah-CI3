@@ -1,69 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><?= $title; ?></title>
+  <link rel="icon" href="<?= base_url()?>assets/logo/logo.png" type="image/png">
 
-    <head>
-        <meta charset="utf-8">
-        <link rel="icon" href="<?= base_url()?>assets/logo/logo.png" type="image/png">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
 
-        <title>Dashboard - Cikrak</title>
-        <!-- STYLE LOGIN -->
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url()?>adminlte/dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+  <title><?= $title; ?></title>
+
         <style>
-            #dataPetugas th {
-            white-space: nowrap; /* Agar teks dalam th tidak patah-patah */
-            }
-
-            #dataPetugas td {
-            max-width: 200px; /* Menentukan lebar maksimal kolom */
+            .address-cell {
+            max-width: 200px; /* Sesuaikan dengan lebar maksimum yang Anda inginkan */
             overflow: hidden;
-            text-overflow: ellipsis; /* Menampilkan ellipsis jika teks terlalu panjang */
+            text-overflow: ellipsis;
             white-space: nowrap;
-            }
-            .divider:after,
-            .divider:before {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #eee;
-            }
-            .h-custom {
-            height: calc(100% - 73px);
-            }
-            @media (max-width: 450px) {
-            .h-custom {
-            height: 100%;
-            }
-            }
+        }
         </style>
-        <style>
-            .image-crop {
-                width: 150px;
-                height: 180px;
-                overflow: hidden;               
-            }
 
-            .image-crop img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        </style>
         <style>
-            .centered-header {
-                text-align: center;
-            }
-            .aksi-column {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .aksi-column button {
-                margin: 0 5px; /* Sesuaikan jarak antara tombol jika diperlukan */
-            }
             .loader {
                 position: fixed;
                 top: 0;
@@ -98,29 +75,6 @@
                 to { transform: rotate(1turn);}
             }
         </style>
-        <!-- Bootstrap Core CSS -->
-        <link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- MetisMenu CSS -->
-        <link href="<?php echo base_url()?>assets/css/metisMenu.min.css" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="<?php echo base_url()?>assets/css/startmin.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href="<?php echo base_url()?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-        <link href="<?php echo base_url()?>assets/css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
-        <!-- DataTables Responsive CSS -->
-        <link href="<?php echo base_url()?>assets/css/dataTables/dataTables.responsive.css" rel="stylesheet">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-
-    <body>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">

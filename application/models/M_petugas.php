@@ -10,7 +10,7 @@
       return $this->db->get();      
     }
     public function get_petugas() {
-      $data = $this->db->select('tb_user.id_user,tb_user.nama_petugas, tb_user.role')
+      $data = $this->db->select('tb_user.id_user,tb_user.nama_petugas, tb_user.role, tb_user.foto')
         ->from('tb_user')        
         ->where('tb_user.email', $this->session->userdata('email'))
         ->get();

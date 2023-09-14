@@ -23,7 +23,7 @@ class Nasabah extends CI_Controller {
 				$this->load->view('usertemplate/header',$data);
 				$this->load->view('usertemplate/top',$data);
 				$this->load->view('usertemplate/sidebar',$data);
-				$this->load->view('nasabah/dashboard.php',$data);
+				$this->load->view('nasabah/dashboard',$data);
 			} else {
 				redirect('/index.php/auth/dashboard');
 			}

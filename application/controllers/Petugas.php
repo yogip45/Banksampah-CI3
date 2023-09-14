@@ -29,9 +29,9 @@ class Petugas extends CI_Controller {
 			$data['title'] = 'Dashboard - Home Petugas';
 			$data['user'] = $this->m_petugas->get_petugas();
 			$data['jumlah'] = $this->m_petugas->hitung();			
-			$this->load->view('petugastemplate/header');
-			$this->load->view('petugastemplate/top',$data);
-			$this->load->view('petugastemplate/sidebar');
+			$this->load->view('newtemplate/header',$data);
+			$this->load->view('newtemplate/top',$data);
+			$this->load->view('newtemplate/sidebar');
 			$this->load->view('petugas/dashboard',$data);
 		} else {
 			redirect('/index.php/auth');

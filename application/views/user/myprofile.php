@@ -1,228 +1,218 @@
-<div class="loader"></div>
-<div id="page-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Profile Saya</h1>
-                <div class="row">
-                    <div class="col-lg-12">
-                            <!-- ALERT TINDAKAN -->
-                            <div class="col-md-12">
-                            <?php if ($this->session->flashdata('sukses')): ?>
-                                <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
-                            <?php endif; ?>
-                            <?php if ($this->session->flashdata('error')): ?>
-                                <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
-                            <?php endif; ?>
-                            </div>
-                            <!-- ALERT TINDAKAN -->
-                        <div class="col-md-12">
-                            <div class="panel panel-default">                                                                
-                                <div class="panel-body">
-                                <!-- BODY -->
-                                    <div class="card mb-3" style="max-width: 640px;">
-                                        <div class="row no-gutters">
-                                            <div class="image-crop col-md-4">
-                                                <img src="<?= base_url() ?>assets/foto/<?= $user['foto'] ?>" alt="Foto Profile">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h3 class="card-title"><?= $user['nama_petugas'] ?></h3>
-                                                    <h5 class="card-title">
-                                                        <?= $user['email'] ?> |
-                                                        <?= $user['username'] ?> | 
-                                                        <span style="<?= $user['role'] == 3 ? 'color: red;' : ($user['role'] == 2 ? 'color: green;' : '') ?>">
-                                                            <?= $user['role'] == 3 ? 'Admin' : ($user['role'] == 2 ? 'Petugas' : '') ?>
-                                                        </span>
-                                                    </h5>
-                                                    <p class="card-text"><?= $user['no_hp'] ?></p>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">
-                                                            Bergabung <?= date('d M Y', strtotime($user['dibuat'])) ?>                                                             
-                                                        </small>
-                                                    </p>                                                    
-                                                    <p class="card-text">
-                                                        <small class="text-muted">                                                            
-                                                            Terakhir Login <?= date('d M Y H:i', strtotime($user['last_login'])) ?>
-                                                        </small>
-                                                    </p>                                                    
-                                                </div>
-                                            </div>                                                    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h5 class="card-title">Edit Profile</h5>
-                                </div>
-                                <div class="panel-body">
-                                    <!-- BODY -->
-                                    <form role="form" action="<?php echo base_url().'index.php/user/update_profile';?>" method="POST">                                                                                                                                                             
-                                            <div class="form-group col-md-6">
-                                                <label for="inputDesa">Nama Lengkap</label>
-                                                <input type="text" class="form-control" id="inputNama" name="nama" value="<?= $user['nama_petugas']?>">  
-                                                <?= form_error('nama','<small class=" text-danger form-text text-muted">', '</small>') ?>                                          
-                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                               
-                                            <div class="form-group col-md-6">
-                                                <label for="inputAlamat">Email</label>
-                                                <input type="text" class="form-control" id="inputAlamat" name="email" value="<?= $user['email']?>" disabled>
-                                                <?= form_error('email','<small class=" text-danger form-text text-muted">', '</small>') ?>
-                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                                            <div class="form-group col-md-6">
-                                                <label for="inputAlamat">No HP</label>
-                                                <input type="text" class="form-control" id="inputEmail" name="no_hp" value="<?= $user['no_hp']?>">
-                                                <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
-                                                <?= form_error('no_hp','<small class=" text-danger form-text text-muted">', '</small>') ?>
-                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-                                        <div class="form-row">
-                                            
-                                            <div class="col-md-12">
-                                                <button type="submit" class="btn btn-primary">Simpan</button>                                                
-                                            </div>
-                                        </div>
-                                    </form>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h5 class="card-title">Ganti Foto Profil</h5>
-                                </div>                                
-                                <div class="panel-body">
-                                <!-- BODY -->
-                                    <div class="card mb-3" style="max-width: 540px;">
-                                        <div class="row no-gutters">                                  
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <?= form_open_multipart('index.php/user/updatefoto');?>                                                                                                    
-                                                        <div class="form-group col-md-4">                                                            
-                                                            <input type="file" name="foto" accept=".png, .jpg">
-                                                            <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
-                                                        </div>
-                                                        <div class="form-row">
-                                                            <div class="col-md-12">
-                                                                <button type="submit" class="btn btn-primary">Simpan</button>                                                
-                                                            </div>
-                                                        </div>                                                    
-                                                    <?= form_close();?>
-                                                </div>
-                                            </div>                                                    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                </div>                
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-md-12">
-                            <div class="panel panel-danger">
-                                <div class="panel-heading">
-                                    <h5 class="card-title">Update Password</h5>
-                                </div>                                
-                                <div class="panel-body">
-                                <!-- BODY -->
-                                    <div class="card mb-3" style="max-width: 640px;">
-                                        <div class="row no-gutters">                                            
-                                            <div class="col-md-12">
-                                                <div class="card-body">                                                    
-                                                    <form role="form" action="<?php echo base_url().'index.php/user/update_password';?>" method="POST">                                                                                                                                                             
-                                                            <div class="form-group col-md-8">
-                                                                <label for="inputDesa">Password Lama</label>
-                                                                <input type="password" class="form-control" id="inputPasswordOld" name="passwordold">  
-                                                                <?= form_error('passwordold','<small class=" text-danger form-text text-muted">', '</small>') ?>                                          
-                                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                            <div class="form-group col-md-8">
-                                                                <label for="inputAlamat">Password Baru</label>
-                                                                <input type="password" class="form-control" id="inputPasswordNew" name="password1">
-                                                                <?= form_error('password1','<small class=" text-danger form-text text-muted">', '</small>') ?>
-                                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                                                            <div class="form-group col-md-8">
-                                                                <label for="inputEmail">Konfirmasi Password Baru</label>
-                                                                <input type="password" class="form-control" id="inputPasswordNew1" name="password2">
-                                                                <?= form_error('password2','<small class=" text-danger form-text text-muted">', '</small>') ?>
-                                                            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-                                                            <div class="form-row">
-                                                                <div class="col-md-12">
-                                                                <button type="submit" class="btn btn-danger">Simpan</button>                                                
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>                                                    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
-            </div>
-            <!-- /#page-wrapper -->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="loader"></div>
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Profile Saya</h1>
+          </div>
+          <div class="col-sm-6">            
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">User</a></li>
+              <li class="breadcrumb-item active">Profil Saya</li>
+            </ol>
+          </div>
         </div>
-    </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <?php if ($this->session->flashdata('sukses')): ?>
+                <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
+            <?php endif; ?>
+            <?php if ($this->session->flashdata('hapus')): ?>
+                <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
+            <?php endif; ?>
+            <?php if ($this->session->flashdata('gagal')): ?>
+                <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
+            <?php endif; ?>
+            <!-- ALERT -->                                                
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <!-- MYPROFILE -->
+                <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                    <div class="col-md-3">
+                        <!-- Profile Image -->
+                        <div class="card card-success card-outline">
+                            <div class="card-body box-profile">
+                                <div class="text-center">
+                                <img class="profile-user-img img-fluid img-circle"
+                                    src="<?= base_url() ?>assets/foto/<?= $user['foto'] ?>"
+                                    alt="User profile picture">
+                                </div>
+
+                                <h3 class="profile-username text-center"><?= $user['nama_petugas'] ?></h3>
+
+                                <p class="text-muted text-center"><?= $user['email'] ?></p>
+
+                                <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>Last Login</b> <a class="float-right"><?= date('d M H:i', strtotime($user['last_login'])) ?></a>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- About Me Box -->
+                        <div class="card card-success">
+                          <div class="card-header">
+                              <h3 class="card-title">Data Diri</h3>
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body">
+                              <strong><i class="fas fa-book mr-1"></i> Nomor HP</strong>
+
+                              <p class="text-muted">
+                              <?= $user['no_hp'] ?>
+                              </p>
+
+                              <hr>
+
+                              <strong><i class="fas fa-user mr-1"></i> Role</strong>
+
+                              <p class="text-muted">
+                                  <span style="<?= $user['role'] == 3 ? 'color: red;' : ($user['role'] == 2 ? 'color: green;' : '') ?>">
+                                                                  <?= $user['role'] == 3 ? 'Super Admin' : ($user['role'] == 2 ? 'Petugas' : '') ?>
+                                  </span>
+                              </p>
+
+                              <hr>
+
+                              <strong><i class="fas fa-user mr-1"></i> Username</strong>
+
+                              <p class="text-muted">
+                              <?= $user['username'] ?>
+                              </p>
+
+                              <hr>
+
+                              <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                              <p class="text-muted">Nothing worth nothing</p>
+                          </div>
+                        <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-9">
+                        <!-- FORM EDIT PROFILE -->
+                        <div class="card card-success card-outline">
+                          <div class="card-header">
+                              <h3 class="card-title">Edit Profile</h3>
+                          </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                <div class="active tab-pane" id="settings">
+                                    <form class="form-horizontal" action="<?php echo base_url().'index.php/user/update_profile';?>" method="POST">
+                                    <div class="form-group row">
+                                        <label for="inputNama" class="col-sm-2 col-form-label">Nama</label>
+                                        <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputNama" placeholder="Nama Lengkap" name="nama" value="<?= $user['nama_petugas']?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputNo" class="col-sm-2 col-form-label">Nomor HP</label>
+                                        <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="inputNo" placeholder="08xxx" name="no_hp" value="<?= $user['no_hp']?>">
+                                        <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FORM EDIT PROFILE -->
+                        <!-- FORM EDIT PROFILE -->
+                        <div class="card card-success card-outline">
+                          <div class="card-header">
+                              <h3 class="card-title">Foto Profile</h3>
+                          </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                <div class="active tab-pane" id="settings">
+                                    <?= form_open_multipart('index.php/user/updatefoto');?>                                                                                                    
+                                    <div class="form-group">
+                                        <!-- <label for="inputFoto">File input</label> -->
+                                        <div class="input-group">
+                                        <div class="custom-file col-md-8">
+                                            <input type="file" class="custom-file-input" id="inputFoto" name="foto">
+                                            <label class="custom-file-label" for="inputFoto">Choose file</label>
+                                        </div>
+                                        <div class="form-group">
+                                        <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                        </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                        </div>
+                                    </div>
+                                    <?= form_close();?>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FORM EDIT PROFILE -->
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+                </section>
+                <!-- MYPROFILE -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->            
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
 </div>
-
-<!-- Include JavaScript files -->
-<script src="<?php echo base_url()?>assets/js/jquery.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/metisMenu.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/startmin.js"></script>
-<script src="<?php echo base_url()?>assets/js/dataTables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/dataTables/dataTables.bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-
-
+<!-- ./wrapper -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    const loader = document.querySelector(".loader");
-    window.addEventListener("load", () => {
-        loader.classList.add("loader--hidden");
-        loader.addEventListener("transitioned", () => {
-            document.body.removeChild(document.querySelector(".loader"));
-        });
+$(document).ready(function() {
+    // Saat input file berubah
+    $('#inputFoto').change(function() {
+        // Ambil nama file yang diunggah
+        var fileName = $(this).val().split('\\').pop();
+        // Tampilkan nama file di label
+        $(this).next('.custom-file-label').html(fileName);
     });
+});
 </script>
-
-<script>
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function() {
-            $(this).remove();
-        });
-    }, 3000);
-</script>
-
-<script>
-    $(document).ready(function () {
-        $('#dataNasabah').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",
-                "sEmptyTable": "Tidak ada data yang tersedia"
-            },
-            "responsive": true
-        });
-    });
-</script>
-</body>
-</html>
+<script src="<?php echo base_url()?>adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+<script src="<?php echo base_url()?>adminlte/plugins/toastr/toastr.min.js"></script>

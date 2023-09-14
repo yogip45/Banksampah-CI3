@@ -29,7 +29,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url()?>adminlte/plugins/summernote/summernote-bs4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
-  <title>Dashboard - Bank Sampah</title>
+  <title><?= $title; ?></title>
 
         <style>
             .address-cell {

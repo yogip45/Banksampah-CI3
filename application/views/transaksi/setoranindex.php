@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Nsaabah</h1>
+            <h1>Data Setoran</h1>
           </div>
           <div class="col-sm-6">            
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Pengguna</a></li>
-              <li class="breadcrumb-item active">Nasabah</li>
+              <li class="breadcrumb-item"><a href="#">Transaksi</a></li>
+              <li class="breadcrumb-item active">Setoran</li>
             </ol>
           </div>
         </div>
@@ -33,7 +33,7 @@
                 <div class="alert alert-danger"><?php echo $this->session->flashdata('edit'); ?></div>
             <?php endif; ?>
             <!-- ALERT -->                                                
-            <?php echo anchor('/index.php/admin/tambah_nasabah/', '<button class="btn btn-info"><i class="fa fa-plus"></i> Tambah</button>'); ?>
+            <?php echo anchor('/index.php/setoran/tambah_setoran/', '<button class="btn btn-info"><i class="fa fa-plus"></i> Tambah</button>'); ?>
             <br>
             <br>
             <div class="card">

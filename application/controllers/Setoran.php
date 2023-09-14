@@ -65,10 +65,10 @@ class Setoran extends CI_Controller {
 				$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
 				$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
 				$this->load->view('newtemplate/header',$data);
-				$this->load->view('newtemplate/top',$data);
-				$this->load->view('newtemplate/sidebar',$data);
-				$this->load->view('transaksi/setorantambah',$data);
-				$this->load->view('newtemplate/footer',$data);
+					$this->load->view('newtemplate/top',$data);
+					$this->load->view('newtemplate/sidebar',$data);
+					$this->load->view('transaksi/setorantambah',$data);	
+					$this->load->view('newtemplate/footer');
 			} else {
 				$this->load->view('error/403');
 			}

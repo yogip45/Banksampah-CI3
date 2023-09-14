@@ -30,22 +30,25 @@ class User extends CI_Controller {
 							$data['nasabah'] = $this->m_user->get_nasabah();
 							$this->load->view('usertemplate/header', $data);
 							$this->load->view('usertemplate/top', $data);
-							$this->load->view('usertemplate/sidebar');
+							$this->load->view('usertemplate/sidebar',$data);
 							$this->load->view('nasabah/myprofile', $data);
+							$this->load->view('usertemplate/footer');
 							break;
 					case 2:
 							$data['user'] = $this->m_user->get_user();
-							$this->load->view('petugastemplate/header', $data);
-							$this->load->view('petugastemplate/top', $data);
-							$this->load->view('petugastemplate/sidebar');
-							$this->load->view('petugas/myprofile', $data);
+							$this->load->view('newtemplate/header', $data);
+							$this->load->view('newtemplate/top', $data);
+							$this->load->view('newtemplate/sidebar');
+							$this->load->view('user/myprofile', $data);
+							$this->load->view('newtemplate/footer');
 							break;
 					case 3:
 							$data['user'] = $this->m_user->get_user();
-							$this->load->view('template/header', $data);
-							$this->load->view('template/top', $data);
-							$this->load->view('template/sidebar');
+							$this->load->view('newtemplate/header', $data);
+							$this->load->view('newtemplate/top', $data);
+							$this->load->view('newtemplate/sidebar');
 							$this->load->view('user/myprofile', $data);
+							$this->load->view('newtemplate/footer');
 							break;
 					default:
 							$this->load->view('error/404');
@@ -161,7 +164,7 @@ class User extends CI_Controller {
 				);
 				$this->m_petugas->update_data($where,$data,'tb_nasabah');
 				$this->m_user->update_data($where,$data1,'tb_user');
-				$this->session->set_flashdata('sukses','Data Berhasil Diubah');
+				$this->session->set_flashdata('sukses','Data Diri Berhasil Diubah');
 				redirect('/index.php/user/myprofile');
 			} else {								
 				// JIKA USER ADMIN / PETUGAS

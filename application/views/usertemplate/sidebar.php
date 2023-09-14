@@ -1,26 +1,54 @@
-<aside class="sidebar navbar-default" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li <?php if (strpos(current_url(), '/nasabah/dashboard') !== false) echo 'class="active"'; ?>>
-                            <a href="/banksampah/index.php/nasabah/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>                                                
-                        <li <?php if (strpos(current_url(), '/transaksi/index') !== false) echo 'class="active"'; ?>>
-                            <a href="#"><i class="fa fa-file-text fa-fw"></i> Transaksi</a>
-                        </li>                        
-                        <li <?php if (strpos(current_url(), '/user/myprofile') !== false) echo 'class="active"'; ?>>
-                            <a href="/banksampah/index.php/user/myprofile"><i class="fa fa-user-circle-o fa-fw"></i> Profil Saya</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+<!-- Main Sidebar Container -->
+<?php $role = $this->session->userdata('role'); ?>
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="<?= base_url() ?>assets/foto/<?= $nasabah['foto'] ?>" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="/banksampah/index.php/user/myprofile" class="d-block"><?= $nasabah['nama']  ?></a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+          <a href="/banksampah/index.php/nasabah/dashboard" class="nav-link <?= ($this->uri->segment(1) == 'nasabah' && $this->uri->segment(2) == 'dashboard') ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+          <a href="/banksampah/index.php/user/myprofile" class="nav-link <?= ($this->uri->segment(1) == 'user' && $this->uri->segment(2) == 'myprofile') ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Profile Saya
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
