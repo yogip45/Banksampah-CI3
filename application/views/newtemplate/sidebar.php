@@ -51,7 +51,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/banksampah/index.php/admin/petugasindex" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex') ? 'active' : ''; ?>">
+                <a href="/banksampah/index.php/admin/petugasindex" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex'
+                || $this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'tambah_petugas' || $this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'edit_petugas'
+                ) ? 'active' : ''; ?>">
                   <i class="far fa-user nav-icon"></i>
                   <p>Petugas</p>
                 </a>
