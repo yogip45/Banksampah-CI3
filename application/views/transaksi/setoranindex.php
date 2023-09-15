@@ -44,12 +44,12 @@
                         <tr>
                             <th>No.</th>
                             <th>Id Setor</th>
+                            <th>NIN</th>
                             <th>Tanggal Setor</th>
                             <th>Jenis Sampah</th>
                             <th>Berat</th>                                                    
                             <th>Harga</th>                                                    
                             <th>Total</th>                                               
-                            <th>Aksi</th>                                             
                         </tr>
                     </thead>
                     <tbody>                                                
@@ -59,16 +59,17 @@
                     <tr class="odd gradeX">
                             <td><?php echo $no++?></td>
                             <td><?php echo $data->id_setor ?></td>
+                            <td><?php echo $data->nin ?></td>
                             <td><?php echo date('d M Y', strtotime($data->tanggal_setor)) ?></td>
                             <td><?php echo $data->jenis_sampah ?></td>
                             <td><?php echo $data->berat ?></td>                                                    
                             <td><?php echo $data->harga ?></td>                                                    
                             <td><?php echo $data->total ?></td>                                                    
-                            <td>                                                    
+                            <!-- <td>                                                    
                                 <button type="button" class="btn btn-outline btn-success" data-toggle="modal" data-target="#detailModal<?php echo $data->nin; ?>">
                                 <i class="fa fa-bars fa-fw"></i>
                                 </button>
-                            </td>                                                    
+                            </td>                                                     -->
                             <?php endforeach; ?>
                         </div>                                                                                                            
                             <!-- <td>

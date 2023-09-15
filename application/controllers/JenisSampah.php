@@ -17,11 +17,11 @@ class JenisSampah extends CI_Controller {
 			$data['title'] = 'Dashboard - Data Sampah';
 			$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
 			$data['user'] = $this->m_user->get_user();
-			$this->load->view('template/header', $data);
-			$this->load->view('template/top', $data);
-			$this->load->view('template/sidebar', $data);
-			// $this->load->view('template/footer');
+			$this->load->view('newtemplate/header', $data);
+			$this->load->view('newtemplate/top', $data);
+			$this->load->view('newtemplate/sidebar', $data);
 			$this->load->view('sampah/jns_sampah', $data);
+			$this->load->view('newtemplate/footer');
 		} else {
 			$this->session->set_flashdata('message','Login dulu');
 			redirect('index.php/auth');
@@ -35,13 +35,12 @@ class JenisSampah extends CI_Controller {
 				$this->load->model('M_jns_sampah');
 				$nama_sampah = $this->input->post('nama_sampah');
 				$harga = $this->input->post('harga');
-				$satuan = $this->input->post('satuan');
 				$kategori = $this->input->post('kategori');
 			
 				$data = array(
 				'nama_sampah' => $nama_sampah,
 				'harga' => $harga,
-				'satuan' => $satuan,
+				'satuan' => 'Kg',
 				'kategori' => $kategori,
 				);
 			
@@ -79,11 +78,11 @@ class JenisSampah extends CI_Controller {
 				$where = array('id'=>$id);		
 				$data['jns_sampah'] = $this->m_jns_sampah->edit_data($where, 'jns_sampah')->result();
 				$data['user'] = $this->m_user->get_user();
-				$this->load->view('template/header',$data);
-				$this->load->view('template/top',$data);
-				$this->load->view('template/sidebar');
-				// $this->load->view('template/footer');
+				$this->load->view('newtemplate/header',$data);
+				$this->load->view('newtemplate/top',$data);
+				$this->load->view('newtemplate/sidebar');
 				$this->load->view('sampah/edit_sampah', $data);
+				$this->load->view('newtemplate/footer');
 
 			} else {
 				$this->load->view('error/403');
@@ -100,13 +99,11 @@ class JenisSampah extends CI_Controller {
 				$id = $this->input->post('id');
 				$nama_sampah = $this->input->post('nama_sampah');
 				$harga = $this->input->post('harga');
-				$satuan = $this->input->post('satuan');
 				$kategori = $this->input->post('kategori');
 
 				$data = array(
 					'nama_sampah'=> $nama_sampah,
 					'harga'=> $harga,
-					'satuan'=> $satuan,
 					'kategori'=> $kategori,
 				);
 
@@ -115,6 +112,7 @@ class JenisSampah extends CI_Controller {
 				);
 
 				$this->m_jns_sampah->update_data($where,$data,'jns_sampah');
+				$this->session->set_flashdata('sukses','Data Berhasil Diedit');
 				redirect('index.php/jenissampah/index');
 			} else {
 				$this->load->view('index.php/error/403');

@@ -1,4 +1,6 @@
 <!-- Main Sidebar Container -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> 
+
 <?php $role = $this->session->userdata('role'); ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Sidebar -->
@@ -12,19 +14,6 @@
           <a href="/banksampah/index.php/user/myprofile" class="d-block"><?= $user['nama_petugas']  ?></a>
         </div>
       </div>
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -32,7 +21,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
           <a href="/banksampah/index.php/admin/dashboard" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'dashboard') ? 'active' : ''; ?>">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <ion-icon name="speedometer"></ion-icon>
               <p>
                 Dashboard
               </p>
@@ -44,7 +33,7 @@
             || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'tambah_nasabah' || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'edit_nasabah'
             ) ? 'active' : ''; ?>">
 
-              <i class="nav-icon fas fa-users"></i>
+              <ion-icon name="people"></ion-icon>
               <p>
                 Pengguna
                 <i class="fas fa-angle-left right"></i>
@@ -62,7 +51,7 @@
               <?php endif ?>
               <?php if ($role!=1) : ?>
                 <li class="nav-item">
-                  <a href="/banksampah/index.php/petugas/nasabahindex" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex') ? 'active' : ''; ?>">
+                  <a href="/banksampah/index.php/petugas/nasabahindex" class="nav-link <?= ($this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex') ? 'active' : ''; ?>">
                     <p>Nasabah</p>
                   </a>
                 </li>                            
@@ -70,10 +59,18 @@
             </ul>
           </li>
           <li class="nav-item">
+          <a href="/banksampah/index.php/jenissampah/" class="nav-link <?= ($this->uri->segment(1) == 'jenissampah') ? 'active' : ''; ?>">
+              <p>
+                <ion-icon name="trash"></ion-icon>
+                Sampah
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
           <?php if ($role!=1) : ?>
             <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
             )  ? 'active' : ''; ?>">
-              <i class="nav-icon fas fa-copy"></i>
+                <ion-icon name="newspaper"></ion-icon>
               <p>
                 Transaksi
                 <i class="fas fa-angle-left right"></i>
@@ -82,7 +79,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/banksampah/index.php/setoran/setoranindex" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
-                )  ? 'active' : ''; ?>"">
+                )  ? 'active' : ''; ?>">
                   <p> Setor</p>
                 </a>
               </li>
@@ -101,7 +98,7 @@
           <?php endif ?>
           <li class="nav-item">
           <a href="/banksampah/index.php/user/myprofile" class="nav-link <?= ($this->uri->segment(1) == 'user' && $this->uri->segment(2) == 'myprofile') ? 'active' : ''; ?>">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="icon ion-person"></i>
               <p>
                 Profile Saya
               </p>

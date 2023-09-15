@@ -24,8 +24,7 @@
     <!-- DATA TABLES -->           
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>      
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script> 
-
-    <!-- <script src="https://kit.fontawesome.com/9c84b4b7be.js" crossorigin="anonymous"></script> -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>    
     </body>
 
 </html>

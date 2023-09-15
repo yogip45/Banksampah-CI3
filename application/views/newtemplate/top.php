@@ -1,4 +1,5 @@
 <!-- Navbar -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> 
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -33,6 +34,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-user"></i>
+          <!-- <ion-icon name="person"></ion-icon> -->
         </a>
         <div class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="/banksampah/index.php/user/myprofile">Profile Saya</a>
