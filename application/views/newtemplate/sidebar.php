@@ -68,8 +68,8 @@
         </li>
           <li class="nav-item">
           <?php if ($role!=1) : ?>
-            <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
-            )  ? 'active' : ''; ?>">
+            <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran' ||
+            $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah')  ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-file-alt"></i>
                 <p>
                   Transaksi
@@ -89,7 +89,8 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/banksampah/index.php/setoran/pernasabah" class="nav-link">
+                <a href="/banksampah/index.php/setoran/pernasabah" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah'
+                )  ? 'active' : ''; ?>">
                   <p>Nasabah</p>
                 </a>
               </li>
