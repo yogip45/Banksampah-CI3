@@ -42,7 +42,7 @@
                     <div class="row">
                     <div class="col-md-3">
                         <!-- Profile Image -->
-                        <div class="card card-success card-outline">
+                        <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                 <img class="profile-user-img img-fluid img-circle"
@@ -64,7 +64,7 @@
                         <!-- /.card -->
 
                         <!-- About Me Box -->
-                        <div class="card card-success">
+                        <div class="card card-primary">
                           <div class="card-header">
                               <h3 class="card-title">Data Diri</h3>
                           </div>
@@ -107,7 +107,7 @@
                     <!-- /.col -->
                     <div class="col-md-9">
                         <!-- FORM EDIT PROFILE -->
-                        <div class="card card-success card-outline">
+                        <div class="card card-primary card-outline">
                           <div class="card-header">
                               <h3 class="card-title">Edit Profile</h3>
                           </div>
@@ -130,7 +130,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
-                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
                                         </div>
                                     </div>
                                     </form>
@@ -140,7 +140,7 @@
                         </div>
                         <!-- FORM EDIT PROFILE -->
                         <!-- FORM EDIT PROFILE -->
-                        <div class="card card-success card-outline">
+                        <div class="card card-primary card-outline">
                           <div class="card-header">
                               <h3 class="card-title">Foto Profile</h3>
                           </div>
@@ -162,7 +162,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
                                         </div>
                                     </div>
                                     <?= form_close();?>

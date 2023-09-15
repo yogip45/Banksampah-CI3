@@ -21,19 +21,19 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
           <a href="/banksampah/index.php/admin/dashboard" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'dashboard') ? 'active' : ''; ?>">
-            <ion-icon name="speedometer"></ion-icon>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex' || 'admin' && $this->uri->segment(2) == 'edit_petugas'
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex' || 'admin' && $this->uri->segment(2) == 'edit_petugas'
             || 'admin' && $this->uri->segment(2) == 'tambah_petugas' || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex'
             || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'tambah_nasabah' || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'edit_nasabah'
             ) ? 'active' : ''; ?>">
 
-              <ion-icon name="people"></ion-icon>
+              <i class="nav-icon fas fa-user-cog"></i>
               <p>
                 Pengguna
                 <i class="fas fa-angle-left right"></i>
@@ -59,20 +59,20 @@
             </ul>
           </li>
           <li class="nav-item">
-          <a href="/banksampah/index.php/jenissampah/" class="nav-link <?= ($this->uri->segment(1) == 'jenissampah') ? 'active' : ''; ?>">
-              <p>
-                <ion-icon name="trash"></ion-icon>
-                Sampah
-              </p>
-            </a>
-          </li>
+          <a href="/banksampah/index.php/jenissampah" class="nav-link <?= ($this->uri->segment(1) == 'jenissampah') ? 'active' : ''; ?>">
+            <i class="nav-icon fas fa-trash"></i>
+            <p>
+              Sampah
+            </p>
+          </a>
+        </li>
           <li class="nav-item">
           <?php if ($role!=1) : ?>
             <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
             )  ? 'active' : ''; ?>">
-                <ion-icon name="newspaper"></ion-icon>
-              <p>
-                Transaksi
+                <i class="nav-icon fas fa-file-alt"></i>
+                <p>
+                  Transaksi
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -89,7 +89,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="/banksampah/index.php/setoran/pernasabah" class="nav-link">
                   <p>Nasabah</p>
                 </a>
               </li>
@@ -97,8 +97,8 @@
           </li>
           <?php endif ?>
           <li class="nav-item">
-          <a href="/banksampah/index.php/user/myprofile" class="nav-link <?= ($this->uri->segment(1) == 'user' && $this->uri->segment(2) == 'myprofile') ? 'active' : ''; ?>">
-              <i class="icon ion-person"></i>
+            <a href="/banksampah/index.php/user/myprofile" class="nav-link <?= ($this->uri->segment(1) == 'user' && $this->uri->segment(2) == 'myprofile') ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Profile Saya
               </p>

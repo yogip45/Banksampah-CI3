@@ -23,10 +23,12 @@
       $result = $this->db->get()->row();
 
       $total_berat = $result->total_berat;
+      $this->db->where('role', 2);
+      $count_petugas = $this->db->count_all_results('tb_user');
       $jumlah = array(
         'nasabah' => $this->db->count_all('tb_nasabah'),
         'sampah' => $total_berat,
-        'petugas' => $this->db->count_all('tb_petugas'),
+        'petugas' => $count_petugas,
         'transaksi' => $this->db->count_all('tb_setoran')
       );
     return $jumlah;

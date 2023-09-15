@@ -40,7 +40,7 @@
           </li>
           <li class="nav-item">
           <a href="/banksampah/index.php/user/myprofile" class="nav-link <?= ($this->uri->segment(1) == 'user' && $this->uri->segment(2) == 'myprofile') ? 'active' : ''; ?>">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Profile Saya
               </p>

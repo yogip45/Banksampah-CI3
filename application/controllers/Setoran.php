@@ -124,7 +124,7 @@ class Setoran extends CI_Controller {
 						'total' => $total,
 						'id_admin' => $id_admin,
 					);
-					$this->m_setoran->input_data($data,'tb_setoran');					
+					$this->m_setoran->input_data($data,'tb_setoran');
 				}
 			} else {
 				$this->load->view('error/403');
