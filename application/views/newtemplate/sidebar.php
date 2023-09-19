@@ -89,7 +89,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/banksampah/index.php/setoran/pernasabah" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah'
+                <a href="/banksampah/index.php/setoran/pernasabah" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah'
                 )  ? 'active' : ''; ?>">
                   <p>Nasabah</p>
                 </a>

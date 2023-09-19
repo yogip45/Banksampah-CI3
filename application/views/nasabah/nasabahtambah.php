@@ -74,9 +74,20 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputDesa">Asal Desa</label>
-                            <input type="text" class="form-control" id="inputDesa" name="desa" value="<?= set_value('desa')?>">
-                            <?= form_error('desa','<small class="text-danger">', '</small>') ?>
+                          <label for="inputKecamatan">Kecamatan</label>
+                          <select class="form-control" id="inputKecamatan" name="kecamatan">
+                              <!-- Opsi kecamatan akan ditambahkan di sini -->
+                              <option value="">Pilih Kecamatan</option>
+                          </select>
+                          <?= form_error('kecamatan','<small class="text-danger">', '</small>') ?>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="inputDesa">Asal Desa</label>
+                          <select class="form-control" id="inputDesa" name="desa">
+                              <!-- Opsi kecamatan akan ditambahkan di sini -->
+                              <option value="">Pilih Desa</option>
+                          </select>
+                          <?= form_error('kecamatan','<small class="text-danger">', '</small>') ?>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputRt">Rt</label>
@@ -88,11 +99,6 @@
                             <input type="number" class="form-control" id="inputRw" name="rw" value="<?= set_value('rw')?>">
                             <?= form_error('rw','<small class="text-danger">', '</small>') ?>
                         </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputKecamatan">Kecamatan</label>
-                        <input type="text" class="form-control" id="inputKecamatan" name="kecamatan" value="<?= set_value('kecamatan')?>">
-                        <?= form_error('kecamatan','<small class="text-danger">', '</small>') ?>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAlamatLengkap">Alamat Lengkap</label>
@@ -128,3 +134,21 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->    
+<script>
+  fetch(`https://yogip45.github.io/api-wilayah-indonesia/api/districts/3305.json`)
+    .then(response => response.json())
+    .then(districts => {
+        const selectKecamatan = document.getElementById('inputKecamatan');
+        
+        // Loop melalui data kecamatan dan tambahkan sebagai opsi
+        districts.forEach(district => {
+            const option = document.createElement('option');
+            option.value = district.name;
+            option.textContent = district.name;
+            selectKecamatan.appendChild(option);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+</script>

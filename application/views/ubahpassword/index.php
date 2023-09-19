@@ -1,136 +1,79 @@
-        <div class="loader"></div>                    
-            <!-- /.sidebar -->
-            <div id="page-wrapper">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">Hallo, Silahkan ubah password terlebih dahulu</h1>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="panel panel-default">
-                                <!-- <div class="panel-heading">
-                                    DataTables Advanced Tables
-                                </div> -->
-                                <!-- /.panel-heading -->
-                                <div class="panel-body">
-                                    <form role="form" action="<?php echo base_url().'index.php/user/passwordmake';?>" method="POST">                                                                                                                                                                                                                                                                                                     
-                                            <div class="form-group col-md-8">
-                                                <label for="inputRw">Password</label>                                                                                                   
-                                                <input type="password" class="form-control" id="inputPassword1" name="password1">
-                                                <?= form_error('password1','<small class="text-danger form-text text-muted">', '</small>') ?>                                           
-                                            </div>                                                                                                                           
-                                            <div class="form-group col-md-8">
-                                                <label for="inputRw">Konfirmasi Password</label>
-                                                <input type="password" class="form-control" id="inputPassword2" name="password2">                                                
-                                                <?= form_error('password2','<small class="text-danger form-text text-muted">', '</small>') ?>                                           
-                                            </div>                                                                                                                                                                                                                                                                                                                                          
-                                        <div class="form-row">
-                                            <div class="col-md-12">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                <button type="reset" class="btn btn-warning">Reset</button>                                                
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <!-- /.table-responsive -->                                    
-                                </div>
-                                <!-- /.panel-body -->
-                            </div>
-                            <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
-            </div>
-            <!-- /#page-wrapper -->
-
+  <!-- Content Wrapper. Contains page content -->
+  <div class="loader"></div>
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Silahkan Ubah Password</h1>
+          </div>
+          <div class="col-sm-6">            
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Pengguna</a></li>
+              <li class="breadcrumb-item active">Ubah Password</li>
+            </ol>
+          </div>
         </div>
-        <!-- /#wrapper -->
+      </div><!-- /.container-fluid -->
+    </section>
 
-        <!-- jQuery -->
-        <script src="<?php echo base_url()?>assets/js/jquery.min.js"></script>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <?php if ($this->session->flashdata('sukses')): ?>
+                <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
+            <?php endif; ?>
+            <?php if ($this->session->flashdata('hapus')): ?>
+                <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
+            <?php endif; ?>
+            <?php if ($this->session->flashdata('gagal')): ?>
+                <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
+            <?php endif; ?>
+            <!-- ALERT -->                                                
+            <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+            <form role="form" action="<?php echo base_url().'index.php/user/passwordmake';?>" method="POST">                                                                                                                                                                                                                                                                                                     
+                    <div class="form-group col-md-6">
+                        <label for="inputRw">Password</label>                                                                                                   
+                        <input type="password" class="form-control" id="inputPassword1" name="password1">
+                        <?= form_error('password1','<small class="text-danger form-text text-muted">', '</small>') ?>                                           
+                    </div>                                                                                                                           
+                    <div class="form-group col-md-6">
+                        <label for="inputRw">Konfirmasi Password</label>
+                        <input type="password" class="form-control" id="inputPassword2" name="password2">                                                
+                        <?= form_error('password2','<small class="text-danger form-text text-muted">', '</small>') ?>                                           
+                    </div>                                                                                                                                                                                                                                                                                                                                          
+                <div class="form-row col-md-6">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-warning">Reset</button>                                                
+                    </div>
+                </div>
+            </form>               
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->            
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="<?php echo base_url()?>assets/js/bootstrap.min.js"></script>
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="<?php echo base_url()?>assets/js/metisMenu.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
-        <script src="<?php echo base_url()?>assets/js/startmin.js"></script>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const togglePassword = document.getElementById('togglePassword');
-                const passwordInput = document.getElementById('inputPassword');
-                const eyeIcon = document.getElementById('eyeIcon');
-
-                togglePassword.addEventListener('click', function() {
-                    if (passwordInput.type === 'password') {
-                        passwordInput.type = 'text';
-                        eyeIcon.classList.remove('fa-eye');
-                        eyeIcon.classList.add('fa-eye-slash');
-                    } else {
-                        passwordInput.type = 'password';
-                        eyeIcon.classList.remove('fa-eye-slash');
-                        eyeIcon.classList.add('fa-eye');
-                    }
-                });
-            });
-        </script>
-
-        <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var inputRt = document.getElementById("inputRt");
-            var inputRw = document.getElementById("inputRw");
-            var inputRtrw = document.getElementById("rtrw");
-
-            inputRw.addEventListener("input", function () {
-                var rtValue = inputRt.value;
-                var rwValue = inputRw.value;
-                
-                inputRtrw.value = rtValue + "/" + rwValue;
-            });
-        });
-        </script>
-        <script>
-            const loader = document.querySelector(".loader");
-            window.addEventListener("load",() => {
-                loader.classList.add("loader--hidden");
-                loader.addEventListener("transitioned", ()=>{
-                    document.body.removeChild(document.querySelector(".loader"));
-                });
-            })
-        </script>
-        <script>
-            window.setTimeout(function(){
-                $(".alert").fadeTo(500,0).slideUp(500, function(){
-                    $(this).remove();
-                });
-            }, 3000);
-        </script>
-        <script src="<?php echo base_url()?>assets/js/dataTables/jquery.dataTables.min.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dataTables/dataTables.bootstrap.min.js"></script>      
-        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>  
-        <script>
-            $(document).ready(function () {
-                $('#dataNasabah').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",
-                    "sEmptyTable": "Tidak ada data yang tersedia"
-                },
-                "responsive": true, // Aktifkan ekstensi Responsive                        
-            });
-        });
-        </script>
-        <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></s>
-            
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-    </body>
-
-</html>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -70,20 +70,22 @@
 								<?php if ($this->session->flashdata('message')): ?>
                   <div class="alert alert-danger"><?php echo $this->session->flashdata('message'); ?></div>
                 <?php endif; ?>
+								<?php if ($this->session->flashdata('recaptcha_error')): ?>
+                  <div class="alert alert-danger"><?php echo $this->session->flashdata('recaptcha_error'); ?></div>
+                <?php endif; ?>
 								<?php if ($this->session->flashdata('sukses')): ?>
                   <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
                 <?php endif; ?>
 							<h4 class="card-title">Login</h4>
 							<form method="POST" action="<?=base_url('/index.php/auth') ?>" class="my-login-validation" novalidate="">
 								<div class="form-group">
-									<label for="email">Email</label>
-									<input id="email" type="text" class="form-control" name="email" value="" required autofocus>
-									<?= form_error('email','<small class=" text-danger form-text text-muted">', '</small>') ?>
+									<label for="username">Username / Email</label>
+									<input id="username" type="text" class="form-control" name="email" value="" required autofocus>
+									<?= form_error('email','<small class=" text-danger">', '</small>') ?>
 									<div class="invalid-feedback">
-										Email tidak valid
+											Username harus diisi
 									</div>
 								</div>
-
 								<div class="form-group">
 									<label for="password">Password
 										<a href="forgot.html" class="float-right">
@@ -91,19 +93,21 @@
 										</a>
 									</label>
 									<input id="password" type="password" class="form-control" name="password" value="" required data-eye>
-									<?= form_error('password','<small class=" text-danger form-text text-muted">', '</small>') ?>
+									<?= form_error('password','<small class=" text-danger">', '</small>') ?>
 								    <div class="invalid-feedback">
 								    	Password harus diisi
 							    	</div>
 								</div>
-
-								<div class="form-group">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" name="remember" id="remember" class="custom-control-input">
-										<label for="remember" class="custom-control-label">Ingat Saya</label>
+								<div class="form-group col-lg-12">
+									<div class="row">
+											<div>
+													<label for="captcha">Captcha</label>
+													<!-- reCaptcha widget -->
+													<?php echo $widget;?>
+													<?php echo $script;?>
+											</div>
 									</div>
 								</div>
-
 								<div class="form-group m-0">
 									<button type="submit" class="btn btn-primary btn-block">
 										Login
@@ -127,16 +131,28 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="<?php echo base_url()?>assets/js/my-login.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- LOADING SCREEN -->
-				<script>
-            const loader = document.querySelector(".loader");
-            window.addEventListener("load",() => {
-                loader.classList.add("loader--hidden");
-                loader.addEventListener("transitioned", ()=>{
-                    document.body.removeChild(document.querySelector(".loader"));
-                });
-            })
-        </script>
-        <!-- LOADING SCREEN -->
+	<script>
+			const loader = document.querySelector(".loader");
+			window.addEventListener("load",() => {
+					loader.classList.add("loader--hidden");
+					loader.addEventListener("transitioned", ()=>{
+							document.body.removeChild(document.querySelector(".loader"));
+					});
+			})
+	</script>
+	<!-- LOADING SCREEN -->
+	<!-- HIDE ALERT -->
+	<script>
+		window.setTimeout(function () {
+		$(".alert")
+			.fadeTo(500, 0)
+			.slideUp(500, function () {
+				$(this).remove();
+			});
+	}, 3000);
+	</script>
+	<!-- HIDE ALERT -->
 </body>
 </html>

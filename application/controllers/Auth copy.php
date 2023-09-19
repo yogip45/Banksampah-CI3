@@ -10,13 +10,29 @@ class Auth extends CI_Controller {
 		$this->load->model('m_petugas');
 		$this->load->model('m_user');				
 	}	
+
 	public function index()
 	{
-		$data = array(
-			'widget' => $this->recaptcha->getWidget(),
-			'script' => $this->recaptcha->getScriptTag(),
-		);
-		//jika sudah login
+		//untuk captcha
+		$config = [
+			'img_path' => './captcha/',
+			'img_url' => base_url('captcha'),
+			'img_width' => 140,
+			'img_height' => 40,
+			'border' => 1,
+			'expiration' => 3600,
+			'word_length' => 5,
+			'font_size' => 20,
+			'font_path' => './fonts/Roboto-BlackItalic.ttf',
+			'pool' => '0123456789',
+			'colors'        => array(
+				'background' => array(255, 255, 255),
+				'border' => array(255, 255, 255),
+				'text' => array(0, 0, 0),
+				'grid' => array(255, 40, 40)
+			)
+		];
+
 		if ($this->session->userdata('email')) {
 			$role = $this->session->userdata('role');
 			switch ($role) {
@@ -39,26 +55,18 @@ class Auth extends CI_Controller {
 			
 			if ($this->form_validation->run() == false)
 			{				
-				$this->load->view('auth/login',$data);
+				$captcha = create_captcha($config);
+				if ($captcha !== FALSE) {
+					// echo $captcha['image'];
+					$data['image'] = $captcha['image'];
+				} else {
+						die('No captcha was created');
+				}
+				$this->session->set_userdata('captcha_word',$captcha['word']);
+					$this->load->view('auth/login',$data);
 				} else {
 					//validasi berhasil
-					$this->load->library('recaptcha');
-					$recaptcha = $this->input->post('g-recaptcha-response');
-					if (!empty($recaptcha)) {
-							$response = $this->recaptcha->verifyResponse($recaptcha);
-							if (isset($response['success']) && $response['success'] === true) {
-									// reCaptcha valid, lanjutkan dengan proses login
-									$this->_login();
-							} else {
-									// reCaptcha tidak valid
-									$this->session->set_flashdata('recaptcha_error', 'Verifikasi Captcha Gagal, Coba Lagi');
-									redirect('index.php/auth');
-							}
-					} else {
-							// reCaptcha tidak diisi
-							$this->session->set_flashdata('recaptcha_error', 'Selesaikan Captcha Terlebih Dahulu');
-							redirect('index.php/auth');
-					}
+					$this->_login();
 				}
 			}
 	}
