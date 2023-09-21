@@ -20,8 +20,7 @@ class Setoran extends CI_Controller {
 				if ($this->session->userdata('role')==2 || $this->session->userdata('role')==3) {
 					$data['title'] = "Dashboard - Data Setoran";
 					$data['user'] = $this->m_user->get_user();
-					$data['setoran'] = $this->m_setoran->tampil_data()->result();
-					$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
+					$data['nasabah'] = $this->m_setoran->tampil_data()->result();
 					$this->load->view('newtemplate/header',$data);
 					$this->load->view('newtemplate/top',$data);
 					$this->load->view('newtemplate/sidebar',$data);
@@ -57,19 +56,18 @@ class Setoran extends CI_Controller {
 				redirect('/index.php/auth');
 			}				
 	}
-	public function detail_setoran($id_setor)
+	public function tambah_setoran()
 	{
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role')==3 || $this->session->userdata('role')==2 ) {
-				$data['title'] = "Dashboard - Form Detail Setoran";
+				$data['title'] = "Dashboard - Form Tambah Setoran";
 				$data['user'] = $this->m_user->get_user();
+				$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
 				$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
-				$data['nasabah'] = $this->m_setoran->get_nasabah($id_setor);
-				$data['detail'] = $this->m_setoran->tampil_detail($id_setor)->result();
 				$this->load->view('newtemplate/header',$data);
 					$this->load->view('newtemplate/top',$data);
 					$this->load->view('newtemplate/sidebar',$data);
-					$this->load->view('transaksi/setorandetail',$data);
+					$this->load->view('transaksi/setorantambah',$data);	
 					$this->load->view('newtemplate/footer');
 			} else {
 				$this->load->view('error/403');
@@ -77,15 +75,6 @@ class Setoran extends CI_Controller {
 		} else {	
 			redirect('/index.php/auth');
 		}
-	}
-	public function donesetor()
-	{
-		$this->m_setoran->ubahstatus();
-		
-		// Berikan respons sukses
-		$response['status'] = 'success';
-		$response['message'] = 'Status updated successfully.';
-		echo json_encode($response);
 	}
 	public function create_setoran()
 	{
@@ -101,56 +90,42 @@ class Setoran extends CI_Controller {
 				$this->form_validation->set_rules('nama','No_hp','required|trim',
 				array('required'=>'Nama Harus Diisi')
 				);								
+				$this->form_validation->set_rules('harga','Harga','required|trim',
+				array('required'=>'Harga Harus Diisi')
+				);		
+				$this->form_validation->set_rules('berat','Berat','required|trim',
+				array('required'=>'Berat Sampah Harus Diisi')
+				);
 				if ($this->form_validation->run() == false) {
-					$data['title'] = "Dashboard - Data Setoran";
+					$data['title'] = "Dashboard - Form Tambah Setoran";
 						$data['user'] = $this->m_user->get_user();
-						// $data['nasabah'] = $this->m_nasabah->tampil_data()->result();
+						$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
 						$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
-						redirect('index.php/setoran/setoranindex');
+						$this->load->view('newtemplate/header',$data);
+						$this->load->view('newtemplate/top',$data);
+						$this->load->view('newtemplate/sidebar',$data);
+						$this->load->view('transaksi/setorantambah',$data);
+						$this->load->view('newtemplate/footer',$data);
 				} else {
-					$id_setor = getAutoSetoranId();
+					$id_setor = getAutoNumber('tb_setoran','id_setor','ST-','10');
 					$nin = $this->input->post('nin');
+					$jenis_sampah = $this->input->post('jenis_sampah');
+					$berat	 = $this->input->post('berat');
+					$harga	 = $this->input->post('harga');
+					$total	 = $this->input->post('harga') * $berat;
 					$id_admin = $this->session->userdata('id_user');
+		
 					$data = array(
 						'id_setor' => $id_setor,
 						'nin' => $nin,
-						'id_admin' => $id_admin,
-					);
-					$this->m_setoran->input_setoran($data,$id_setor);
-					redirect('index.php/setoran/setoranindex');
-				}
-			} else {
-				$this->load->view('error/403');
-			}
-		} else {
-			redirect('/index.php/auth');
-		}
-	}
-	public function create_detail()
-	{
-		if ($this->session->userdata('email')) {
-			if ($this->session->userdata('role')==2||$this->session->userdata('role')==3) {
-				
-				$this->load->model('m_nasabah');
-				$this->load->model('m_jns_sampah');
-				$id_setor = $this->input->post('id_setor');
-					// $data['nasabah'] = $this->m_setoran->get_nasabah($id_setor);
-					$jns_sampah = $this->input->post('jenis_sampah');
-					$berat = $this->input->post('berat');
-					$harga = $this->input->post('harga');
-					$total = $this->input->post('total');
-					$data = array(
-
-						'id_setor' => $id_setor,
-						'jns_sampah' => $jns_sampah,
+						'jenis_sampah' => $jenis_sampah,
 						'berat' => $berat,
 						'harga' => $harga,
 						'total' => $total,
-						'status' => 0,
+						'id_admin' => $id_admin,
 					);
-					$this->m_setoran->input_detail($data,$id_setor);
-					redirect('index.php/setoran/setoranindex');
-				
+					$this->m_setoran->input_data($data,'tb_setoran');
+				}
 			} else {
 				$this->load->view('error/403');
 			}

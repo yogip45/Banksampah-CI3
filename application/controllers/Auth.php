@@ -8,7 +8,7 @@ class Auth extends CI_Controller {
 		$this->load->library('form_validation');		
 		$this->data['title'] = 'Dashboard - Home';
 		$this->load->model('m_petugas');
-		$this->load->model('m_user');				
+		$this->load->model('m_user');
 	}	
 	public function index()
 	{
@@ -42,22 +42,26 @@ class Auth extends CI_Controller {
 				$this->load->view('auth/login',$data);
 				} else {
 					//validasi berhasil
-					$this->load->library('recaptcha');
-					$recaptcha = $this->input->post('g-recaptcha-response');
-					if (!empty($recaptcha)) {
-							$response = $this->recaptcha->verifyResponse($recaptcha);
-							if (isset($response['success']) && $response['success'] === true) {
-									// reCaptcha valid, lanjutkan dengan proses login
-									$this->_login();
-							} else {
-									// reCaptcha tidak valid
-									$this->session->set_flashdata('recaptcha_error', 'Verifikasi Captcha Gagal, Coba Lagi');
-									redirect('index.php/auth');
-							}
+					if ( $this->session->userdata('login_attempts') >=3) {
+						$this->load->library('recaptcha');
+						$recaptcha = $this->input->post('g-recaptcha-response');
+						if (!empty($recaptcha)) {
+								$response = $this->recaptcha->verifyResponse($recaptcha);
+								if (isset($response['success']) && $response['success'] === true) {
+										// reCaptcha valid, lanjutkan dengan proses login
+										$this->_login();
+									} else {
+										// reCaptcha tidak valid
+										$this->session->set_flashdata('recaptcha_error', 'Verifikasi Captcha Gagal, Coba Lagi');
+										redirect('index.php/auth');
+								}
+						} else {
+								// reCaptcha tidak diisi
+								$this->session->set_flashdata('recaptcha_error', 'Selesaikan Captcha Terlebih Dahulu');
+								redirect('index.php/auth');
+						}
 					} else {
-							// reCaptcha tidak diisi
-							$this->session->set_flashdata('recaptcha_error', 'Selesaikan Captcha Terlebih Dahulu');
-							redirect('index.php/auth');
+						$this->_login();
 					}
 				}
 			}
@@ -88,13 +92,11 @@ class Auth extends CI_Controller {
 		// $this->ClearCaptcha();
 		$email = $this->input->post('email');		
 		$password = $this->input->post('password');
-		$currentCaptcha = $this->session->userdata('captcha_word');
-		$answer = $this->input->post('captcha');
 		$this->ClearCaptcha();
 		
 		$user = $this->db->get_where('tb_user',['email'=>$email])->row_array();		
 		$username = $this->db->get_where('tb_user',['username'=>$email])->row_array();
-		if ($answer == $currentCaptcha) {
+		$login_attempts = $this->session->userdata('login_attempts');
 			if ($user) {
 				//emailnya ada and aktif
 				if ($user['is_active']==1) 
@@ -102,6 +104,7 @@ class Auth extends CI_Controller {
 					//cek passwd
 					if (password_verify($password,$user['password']))
 					{
+						$this->session->set_userdata('login_attempts', 0);
 						$data = [
 							'email'=>$user['email'],
 							'role'=>$user['role'],
@@ -136,10 +139,14 @@ class Auth extends CI_Controller {
 					}else {
 						$this->session->set_flashdata('message','Password Salah');
 						// $this->load->view('auth/login');
+						$login_attempts = ($login_attempts) ? $login_attempts + 1 : 1;
+						$this->session->set_userdata('login_attempts', $login_attempts);
 						redirect('/index.php/auth');
 					}
 				}else {
 					$this->session->set_flashdata('message','Email / Username tidak aktif');
+					$login_attempts = ($login_attempts) ? $login_attempts + 1 : 1;
+					$this->session->set_userdata('login_attempts', $login_attempts);
 					redirect('/index.php/auth');
 				}
 			} 
@@ -151,6 +158,7 @@ class Auth extends CI_Controller {
 					if (password_verify($password,$username['password']))
 					{
 						$this->ClearCaptcha();
+						$this->session->set_userdata('login_attempts', 0);
 						$data = [
 							'email'=>$username['email'],
 							'role'=>$username['role'],
@@ -184,22 +192,23 @@ class Auth extends CI_Controller {
 						}
 					}else {
 						$this->session->set_flashdata('message','Password Salah');
+						$login_attempts = ($login_attempts) ? $login_attempts + 1 : 1;
+						$this->session->set_userdata('login_attempts', $login_attempts);
 						$this->load->view('auth/login');
 					}
 				}else {
 					$this->session->set_flashdata('message','Email / Username tidak aktif');
+					$login_attempts = ($login_attempts) ? $login_attempts + 1 : 1;
+					$this->session->set_userdata('login_attempts', $login_attempts);
 					$this->load->view('auth/login');
 				}
 			
 			}else {
 				$this->session->set_flashdata('message','Email / Username tidak terdaftar');
+        $login_attempts = ($login_attempts) ? $login_attempts + 1 : 1;
+        $this->session->set_userdata('login_attempts', $login_attempts);
 				redirect('/index.php/auth');
 			}
-		}	else {
-			$this->session->set_flashdata('message','Captcha Salah');
-			redirect('/index.php/auth');
-
-		}
 	}
 
 	private function ClearCaptcha() {

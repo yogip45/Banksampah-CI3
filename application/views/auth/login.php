@@ -98,16 +98,18 @@
 								    	Password harus diisi
 							    	</div>
 								</div>
-								<div class="form-group col-lg-12">
-									<div class="row">
-											<div>
-													<label for="captcha">Captcha</label>
-													<!-- reCaptcha widget -->
-													<?php echo $widget;?>
-													<?php echo $script;?>
-											</div>
-									</div>
-								</div>
+								<?php if ($this->session->userdata('login_attempts') >= 3): ?>
+										<div class="form-group col-lg-12">
+												<div class="row">
+														<div>
+																<label for="captcha">Captcha</label>
+																<!-- reCaptcha widget -->
+																<?php echo $widget;?>
+																<?php echo $script;?>
+														</div>
+												</div>
+										</div>
+								<?php endif; ?>
 								<div class="form-group m-0">
 									<button type="submit" class="btn btn-primary btn-block">
 										Login

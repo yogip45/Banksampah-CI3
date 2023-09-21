@@ -38,28 +38,30 @@
               <div class="card-body">                
                 <form role="form" action="<?php echo base_url().'index.php/petugas/create_nasabah';?>" method="POST">
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="inputNama">Nama Lengkap</label>
                             <input type="text" class="form-control" id="inputNama" name="nama" value="<?= set_value('nama')?>">  
                             <?= form_error('nama','<small class="text-danger">', '</small>') ?>                                          
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="inputEmail">Email</label>
                             <input type="text" class="form-control" id="inputEmail" name="email" value="<?= set_value('email')?>">
                             <?= form_error('email','<small class="text-danger">', '</small>') ?>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword1">Password</label>                                                                                                   
-                            <input type="password" class="form-control" id="inputPassword1" name="password1">
-                            <?= form_error('password1','<small class="text-danger">', '</small>') ?>                                           
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword2">Konfirmasi Password</label>
-                            <input type="password" class="form-control" id="inputPassword2" name="password2">                                                
-                            <?= form_error('password2','<small class="text-danger">', '</small>') ?>                                           
-                        </div>
+                      <div class="form-group col-md-4">
+                        <label for="inputPassword1">Password</label>                                                                                                   
+                        <input type="password" class="form-control" id="inputPassword1" name="password1">
+                        <?= form_error('password1','<small class="text-danger">', '</small>') ?>                                           
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="inputPassword2">Konfirmasi Password</label>
+                        <input type="password" class="form-control" id="inputPassword2" name="password2">                                                
+                        <?= form_error('password2','<small class="text-danger">', '</small>') ?>                                           
+                      </div>
                     </div>
                     <div class="form-group col-md-8">
                         <label>Jenis Kelamin</label>
@@ -73,31 +75,25 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                           <label for="inputKecamatan">Kecamatan</label>
-                          <select class="form-control" id="inputKecamatan" name="kecamatan">
+                          <select class="form-control" id="inputKecamatan" name="id_kecamatan">
                               <!-- Opsi kecamatan akan ditambahkan di sini -->
                               <option value="">Pilih Kecamatan</option>
+                              <?php foreach ($alamat as $data): ?>
+                              <option value="<?=$data->id_kecamatan;?>"><?= $data->nama_kecamatan; ?></option>
+                              <?php endforeach ?>
                           </select>
-                          <?= form_error('kecamatan','<small class="text-danger">', '</small>') ?>
+                          <?= form_error('id_kecamatan','<small class="text-danger">', '</small>') ?>
                         </div>
-                        <div class="form-group col-md-6">
-                          <label for="inputDesa">Asal Desa</label>
-                          <select class="form-control" id="inputDesa" name="desa">
+                        <div class="form-group col-md-4">
+                          <label for="inputDesa" id="labelDesa">Asal Desa</label>
+                          <select class="form-control" id="inputDesa" name="id_desa">
                               <!-- Opsi kecamatan akan ditambahkan di sini -->
                               <option value="">Pilih Desa</option>
+
                           </select>
-                          <?= form_error('kecamatan','<small class="text-danger">', '</small>') ?>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputRt">Rt</label>
-                            <input type="number" class="form-control" id="inputRt" name="rt" value="<?= set_value('rt')?>">
-                            <?= form_error('rt','<small class="text-danger">', '</small>') ?>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputRw">Rw</label>
-                            <input type="number" class="form-control" id="inputRw" name="rw" value="<?= set_value('rw')?>">
-                            <?= form_error('rw','<small class="text-danger">', '</small>') ?>
+                          <?= form_error('id_desa','<small class="text-danger">', '</small>') ?>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -133,22 +129,36 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->    
-<script>
-  fetch(`https://yogip45.github.io/api-wilayah-indonesia/api/districts/3305.json`)
-    .then(response => response.json())
-    .then(districts => {
-        const selectKecamatan = document.getElementById('inputKecamatan');
-        
-        // Loop melalui data kecamatan dan tambahkan sebagai opsi
-        districts.forEach(district => {
-            const option = document.createElement('option');
-            option.value = district.name;
-            option.textContent = district.name;
-            selectKecamatan.appendChild(option);
-        });
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
+<!-- ./wrapper -->
+  <!-- GET DESA -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      loaddesa();
     });
-</script>
+
+    function loaddesa(){
+      $("#inputKecamatan").change(function(){
+        var getkecamatan = $("#inputKecamatan").val();
+          $.ajax({
+            type : "POST",
+            dataType : "JSON",
+            url : "<?= base_url().'index.php/petugas/get_desa' ?>",
+            data : {id_kecamatan : getkecamatan},
+            success : function(data){
+              console.log(data);
+
+              var html = '';
+              var i;
+              for (i = 0; i < data.length; i ++ ){
+                html += '<option value="'+data[i].id_desa+'">'+data[i].nama_desa+'</option>'
+              }
+              $("#inputDesa").html(html);
+              $("#labelDesa").show();
+              $("#inputDesa").show();
+            }
+          });
+      });
+    }
+  </script>

@@ -18,6 +18,7 @@ class Petugas extends CI_Controller {
 		$this->load->model('m_petugas');
 		$this->load->model('m_user');                  
 		$this->load->model('m_jns_sampah');
+		$this->load->model('m_alamat');
 		date_default_timezone_set('Asia/Jakarta');
 	}
 	public function dashboard()
@@ -58,10 +59,20 @@ class Petugas extends CI_Controller {
 			}				
 	}	
 
+	public function get_desa()
+	{
+		$id_kecamatan = $this->input->post('id_kecamatan');
+
+		$getdatadesa = $this->m_alamat->getdatadesa($id_kecamatan);
+
+		echo json_encode($getdatadesa);
+	}
 	public function tambah_nasabah()
 	{
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role')==3 || $this->session->userdata('role')==2 ) {
+				$getdata = $this->m_alamat->getdatakecamatan();
+				$data['alamat'] = $getdata;
 				$data['title'] = "Dashboard - Form Tambah Nasabah";
 				$data['user'] = $this->m_user->get_user();
 				$this->load->view('newtemplate/header',$data);
@@ -88,18 +99,12 @@ class Petugas extends CI_Controller {
 		$this->form_validation->set_rules('email','Email','required|trim|valid_email|is_unique[tb_user.email]',
 		array('required'=>'Email Harus Diisi','valid_email'=>'Alamat Email Tidak Valid','is_unique'=>'Alamat Email Sudah Digunakan')
 		);		
-		$this->form_validation->set_rules('desa','Desa','required|trim',
+		$this->form_validation->set_rules('id_desa','Desa','required|trim',
 		array('required'=>'Desa Harus Diisi')
 		);
-		$this->form_validation->set_rules('kecamatan','Kecamatan','required|trim',
+		$this->form_validation->set_rules('id_kecamatan','Kecamatan','required|trim',
 		array('required'=>'Kecamatan Harus Diisi')
 		);		
-		$this->form_validation->set_rules('rt','Rt','required|trim',
-		array('required'=>'Rt Harus Diisi')
-		);
-		$this->form_validation->set_rules('rw','Rw','required|trim',
-		array('required'=>'Rw Harus Diisi')
-		);
 		$this->form_validation->set_rules('alamat_lengkap','Alamat_lengkap','required|trim',
 		array('required'=>'Alamat Harus Diisi')
 		);
@@ -129,10 +134,8 @@ class Petugas extends CI_Controller {
 			$nin = getAutoNumber('tb_nasabah','nin','NSB','7');
 			$nama = $this->input->post('nama');
 			$jk = $this->input->post('jk');	
-			$rt = $this->input->post('rt');		
-			$rw = $this->input->post('rw');		
-			$desa = $this->input->post('desa');		
-			$kecamatan = $this->input->post('kecamatan');		
+			$desa = $this->input->post('id_desa');		
+			$kecamatan = $this->input->post('id_kecamatan');	
 			$alamat_lengkap = $this->input->post('alamat_lengkap');		
 			$email = $this->input->post('email');		
 			$password = $this->input->post('password1');
@@ -154,10 +157,8 @@ class Petugas extends CI_Controller {
 				'nin' => $nin,
 				'nama' => $nama,
 				'jk' => $jk,
-				'rt' => $rt,
-				'rw' => $rw,
-				'desa' => $desa,
-				'kecamatan' => $kecamatan,
+				'id_desa' => $desa,
+				'id_kecamatan' => $kecamatan,
 				'alamat_lengkap' => $alamat_lengkap,				
 				'saldo' => 0,
 			);
@@ -311,8 +312,5 @@ public function hapus_nasabah($id_user)
 				redirect('/index.php/auth');
 		}
 	}
-	// FUNGSI UNTUK NASABAH
-	// FUNGSI UNTUK SETORAN
-	
-	// FUNGSI UNTUK SETORAN
+	// FUNGSI UNTUK AMBIL DATA DESA
 }
