@@ -29,6 +29,9 @@
             <?php if ($this->session->flashdata('hapus')): ?>
                 <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
             <?php endif; ?>
+            <?php if ($this->session->flashdata('gagal')): ?>
+                <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
+            <?php endif; ?>
             <?php if ($this->session->flashdata('edit')): ?>
                 <div class="alert alert-danger"><?php echo $this->session->flashdata('edit'); ?></div>
             <?php endif; ?>
@@ -79,7 +82,8 @@
                           <th>Id Setor</th>
                           <th>NIN</th>
                           <th>Tanggal Setor</th>
-                          <th>Total</th>
+                          <th>Total (Rp.)</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -92,7 +96,10 @@
                             <td><?php echo $data->id_setor ?></td>
                             <td><?php echo $data->nin ?></td>
                             <td><?php echo date('d M Y', strtotime($data->tanggal_setor)) ?></td>
-                            <td><?php echo $data->id_admin ?></td>
+                            <td><?php echo $data->total ?></td>
+                            <td class="text-center <?php echo $data->status == 1 ? 'text-success' : 'text-warning'; ?>">
+                                <?php echo $data->status == 1 ? 'Selesai' : 'Belum Selesai'; ?>
+                            </td>
                             <td class="text-center">
                               <?php echo anchor('/index.php/setoran/detail_setoran/'.$data->id_setor, '<button class="btn btn-info"><i class="fa fa-bars"></i> Detail</button>'); ?>
                             </td>
@@ -175,4 +182,4 @@
 </div>
 <!-- ./wrapper -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="<?= base_url() ?>/assets/js/trans-js.js"></script>
+<script src="<?= base_url() ?>assets/js/trans-js.js"></script>

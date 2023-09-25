@@ -36,11 +36,28 @@
       
       // return true;
     }
-    public function ubahstatus()
-{
-    $data = array('status' => 1);
-    $this->db->update('tb_detail_transaksi', $data);
-}
+    public function selesaiTransaksi($id_setor, $new_status, $total,$nin) 
+    {
+      $data = array(
+          'status' => $new_status,
+          'total' => $total // Memperbarui kolom 'total' juga
+      );          
+      $this->db->where('id_setor', $id_setor);
+      return $this->db->update('tb_setoran', $data);
+    }
+    public function updateSaldo($nin,$total){
+      // Mengupdate tabel tb_nasabah
+      $this->db->where('nin', $nin);
+      $saldo_sekarang = $this->db->get('tb_nasabah')->row()->saldo;
+      $saldo_baru = $saldo_sekarang + $total;
+      
+      $data_nasabah = array(
+          'saldo' => $saldo_baru
+      );
+      
+      $this->db->where('nin', $nin);
+      $this->db->update('tb_nasabah', $data_nasabah);
+      }
     // public function input_detail($data)
     // {
     //   $nin = $data['nin'];    

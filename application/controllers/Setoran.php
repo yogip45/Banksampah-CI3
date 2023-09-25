@@ -66,6 +66,7 @@ class Setoran extends CI_Controller {
 				$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
 				$data['nasabah'] = $this->m_setoran->get_nasabah($id_setor);
 				$data['detail'] = $this->m_setoran->tampil_detail($id_setor)->result();
+				$data['id_setor'] = $id_setor;
 				$this->load->view('newtemplate/header',$data);
 					$this->load->view('newtemplate/top',$data);
 					$this->load->view('newtemplate/sidebar',$data);
@@ -78,15 +79,24 @@ class Setoran extends CI_Controller {
 			redirect('/index.php/auth');
 		}
 	}
-	public function donesetor()
+	public function selesaitransaksi()
 	{
-		$this->m_setoran->ubahstatus();
-		
-		// Berikan respons sukses
-		$response['status'] = 'success';
-		$response['message'] = 'Status updated successfully.';
-		echo json_encode($response);
+		$this->load->model('m_setoran');
+		$id_setor = $this->input->post('id_setor');
+		$total = $this->input->post('total');
+		$nin = $this->input->post('nin');
+		$new_status = 1; // Ganti dengan status yang ingin Anda set
+		$result = $this->m_setoran->selesaiTransaksi($id_setor, $new_status,$total,$nin);
+		$this->m_setoran->updateSaldo($nin,$total);
+		if ($result) {
+			echo json_encode(array('status' => 'success'));
+			$this->session->set_flashdata('sukses','Transaksi ' . $id_setor . ' Selesai');
+		} else {
+			echo json_encode(array('status' => 'error'));
+			$this->session->set_flashdata('gagal','Transaksi ' . $id_setor . ' Gagal');
+		}
 	}
+
 	public function create_setoran()
 	{
 		if ($this->session->userdata('email')) {
@@ -146,7 +156,6 @@ class Setoran extends CI_Controller {
 						'berat' => $berat,
 						'harga' => $harga,
 						'total' => $total,
-						'status' => 0,
 					);
 					$this->m_setoran->input_detail($data,$id_setor);
 					redirect('index.php/setoran/setoranindex');

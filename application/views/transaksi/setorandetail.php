@@ -51,8 +51,9 @@
                                         <table class="table">
                                           <tr>
                                               <td style="width: 60%; vertical-align: top ">
+                                                <p><span id="id_setor"><?= $id_setor; ?></span></p>
                                                 <p><?= $nasabah['nama']; ?></p>
-                                                <p><?= $nasabah['nin']; ?></p>
+                                                <p><span id="nin"><?= $nasabah['nin']; ?></span></p>
                                                 <p><?= $nasabah['id_admin']; ?></p>
                                               </td>
                                               <td style="width: 30%; vertical-align: top; text-align: right;" class="text-bold">
@@ -84,7 +85,7 @@
                           <div class="card-body">
                               <div class="tab-content">
                                 <div class="active tab-pane" id="settings">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambahDetail">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahDetail">
                                     <i class="fa fa-plus"></i> Tambah
                                 </button>
                                 <br>
@@ -111,12 +112,12 @@
                                           <td><?php echo $data->harga ?></td>
                                           <td><?php echo $data->total ?></td>
                                           <td class="text-center">
-                                            <?php echo anchor('/index.php/setoran/detail_setoran/'.$data->id_setor, '<button class="btn btn-info"><i class="fa fa-trash"></i> Hapus</button>'); ?>
+                                            <?php echo anchor('/index.php/setoran/hapus_detail_setoran/'.$data->id_setor, '<button class="btn btn-danger"><i class="fa fa-trash"></i> </button>'); ?>
                                           </td>
                                       <?php endforeach; ?>
                                     </tbody>
-                                  </table>
-                                  <button id="updateStatusButton" class="btn btn-info">Selesai Transaksi</button>
+                                  </table>                                  
+                                  <a data-target="#selesaiTransaksi<?= $nasabah['nin']; ?>" href="#selesai" id="selesaiTransaksi" data-toggle="modal"  class="btn btn-info">Selesai Transaksi</a>
                                 </div>
                               </div>
                             </div>
@@ -169,6 +170,22 @@
                     </div>
                 </div>
                 <!-- MODAL INPUT -->
+                <!-- MODAL SELESAI TRANSAKSI -->
+                <div class="modal fade" id="selesaiTransaksi<?= $nasabah['nin']; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h5>Selesaikan Transaksi?</h5>
+                                <p>Data tidak dapat diubah lagi</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="button" class="btn btn-info" id="btn-selesai">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL SELESAI TRANSAKSI -->
               </div>
               <!-- /.card-body -->
             </div>
@@ -254,26 +271,35 @@
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-$(document).ready(function() {
-    $("#updateStatusButton").click(function() {
+  $(document).ready(function() {
+    $("#btn-selesai").click(function() {
+        var id_setor = $("#id_setor").text();
+        var totalStr = $("#total").text();
+        var nin = $("#nin").text();
+        console.log(total);
         $.ajax({
-            url: "http://localhost/banksampah/index.php/setoran/donesetor",
-            type: "POST",
-            dataType: "json",
+            type: 'POST',
+            url: '<?php echo base_url('index.php/setoran/selesaitransaksi'); ?>',
+            data: {
+              id_setor: id_setor,
+              total: total,
+              nin: nin
+            },
+            dataType: 'json',
             success: function(response) {
-                if (response.status === "success") {
-                    alert(response.message);
-                    // Refresh halaman atau lakukan tindakan lain yang diperlukan
+                if (response.status === 'success') {
+                    // Jika ingin mengarahkan pengguna setelah menampilkan pesan
+                    window.location.href = '<?php echo base_url('index.php/setoran/setoranindex'); ?>';
                 } else {
-                    alert("Failed to update status.");
+                    alert('Transaksi Gagal');
                 }
             },
-            error: function() {
-                alert("An error occurred while updating status.");
-            }
         });
     });
 });
+
 </script>
+
 

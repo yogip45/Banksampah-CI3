@@ -19,7 +19,7 @@
 
     public function hitung(){
       $this->db->select_sum('berat', 'total_berat');
-      $this->db->from('tb_setoran');
+      $this->db->from('tb_detail_setoran');
       $result = $this->db->get()->row();
 
       $total_berat = $result->total_berat;

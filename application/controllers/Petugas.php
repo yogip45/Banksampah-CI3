@@ -122,13 +122,15 @@ class Petugas extends CI_Controller {
 
 
 		if ($this->form_validation->run() == false) {
-			$data['title'] = "Dashboard - Tambah Nasabah";
-			$data['user'] = $this->m_user->get_user();
-			$this->load->view('newtemplate/header',$data);
-			$this->load->view('newtemplate/top',$data);
-			$this->load->view('newtemplate/sidebar');
-			$this->load->view('nasabah/nasabahtambah');
-			$this->load->view('newtemplate/footer');
+				$getdata = $this->m_alamat->getdatakecamatan();
+				$data['alamat'] = $getdata;
+				$data['title'] = "Dashboard - Form Tambah Nasabah";
+				$data['user'] = $this->m_user->get_user();
+				$this->load->view('newtemplate/header',$data);
+				$this->load->view('newtemplate/top',$data);
+				$this->load->view('newtemplate/sidebar',$data);
+				$this->load->view('nasabah/nasabahtambah',$data);
+				$this->load->view('newtemplate/footer');
 		} else {			
 			$kodeunik = 'U' . uniqid();
 			$nin = getAutoNumber('tb_nasabah','nin','NSB','7');
