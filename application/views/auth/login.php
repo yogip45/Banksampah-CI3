@@ -88,9 +88,6 @@
 								</div>
 								<div class="form-group">
 									<label for="password">Password
-										<a href="forgot.html" class="float-right">
-											Lupa Password?
-										</a>
 									</label>
 									<input id="password" type="password" class="form-control" name="password" value="" required data-eye>
 									<?= form_error('password','<small class=" text-danger">', '</small>') ?>

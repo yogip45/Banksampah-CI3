@@ -3,10 +3,9 @@
   {
     public function tampil_data()
     {      
-      $this->db->select('tb_setoran.*, tb_nasabah.nama', 'tb_nasabah.nin');
+      $this->db->select('tb_setoran.*');
       $this->db->from('tb_setoran');
-      $this->db->join('tb_nasabah', 'tb_setoran.nin = tb_nasabah.nin', 'left');
-      return $this->db->get();      
+      return $this->db->get();
     }
     public function get_nasabah($id_setor){
       $this->db->select('tb_setoran.*, tb_nasabah.nama, tb_nasabah.nin, tb_nasabah.saldo');
@@ -24,9 +23,7 @@
     {
       $this->db->insert('tb_setoran', $data);
       $this->session->set_flashdata('sukses','Berhasil Ditambahkan');
-			redirect('/index.php/setoran/detail_setoran/'.$id_setor);
-      
-      // return true;
+      redirect('/index.php/setoran/detail_setoran/'.$id_setor);
     }
     public function input_detail($data,$id_setor)
     {

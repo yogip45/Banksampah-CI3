@@ -87,8 +87,8 @@ class Setoran extends CI_Controller {
 		$nin = $this->input->post('nin');
 		$new_status = 1; // Ganti dengan status yang ingin Anda set
 		$result = $this->m_setoran->selesaiTransaksi($id_setor, $new_status,$total,$nin);
-		$this->m_setoran->updateSaldo($nin,$total);
 		if ($result) {
+			$this->m_setoran->updateSaldo($nin,$total);
 			echo json_encode(array('status' => 'success'));
 			$this->session->set_flashdata('sukses','Transaksi ' . $id_setor . ' Selesai');
 		} else {
@@ -120,11 +120,13 @@ class Setoran extends CI_Controller {
 				} else {
 					$id_setor = getAutoSetoranId();
 					$nin = $this->input->post('nin');
+					$saldo_lama = $this->m_nasabah->getSaldoByNin($nin);
 					$id_admin = $this->session->userdata('id_user');
 					$data = array(
 						'id_setor' => $id_setor,
 						'nin' => $nin,
 						'id_admin' => $id_admin,
+						'saldo_lama'=>$saldo_lama,
 					);
 					$this->m_setoran->input_setoran($data,$id_setor);
 					redirect('index.php/setoran/setoranindex');

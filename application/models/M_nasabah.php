@@ -41,4 +41,16 @@
     {
       
     }
+    public function getSaldoByNin($nin)
+    {
+      $this->db->select('saldo');
+      $this->db->where('nin', $nin);
+      $query = $this->db->get('tb_nasabah');
+
+      if ($query->num_rows() > 0) {
+          return $query->row()->saldo;
+      } else {
+          return 0; // Atau nilai default lain jika nin tidak ditemukan.
+      }
+    }
   }

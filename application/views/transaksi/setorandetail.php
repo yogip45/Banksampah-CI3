@@ -62,7 +62,7 @@
                                                 <p>Total Pendapatan:</p>
                                               </td>
                                               <td style="width: 10%; vertical-align: top; text-align: left;">
-                                                  <p>Rp. <span id="saldoLama"><?= $nasabah['saldo']; ?></span></p>
+                                                  <p>Rp. <span id="saldoLama"><?= $nasabah['saldo_lama']; ?></span></p>
                                                   <p><span id="new_saldo"></span></p>
                                                   <p>Rp. <span id="total"></span></p>
                                               </td>
@@ -85,9 +85,13 @@
                           <div class="card-body">
                               <div class="tab-content">
                                 <div class="active tab-pane" id="settings">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahDetail">
-                                    <i class="fa fa-plus"></i> Tambah
-                                </button>
+                                <?php if ($nasabah['status'] == 0) : ?>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahDetail">
+                                        <i class="fa fa-plus"></i> Tambah
+                                    </button>
+                                <?php elseif ($nasabah['status'] == 1) : ?>
+                                    <h5 style="color: green;">Transaksi Selesai</h5>
+                                <?php endif; ?>
                                 <br>
                                 <br>
                                   <table class="table table-striped table-bordered" id="dataNasabah">
@@ -98,7 +102,9 @@
                                         <th>Berat (Kg)</th>
                                         <th>Harga</th>
                                         <th>Total</th>
-                                        <th>Action</th>
+                                        <?php if ($nasabah['status'] == 0) : ?>
+                                          <th>Action</th>
+                                        <?php endif; ?>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -111,13 +117,17 @@
                                           <td><?php echo $data->berat ?></td>
                                           <td><?php echo $data->harga ?></td>
                                           <td><?php echo $data->total ?></td>
-                                          <td class="text-center">
-                                            <?php echo anchor('/index.php/setoran/hapus_detail_setoran/'.$data->id_setor, '<button class="btn btn-danger"><i class="fa fa-trash"></i> </button>'); ?>
-                                          </td>
+                                          <?php if ($nasabah['status'] == 0) : ?>
+                                            <td class="text-center">
+                                              <?php echo anchor('/index.php/setoran/hapus_detail_setoran/'.$data->id_setor, '<button class="btn btn-danger"><i class="fa fa-trash"></i> </button>'); ?>
+                                            </td>
+                                          <?php endif; ?>
                                       <?php endforeach; ?>
                                     </tbody>
-                                  </table>                                  
-                                  <a data-target="#selesaiTransaksi<?= $nasabah['nin']; ?>" href="#selesai" id="selesaiTransaksi" data-toggle="modal"  class="btn btn-info">Selesai Transaksi</a>
+                                  </table>              
+                                  <?php if ($nasabah['status'] == 0) : ?>
+                                    <a data-target="#selesaiTransaksi<?= $nasabah['nin']; ?>" href="#selesai" id="selesaiTransaksi" data-toggle="modal"  class="btn btn-info">Selesai Transaksi</a>
+                                  <?php endif; ?>                    
                                 </div>
                               </div>
                             </div>

@@ -101,7 +101,11 @@
                                 <?php echo $data->status == 1 ? 'Selesai' : 'Belum Selesai'; ?>
                             </td>
                             <td class="text-center">
-                              <?php echo anchor('/index.php/setoran/detail_setoran/'.$data->id_setor, '<button class="btn btn-info"><i class="fa fa-bars"></i> Detail</button>'); ?>
+                                <?php
+                                $url = '/index.php/setoran/detail_setoran/' . $data->id_setor;
+                                $attributes = array('class' => 'btn btn-info');
+                                echo anchor($url, 'Detail', $attributes);
+                                ?>
                             </td>
                         <?php endforeach; ?>
                       </tbody>

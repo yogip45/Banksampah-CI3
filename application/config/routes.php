@@ -54,4 +54,5 @@ $route['404_override'] = 'notFound';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['jenissampah/edit'] = 'jenissampah/edit';
+$route['index.php/setoran/detail_setoran/(:any)'] = 'index.php/setoran/detail_setoran/$1';
 
