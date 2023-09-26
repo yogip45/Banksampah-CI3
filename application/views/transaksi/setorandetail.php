@@ -90,7 +90,6 @@
                                         <i class="fa fa-plus"></i> Tambah
                                     </button>
                                     <br>
-                                    <br>
                                 <?php elseif ($nasabah['status'] == 1) : ?>
                                     <h3 style="color: green;" class="text-bold">Transaksi Selesai</h3>
                                 <?php endif; ?>
