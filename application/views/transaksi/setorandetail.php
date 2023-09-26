@@ -10,8 +10,8 @@
           </div>
           <div class="col-sm-6">            
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item"><a href="<?= base_url().'index.php/setoran/setoranindex';?>">Setor</a></li>
+              <li class="breadcrumb-item active">Detail Setoran</li>
             </ol>
           </div>
         </div>
@@ -48,26 +48,25 @@
                                 <div class="card-body">
                                     <div class="tab-content">
                                         <div class="text-left">
-                                        <table class="table">
-                                          <tr>
-                                              <td style="width: 60%; vertical-align: top ">
-                                                <p><span id="id_setor"><?= $id_setor; ?></span></p>
-                                                <p><?= $nasabah['nama']; ?></p>
-                                                <p><span id="nin"><?= $nasabah['nin']; ?></span></p>
-                                                <p><?= $nasabah['id_admin']; ?></p>
-                                              </td>
-                                              <td style="width: 30%; vertical-align: top; text-align: right;" class="text-bold">
-                                                <p>Saldo Awal:</p>
-                                                <p>Total Pendapatan:</p>
-                                                <p>Saldo Baru:</p>
-                                              </td>
-                                              <td style="width: 10%; vertical-align: top; text-align: left;">
-                                                  <p>Rp. <span id="saldoLama"><?= $nasabah['saldo_lama']; ?></span></p>
-                                                  <p>Rp. <span id="total"></span></p>
-                                                  <p><span id="new_saldo"></span></p>
-                                              </td>
-                                          </tr>
-                                        </table>
+                                          <div class="table-responsive">
+                                            <table class="table">
+                                              <tr>
+                                                  <td style="width: 60%; vertical-align: top ">
+                                                    <h5><span id="id_setor"><?= $id_setor; ?></span>/<?= $nasabah['nama']; ?>/<span id="nin"><?= $nasabah['nin']; ?></span> </h5>
+                                                  </td>
+                                                </tr>
+                                              </tr>
+                                            </table>
+                                            <table class="table">
+                                              <tr>
+                                                <td style="width: 60%; vertical-align: top ">
+                                                  <p>Saldo Awal: <span class="text-bold">Rp. </span> <span id="saldoLama" class="text-bold"><?= $nasabah['saldo_lama']; ?></span></p>
+                                                  <p>Total Pendapatan: <span class="text-bold">Rp. </span> <span class="text-bold" id="total"></span></p>
+                                                  <p>Saldo Baru: <span class="text-bold" id="new_saldo"></span></p>
+                                                </td>
+                                              </tr>
+                                              </table>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>

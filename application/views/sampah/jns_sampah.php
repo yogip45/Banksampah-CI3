@@ -40,60 +40,62 @@
             <br>
             <div class="card">
               <!-- /.card-header -->
-              <div class="card-body">                
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Jenis Sampah</th>
-                            <th>Kategori</th>
-                            <th>Harga</th>
-                            <th>Tanggal Update</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $no = 1;
-                        foreach ($jns_sampah as $sampah) : ?>
-                        <tr>
-                            <td><?php echo $no++ ?></td>                                                    
-                            <td><?php echo $sampah->nama_sampah ?></td>                                                   
-                            <td><?php echo $sampah->kategori ?></td>                                                   
-                            <td><?php echo $sampah->harga ?> /kg</td>                                                                                                        
-                            <td><?php echo date('d M Y', strtotime($sampah->diubah)) ?></td>                                                    
-                            <td class="text-center" >                                                        
-                                <?php echo anchor('index.php/jenissampah/edit/'.$sampah->id, '<button type="button" class="btn btn-warning"><i class="fa text-white fa-edit fa-fw"></i></button>'); ?>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal<?php echo $sampah->id; ?>">
-                                <i class="fa fa-trash fa-fw"></i>
-                                </button>
-                            </td>                                                                                                                                                                                                                   
-                            <!-- Modal untuk konfirmasi hapus -->
-                            <div class="modal fade" id="hapusModal<?php echo $sampah->id; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel<?php echo $sampah->id; ?>" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="hapusModalLabel<?php echo $sampah->id; ?>">Konfirmasi Hapus</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Apakah Anda yakin ingin menghapus data ini?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                            <?php echo anchor('index.php/jenissampah/hapus/'.$sampah->id, '<button type="button" class="btn btn-danger">OK</button>'); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Modal untuk edit -->                                                                                               
-                        <?php endforeach; ?>
-                        </div>
-                    </tr>                                                                                           
-                    </tbody>
-                </table>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered table-hover">
+                      <thead>
+                          <tr>
+                              <th>No.</th>
+                              <th>Jenis Sampah</th>
+                              <th>Kategori</th>
+                              <th>Harga</th>
+                              <th>Tanggal Update</th>
+                              <th>Aksi</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                          $no = 1;
+                          foreach ($jns_sampah as $sampah) : ?>
+                          <tr>
+                              <td><?php echo $no++ ?></td>                                                    
+                              <td><?php echo $sampah->nama_sampah ?></td>                                                   
+                              <td><?php echo $sampah->kategori ?></td>                                                   
+                              <td><?php echo $sampah->harga ?> /kg</td>                                                                                                        
+                              <td><?php echo date('d M Y', strtotime($sampah->diubah)) ?></td>                                                    
+                              <td class="text-center" >                                                        
+                                  <?php echo anchor('index.php/jenissampah/edit/'.$sampah->id, '<button type="button" class="btn btn-warning"><i class="fa text-white fa-edit fa-fw"></i></button>'); ?>
+                                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal<?php echo $sampah->id; ?>">
+                                  <i class="fa fa-trash fa-fw"></i>
+                                  </button>
+                              </td>                                                                                                                                                                                                                   
+                              <!-- Modal untuk konfirmasi hapus -->
+                              <div class="modal fade" id="hapusModal<?php echo $sampah->id; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel<?php echo $sampah->id; ?>" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="hapusModalLabel<?php echo $sampah->id; ?>">Konfirmasi Hapus</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              Apakah Anda yakin ingin menghapus data ini?
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                              <?php echo anchor('index.php/jenissampah/hapus/'.$sampah->id, '<button type="button" class="btn btn-danger">OK</button>'); ?>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- Modal untuk edit -->                                                                                               
+                          <?php endforeach; ?>
+                          </div>
+                      </tr>                                                                                           
+                      </tbody>
+                  </table>
+                </div>
                 <!-- MODAL INPUT -->
                 <div class="modal fade" id="tambahSampah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
