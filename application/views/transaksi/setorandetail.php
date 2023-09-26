@@ -298,7 +298,6 @@
         var id_setor = $("#id_setor").text();
         var totalStr = $("#total").text();
         var nin = $("#nin").text();
-        console.log(total);
         $.ajax({
             type: 'POST',
             url: '<?php echo base_url('index.php/setoran/selesaitransaksi'); ?>',
@@ -324,7 +323,6 @@
 $(document).ready(function() {
     $(".hapus-detail").click(function() {
         var id_setor = $(this).data('id-setor');
-        console.log(id_setor);
         $.ajax({
             type: 'POST',
             url: '<?php echo base_url('index.php/setoran/hapus_detail_setoran'); ?>',
