@@ -42,6 +42,13 @@
       $this->db->where('id_setor', $id_setor);
       return $this->db->update('tb_setoran', $data);
     }
+
+    public function hapus_detail($id_detail_setoran)
+    {
+      $this->db->where('id', $id_detail_setoran);
+      return $this->db->delete('tb_detail_setoran');
+    }
+
     public function updateSaldo($nin,$total){
       // Mengupdate tabel tb_nasabah
       $this->db->where('nin', $nin);

@@ -58,13 +58,13 @@
                                               </td>
                                               <td style="width: 30%; vertical-align: top; text-align: right;" class="text-bold">
                                                 <p>Saldo Awal:</p>
-                                                <p>Saldo Baru:</p>
                                                 <p>Total Pendapatan:</p>
+                                                <p>Saldo Baru:</p>
                                               </td>
                                               <td style="width: 10%; vertical-align: top; text-align: left;">
                                                   <p>Rp. <span id="saldoLama"><?= $nasabah['saldo_lama']; ?></span></p>
-                                                  <p><span id="new_saldo"></span></p>
                                                   <p>Rp. <span id="total"></span></p>
+                                                  <p><span id="new_saldo"></span></p>
                                               </td>
                                           </tr>
                                         </table>
@@ -89,15 +89,17 @@
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahDetail">
                                         <i class="fa fa-plus"></i> Tambah
                                     </button>
+                                    <br>
+                                    <br>
                                 <?php elseif ($nasabah['status'] == 1) : ?>
-                                    <h5 style="color: green;">Transaksi Selesai</h5>
+                                    <h3 style="color: green;" class="text-bold">Transaksi Selesai</h3>
                                 <?php endif; ?>
-                                <br>
                                 <br>
                                   <table class="table table-striped table-bordered" id="dataNasabah">
                                       <thead>
                                       <tr>
                                         <th>No.</th>
+                                        <th>Id.</th>
                                         <th>Jenis Sampah</th>
                                         <th>Berat (Kg)</th>
                                         <th>Harga</th>
@@ -113,13 +115,21 @@
                                       foreach ($detail as $data) : ?>
                                         <tr class="odd gradeX">
                                           <td><?php echo $no++ ?></td>
+                                          <td><?php echo $data->id ?></td>
                                           <td><?php echo $data->jns_sampah ?></td>
                                           <td><?php echo $data->berat ?></td>
                                           <td><?php echo $data->harga ?></td>
                                           <td><?php echo $data->total ?></td>
                                           <?php if ($nasabah['status'] == 0) : ?>
                                             <td class="text-center">
-                                              <?php echo anchor('/index.php/setoran/hapus_detail_setoran/'.$data->id_setor, '<button class="btn btn-danger"><i class="fa fa-trash"></i> </button>'); ?>
+                                            <?php echo anchor(
+                                                '#',
+                                                '<button class="btn btn-danger" id="hapus-detail"><i class="fa fa-trash"></i></button>',
+                                                array(
+                                                    'data-id-setor' => $data->id,
+                                                    'class' => 'hapus-detail'
+                                                )
+                                            ); ?>
                                             </td>
                                           <?php endif; ?>
                                       <?php endforeach; ?>
@@ -294,7 +304,7 @@
             url: '<?php echo base_url('index.php/setoran/selesaitransaksi'); ?>',
             data: {
               id_setor: id_setor,
-              total: total,
+              total: totalStr,
               nin: nin
             },
             dataType: 'json',
@@ -309,7 +319,29 @@
         });
     });
 });
-
 </script>
+<script>
+$(document).ready(function() {
+    $(".hapus-detail").click(function() {
+        var id_setor = $(this).data('id-setor');
+        console.log(id_setor);
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('index.php/setoran/hapus_detail_setoran'); ?>',
+            data: { id_setor: id_setor },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    location.reload();
+                } else {
+                    alert('Hapus Gagal');
+                }
+            },
+        });
+    });
+});
+</script>
+
+
 
 
