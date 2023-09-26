@@ -39,6 +39,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/banksampah/index.php/nasabah/setoran_saya" class="nav-link <?= ($this->uri->segment(1) == 'nasabah' && $this->uri->segment(2) == 'setoran_saya') ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Riwayat Setor
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
           <a href="/banksampah/index.php/user/myprofile" class="nav-link <?= ($this->uri->segment(1) == 'user' && $this->uri->segment(2) == 'myprofile') ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-user-circle"></i>
               <p>

@@ -96,8 +96,6 @@
                                   <table class="table table-striped table-bordered" id="dataNasabah">
                                       <thead>
                                       <tr>
-                                        <th>No.</th>
-                                        <th>Id.</th>
                                         <th>Jenis Sampah</th>
                                         <th>Berat (Kg)</th>
                                         <th>Harga</th>
@@ -112,8 +110,6 @@
                                       $no = 1;
                                       foreach ($detail as $data) : ?>
                                         <tr class="odd gradeX">
-                                          <td><?php echo $no++ ?></td>
-                                          <td><?php echo $data->id ?></td>
                                           <td><?php echo $data->jns_sampah ?></td>
                                           <td><?php echo $data->berat ?></td>
                                           <td><?php echo $data->harga ?></td>
@@ -260,7 +256,7 @@
     // Loop melalui setiap baris (kecuali header) dalam tabel
     for (var i = 1; i < table.rows.length; i++) {
         // Ambil nilai dari kolom "Total" pada setiap baris
-        var totalValue = parseFloat(table.rows[i].cells[4].textContent);
+        var totalValue = parseFloat(table.rows[i].cells[3].textContent);
         
         // Pastikan nilai yang diambil adalah angka
         if (!isNaN(totalValue)) {

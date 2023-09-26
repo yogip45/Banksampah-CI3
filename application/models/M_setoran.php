@@ -7,6 +7,11 @@
       $this->db->from('tb_setoran');
       return $this->db->get();
     }
+    public function tampil_databyNin($nin)
+    {      
+      $this->db->where('nin',$nin);
+      return $this->db->get('tb_setoran');
+    }
     public function get_nasabah($id_setor){
       $this->db->select('tb_setoran.*, tb_nasabah.nama, tb_nasabah.nin, tb_nasabah.saldo');
       $this->db->from('tb_setoran');
