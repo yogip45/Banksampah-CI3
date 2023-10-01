@@ -32,6 +32,10 @@
 
       return $this->db->get()->result();
     }
+
+    public function get_kec_desa($id_kecamatan,$id_desa){
+      
+    }
     public function update_data($where,$data,$table)
     {
       $this->db->where($where);

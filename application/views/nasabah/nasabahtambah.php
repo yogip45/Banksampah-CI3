@@ -91,9 +91,18 @@
                           <select class="form-control" id="inputDesa" name="id_desa">
                               <!-- Opsi kecamatan akan ditambahkan di sini -->
                               <option value="">Pilih Desa</option>
-
                           </select>
                           <?= form_error('id_desa','<small class="text-danger">', '</small>') ?>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="inputRt">Rt</label>
+                            <input type="number" class="form-control" id="inputRt" name="rt" value="<?= set_value('rt')?>">
+                            <?= form_error('rt','<small class="text-danger">', '</small>') ?>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="inputRt">Rw</label>
+                            <input type="number" class="form-control" id="inputRt" name="rw" value="<?= set_value('rw')?>">
+                            <?= form_error('rt','<small class="text-danger">', '</small>') ?>
                         </div>
                     </div>
                     <div class="form-group col-md-6">

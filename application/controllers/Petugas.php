@@ -108,6 +108,12 @@ class Petugas extends CI_Controller {
 		$this->form_validation->set_rules('alamat_lengkap','Alamat_lengkap','required|trim',
 		array('required'=>'Alamat Harus Diisi')
 		);
+		$this->form_validation->set_rules('rt','Rt','required|trim',
+		array('required'=>'Rt Harus Diisi')
+		);
+		$this->form_validation->set_rules('rw','Rw','required|trim',
+		array('required'=>'Rw Harus Diisi')
+		);
 		$this->form_validation->set_rules('password1','Password','required|trim|min_length[8]|matches[password2]',
 		array(
 			'required'=>'Password Harus Diisi',
@@ -138,6 +144,8 @@ class Petugas extends CI_Controller {
 			$jk = $this->input->post('jk');	
 			$desa = $this->input->post('id_desa');		
 			$kecamatan = $this->input->post('id_kecamatan');	
+			$rt = $this->input->post('rt');	
+			$rw = $this->input->post('rw');	
 			$alamat_lengkap = $this->input->post('alamat_lengkap');		
 			$email = $this->input->post('email');		
 			$password = $this->input->post('password1');
@@ -161,6 +169,8 @@ class Petugas extends CI_Controller {
 				'jk' => $jk,
 				'id_desa' => $desa,
 				'id_kecamatan' => $kecamatan,
+				'rt' => $rt,
+				'rw' => $rw,
 				'alamat_lengkap' => $alamat_lengkap,				
 				'saldo' => 0,
 			);
