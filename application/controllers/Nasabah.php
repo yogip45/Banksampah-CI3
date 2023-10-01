@@ -52,4 +52,27 @@ class Nasabah extends CI_Controller {
 			redirect('/index.php/auth');
 		}
 	}
+	public function detail_setoran()
+	{
+		if ($this->session->userdata('email')) {
+			if ($this->session->userdata('role')==1) {
+				$id_setor = $this->input->post('id_setor');
+				$data['title'] = "Dashboard - Detail Setoran Saya";
+				$data['nasabah'] = $this->m_user->get_nasabah();
+				$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
+				$data['setoran'] = $this->m_setoran->get_nasabah($id_setor);
+				$data['detail'] = $this->m_setoran->tampil_detail($id_setor)->result();
+				$data['id_setor'] = $id_setor;
+				$this->load->view('usertemplate/header',$data);
+					$this->load->view('usertemplate/top',$data);
+					$this->load->view('usertemplate/sidebar',$data);
+					$this->load->view('nasabah/setorandetail',$data);
+					$this->load->view('usertemplate/footer');
+			} else {
+				redirect('/index.php/auth/dashboard');
+			}
+		} else {	
+			redirect('/index.php/auth');
+		}
+	}
 }

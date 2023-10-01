@@ -49,9 +49,11 @@
                             <td class="text-success"><?php echo $data->total ?></td>
                             <td class="text-center">
                                 <?php
-                                $url = '/index.php/setoran/detail_setoran/' . $data->id_setor;
-                                $attributes = array('class' => 'btn btn-info');
-                                echo anchor($url, '<i class="fas fa-bars"></i>', $attributes);
+                                $url = '/index.php/nasabah/detail_setoran';
+                                echo form_open($url);
+                                echo form_hidden('id_setor', $data->id_setor);
+                                echo '<button type="submit" class="btn btn-info"><i class="fas fa-bars"></i></button>';
+                                echo form_close();
                                 ?>
                             </td>
                         <?php endforeach; ?>
