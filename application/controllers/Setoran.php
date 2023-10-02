@@ -81,19 +81,27 @@ class Setoran extends CI_Controller {
 	}
 	public function selesaitransaksi()
 	{
-		$this->load->model('m_setoran');
-		$id_setor = $this->input->post('id_setor');
-		$total = $this->input->post('total');
-		$nin = $this->input->post('nin');
-		$new_status = 1; // Ganti dengan status yang ingin Anda set
-		$result = $this->m_setoran->selesaiTransaksi($id_setor, $new_status,$total,$nin);
-		if ($result) {
-			$this->m_setoran->updateSaldo($nin,$total);
-			echo json_encode(array('status' => 'success'));
-			$this->session->set_flashdata('sukses','Transaksi ' . $id_setor . ' Selesai');
-		} else {
-			echo json_encode(array('status' => 'error'));
-			$this->session->set_flashdata('gagal','Transaksi ' . $id_setor . ' Gagal');
+		if ($this->session->userdata('email')) {
+			if ($this->session->userdata('role')==2 || $this->session->userdata('role')==3) {
+				$this->load->model('m_setoran');
+				$id_setor = $this->input->post('id_setor');
+				$total = $this->input->post('total');
+				$nin = $this->input->post('nin');
+				$new_status = 1; // Ganti dengan status yang ingin Anda set
+				$result = $this->m_setoran->selesaiTransaksi($id_setor, $new_status,$total,$nin);
+				if ($result) {
+					$this->m_setoran->updateSaldo($nin,$total);
+					echo json_encode(array('status' => 'success'));
+					$this->session->set_flashdata('sukses','Transaksi ' . $id_setor . ' Selesai');
+				} else {
+					echo json_encode(array('status' => 'error'));
+					$this->session->set_flashdata('gagal','Transaksi ' . $id_setor . ' Gagal');
+				}
+			} else {
+				$this->load->view('error/403');
+			}
+		} else {			
+			redirect('/index.php/auth');
 		}
 	}
 
