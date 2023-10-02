@@ -177,7 +177,6 @@
             url : "<?= base_url().'index.php/stok/max_barangkeluar' ?>",
             data : {id_sampah : getId},
             success : function(data){
-              console.log(data);
               var placeholderText ="Maksimal " + data[0].jumlah + " Kg";
               $("#inputJumlah").attr("placeholder", placeholderText);
             }
