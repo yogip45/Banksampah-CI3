@@ -67,6 +67,15 @@ class Petugas extends CI_Controller {
 
 		echo json_encode($getdatadesa);
 	}
+	public function get_desa_edit()
+	{
+		$id_kecamatan = $this->input->post('id_kecamatan');
+		$id_desa = $this->input->post('id_desa');
+
+		$getdatadesa = $this->m_alamat->getdatadesa($id_kecamatan);
+
+		echo json_encode($getdatadesa);
+	}
 	public function tambah_nasabah()
 	{
 		if ($this->session->userdata('email')) {
@@ -214,7 +223,7 @@ public function hapus_nasabah($id_user)
 				$data['user'] = $this->m_user->get_user();
 				$this->load->model('m_nasabah');
 				$this->load->model('m_user');
-				// $where = array('id_user'=>$id_user);		
+				$data['kecamatan'] = $this->m_alamat->getdatakecamatan();
 				$data['nasabah'] = $this->m_nasabah->get_user_nasabah_data($id_user);
 				$this->load->view('newtemplate/header',$data);
 				$this->load->view('newtemplate/top',$data);
@@ -240,21 +249,19 @@ public function hapus_nasabah($id_user)
 			$rt = $this->input->post('rt');		
 			$rw = $this->input->post('rw');		
 			$jk = $this->input->post('jk');		
-			$desa = $this->input->post('desa');
-			$kecamatan = $this->input->post('kecamatan');		
+			$desa = $this->input->post('id_desa');
+			$kecamatan = $this->input->post('id_kecamatan');		
 			$alamat_lengkap = $this->input->post('alamat_lengkap');		
 			
 			$data = array(
-				//auto generate nin
-				'role' => 1,
 				'diedit' => date('Y-m-d H:i:s'),
 			);
 			$data1 = array(											
 				'nama' => $nama,
 				'rt' => $rt,
 				'rw' => $rw,
-				'desa' => $desa,
-				'kecamatan' => $kecamatan,
+				'id_desa' => $desa,
+				'id_kecamatan' => $kecamatan,
 				'alamat_lengkap' => $alamat_lengkap,
 				'jk' => $jk,
 			);

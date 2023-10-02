@@ -14,6 +14,11 @@
       
       return $query->result();
     }
+    public function getalldesa()
+    {
+      $query = $this->db->query("SELECT * FROM tb_desa ORDER BY nama_desa ASC");
+      return $query->result();
+    }
     public function tampil_desa($id_kecamatan)
     {
       // Sesuaikan nama tabel dan kolom sesuai dengan struktur database Anda

@@ -31,7 +31,6 @@
               <?php foreach ($nasabah as $data) : ?>
                 <form role="form" action="<?php echo base_url('index.php/petugas/update_nasabah'); ?>" method="POST">
                     <input type="hidden" value="<?= $data->id_user ?>" name="id_user">
-                    <input type="hidden" id="idDesa" value="<?= $data->id_desa; ?>">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputNama">Nama Lengkap</label>
@@ -71,12 +70,15 @@
                             <?= form_error('id_kecamatan', '<small class="text-danger">', '</small>') ?>
                         </div>
                         <div class="form-group col-md-4">
-                          <label for="inputDesa" id="labelDesa">Asal Desa</label>
-                          <select class="form-control" id="inputDesa" name="id_desa">
-                              <!-- Opsi kecamatan akan ditambahkan di sini -->
-                              <option value="">Pilih Desa</option>
-                          </select>
-                          <?= form_error('id_desa','<small class="text-danger">', '</small>') ?>
+                            <label for="inputDesa" id="labelDesa">Asal Desa</label>
+                            <select class="form-control" id="inputDesa" name="id_desa">
+                                <!-- Opsi desa akan ditambahkan di sini -->
+                                <?php
+                                $selectedDesa = ($data->id_desa == $nasabah->id_desa) ? 'selected' : '';
+                                ?>
+                                <option value="<?=$data->id_desa;?>" <?= $selectedDesa; ?>><?= $data->nama_desa; ?></option>
+                            </select>
+                            <?= form_error('id_desa', '<small class="text-danger">', '</small>') ?>
                         </div>
                         <div class="form-group col-md-1">
                             <label for="inputRt">Rt</label>
@@ -130,18 +132,19 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function(){
-      desa();
       loaddesa();
     });
     function loaddesa(){
-      $("#inputKecamatan").change(function(){
         var getkecamatan = $("#inputKecamatan").val();
+        var id_desa = <?= $data->id_desa?>;
           $.ajax({
             type : "POST",
             dataType : "JSON",
             url : "<?= base_url().'index.php/petugas/get_desa' ?>",
-            data : {id_kecamatan : getkecamatan},
+            data : {id_kecamatan : getkecamatan,
+            id_desa: id_desa},
             success : function(data){
+              console.log(data);
 
               var html = '';
               var i;
@@ -149,32 +152,6 @@
                 html += '<option value="'+data[i].id_desa+'">'+data[i].nama_desa+'</option>'
               }
               $("#inputDesa").html(html);
-              $("#labelDesa").show();
-              $("#inputDesa").show();
-            }
-          });
-      });
-    }
-    function desa(){
-        var getkecamatan = $("#inputKecamatan").val();
-        var id_desa_selected = $("#idDesa").val();
-          $.ajax({
-            type : "POST",
-            dataType : "JSON",
-            url : "<?= base_url().'index.php/petugas/get_desa' ?>",
-            data : {id_kecamatan : getkecamatan},
-            success : function(data){
-
-              var html = '';
-              var i;
-              for (i = 0; i < data.length; i ++ ){
-                var selected = (data[i].id_desa == id_desa_selected) ? 'selected' : '';
-                // console.log(selected);
-                html += '<option value="' + data[i].id_desa + '" ' + selected + '>' + data[i].nama_desa + '</option>';
-              }
-              $("#inputDesa").html(html);
-              $("#labelDesa").show();
-              $("#inputDesa").show();
             }
           });
     }
