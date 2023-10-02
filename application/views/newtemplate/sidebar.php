@@ -69,7 +69,8 @@
           <li class="nav-item">
           <?php if ($role!=1) : ?>
             <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran' ||
-            $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran')  ? 'active' : ''; ?>">
+            $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran'
+            || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar')  ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-file-alt"></i>
                 <p>
                   Transaksi
@@ -84,12 +85,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
-                  <p> Penarikan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/banksampah/index.php/stok/barangkeluar" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'barangkeluar'
+                <a href="/banksampah/index.php/stok/barangkeluar" class="nav-link <?= ($this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar'
                 )  ? 'active' : ''; ?>">
                   <p>Barang Keluar</p>
                 </a>
