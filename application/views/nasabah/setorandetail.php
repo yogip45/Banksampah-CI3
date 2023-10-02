@@ -107,7 +107,7 @@
                                       $no = 1;
                                       foreach ($detail as $data) : ?>
                                         <tr class="odd gradeX">
-                                          <td><?php echo $data->jns_sampah ?></td>
+                                          <td><?php echo $data->nama_sampah ?></td>
                                           <td><?php echo $data->berat ?></td>
                                           <td><?php echo $data->harga ?></td>
                                           <td><?php echo $data->total ?></td>

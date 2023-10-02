@@ -12,6 +12,7 @@ class Setoran extends CI_Controller {
 		$this->load->model('m_user');                  
 		$this->load->model('m_jns_sampah');
 		$this->load->model('m_setoran');
+		$this->load->model('m_stok');
 		date_default_timezone_set('Asia/Jakarta');
 	}
 	public function setoranindex()
@@ -87,9 +88,16 @@ class Setoran extends CI_Controller {
 				$id_setor = $this->input->post('id_setor');
 				$total = $this->input->post('total');
 				$nin = $this->input->post('nin');
-				$new_status = 1; // Ganti dengan status yang ingin Anda set
+				$new_status = 1;
 				$result = $this->m_setoran->selesaiTransaksi($id_setor, $new_status,$total,$nin);
 				if ($result) {
+					$sampah_ids = $this->m_stok->getUniqueSampahIds();
+					foreach ($sampah_ids as $id_sampah) {
+						// Hitung total berat untuk id_sampah tertentu
+						$total_berat = $this->m_stok->hitungTotalBeratByIdSampah($id_sampah);
+						// Update kolom 'berat' di tb_stok dengan total berat yang baru
+						$this->m_stok->updateBeratByIdSampah($id_sampah, $total_berat);
+					}
 					$this->m_setoran->updateSaldo($nin,$total);
 					echo json_encode(array('status' => 'success'));
 					$this->session->set_flashdata('sukses','Transaksi ' . $id_setor . ' Selesai');
@@ -153,6 +161,7 @@ class Setoran extends CI_Controller {
 				
 				$this->load->model('m_nasabah');
 				$this->load->model('m_jns_sampah');
+				$this->load->model('m_stok');
 				$id_setor = $this->input->post('id_setor');
 					// $data['nasabah'] = $this->m_setoran->get_nasabah($id_setor);
 					$jns_sampah = $this->input->post('jenis_sampah');
@@ -162,11 +171,12 @@ class Setoran extends CI_Controller {
 					$data = array(
 
 						'id_setor' => $id_setor,
-						'jns_sampah' => $jns_sampah,
+						'id_sampah' => $jns_sampah,
 						'berat' => $berat,
 						'harga' => $harga,
 						'total' => $total,
 					);
+					
 					$this->m_setoran->input_detail($data,$id_setor);
 					redirect('index.php/setoran/setoranindex');
 				

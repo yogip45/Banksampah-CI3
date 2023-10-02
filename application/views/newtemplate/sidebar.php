@@ -89,9 +89,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/banksampah/index.php/setoran/pernasabah" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah'
+                <a href="/banksampah/index.php/setoran/barangkeluar" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'barangkeluar'
                 )  ? 'active' : ''; ?>">
-                  <p>Nasabah</p>
+                  <p>Barang Keluar</p>
                 </a>
               </li>
             </ul>

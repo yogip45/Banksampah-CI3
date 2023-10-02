@@ -64,17 +64,17 @@
                               <td><?php echo $sampah->harga ?> /kg</td>                                                                                                        
                               <td><?php echo date('d M Y', strtotime($sampah->diubah)) ?></td>                                                    
                               <td class="text-center" >                                                        
-                                  <?php echo anchor('index.php/jenissampah/edit/'.$sampah->id, '<button type="button" class="btn btn-warning"><i class="fa text-white fa-edit fa-fw"></i></button>'); ?>
-                                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal<?php echo $sampah->id; ?>">
+                                  <?php echo anchor('index.php/jenissampah/edit/'.$sampah->id_sampah, '<button type="button" class="btn btn-warning"><i class="fa text-white fa-edit fa-fw"></i></button>'); ?>
+                                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal<?php echo $sampah->id_sampah; ?>">
                                   <i class="fa fa-trash fa-fw"></i>
                                   </button>
                               </td>                                                                                                                                                                                                                   
                               <!-- Modal untuk konfirmasi hapus -->
-                              <div class="modal fade" id="hapusModal<?php echo $sampah->id; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel<?php echo $sampah->id; ?>" aria-hidden="true">
+                              <div class="modal fade" id_sampah="hapusModal<?php echo $sampah->id_sampah; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel<?php echo $sampah->id_sampah; ?>" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                       <div class="modal-content">
                                           <div class="modal-header">
-                                              <h5 class="modal-title" id="hapusModalLabel<?php echo $sampah->id; ?>">Konfirmasi Hapus</h5>
+                                              <h5 class="modal-title" id_sampah="hapusModalLabel<?php echo $sampah->id_sampah; ?>">Konfirmasi Hapus</h5>
                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                   <span aria-hidden="true">&times;</span>
                                               </button>
@@ -84,12 +84,69 @@
                                           </div>
                                           <div class="modal-footer">
                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                              <?php echo anchor('index.php/jenissampah/hapus/'.$sampah->id, '<button type="button" class="btn btn-danger">OK</button>'); ?>
+                                              <?php echo anchor('index.php/jenissampah/hapus/'.$sampah->id_sampah, '<button type="button" class="btn btn-danger">OK</button>'); ?>
                                           </div>
                                       </div>
                                   </div>
                               </div>
                               <!-- Modal untuk edit -->                                                                                               
+                          <?php endforeach; ?>
+                          </div>
+                      </tr>                                                                                           
+                      </tbody>
+                  </table>
+                </div>
+                
+                <!-- KONFIRMASI HAPUS -->
+                <?php
+                    $no = 1;
+                    foreach ($jns_sampah as $data) : ?>
+                        <div class="modal fade" id="hapusModal<?php echo $data->id_sampah; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="hapusModalLabel">Konfirmasi Hapus</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Apakah Anda yakin ingin menghapus data ini?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                        <?php echo anchor('/index.php/jenissampah/hapus/'.$data->id_sampah, '<button type="button" class="btn btn-danger">OK</button>'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                                                                                
+                    <?php endforeach; ?>
+                    <!-- KONFIRMASI HAPUS -->
+
+                <div class="table-responsive">
+                  <div class="col-sm-6">
+                    <h4>Stok Sampah</h4>
+                  </div>
+                  <table class="table table-striped table-bordered table-hover">
+                      <thead>
+                          <tr>
+                              <th>No.</th>
+                              <th>Id Stok</th>
+                              <th>Jenis Sampah</th>
+                              <th>Jumlah Stok</th>
+                              <th>Tanggal Update</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                          $no = 1;
+                          foreach ($stok as $datastok) : ?>
+                          <tr>
+                              <td><?php echo $no++ ?></td>                                                    
+                              <td><?php echo $datastok->id_stok ?></td>                                                   
+                              <td><?php echo $datastok->nama_sampah ?></td>                                                   
+                              <td><?php echo $datastok->jumlah ?> Kg</td>                                                                                                        
+                              <td><?php echo date('d M Y', strtotime($datastok->tgl_update)) ?></td>                                                    
                           <?php endforeach; ?>
                           </div>
                       </tr>                                                                                           

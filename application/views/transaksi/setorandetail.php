@@ -110,7 +110,7 @@
                                       $no = 1;
                                       foreach ($detail as $data) : ?>
                                         <tr class="odd gradeX">
-                                          <td><?php echo $data->jns_sampah ?></td>
+                                          <td><?php echo $data->nama_sampah ?></td>
                                           <td><?php echo $data->berat ?></td>
                                           <td><?php echo $data->harga ?></td>
                                           <td><?php echo $data->total ?></td>
@@ -157,7 +157,7 @@
                                   <select class="form-control" id="jenisSampah" name="jenis_sampah">
                                           <option data-harga="0" value="">Pilih Sampah</option>
                                           <?php foreach ($jns_sampah as $sampah) : ?>
-                                              <option data-harga="<?= $sampah->harga ?>"><?= $sampah->nama_sampah ?></option>
+                                              <option data-harga="<?= $sampah->harga ?>" value="<?= $sampah->id_sampah ?>"><?= $sampah->nama_sampah ?></option>
                                           <?php endforeach ?>
                                   </select>
                                 </div>

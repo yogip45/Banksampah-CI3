@@ -45,7 +45,7 @@
                     <form action="<?php echo base_url().'index.php/jenissampah/update';?>" method="post" class="col-sm-6">
                         <div class="form-group">
                             <label for="jenisSampah">Jenis Sampah</label>
-                            <input type="hidden" name="id" value="<?= $sampah->id; ?>">
+                            <input type="hidden" name="id" value="<?= $sampah->id_sampah; ?>">
                             <input type="text" class="form-control" id="jenisSampah" name="nama_sampah" required placeholder="botol, kardus bekas" value="<?= $sampah->nama_sampah; ?>">
                         </div>
                         <div class="form-group">

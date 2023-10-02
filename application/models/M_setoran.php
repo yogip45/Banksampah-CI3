@@ -21,8 +21,12 @@
     }
     public function tampil_detail($id_setor)
     {
-      $this->db->where('id_setor', $id_setor);
-      return $this->db->get('tb_detail_setoran');
+      $this->db->select('tb_detail_setoran.*, jns_sampah.nama_sampah');
+      $this->db->from('tb_detail_setoran');
+      $this->db->join('jns_sampah', 'tb_detail_setoran.id_sampah = jns_sampah.id_sampah', 'left');
+      $this->db->where('tb_detail_setoran.id_setor', $id_setor);
+      
+      return $this->db->get();
     }
     public function input_setoran($data,$id_setor)
     {
@@ -68,14 +72,6 @@
       $this->db->update('tb_nasabah', $data_nasabah);
       }
 
-    public function get_keyword($keyword)
-    {
-      $this->db->select('*');
-      $this->db->from('tb_setoran');
-      $this->db->like('nin', $keyword);
-
-      return $this->db->get()->result();
-    }
 
 
   }
