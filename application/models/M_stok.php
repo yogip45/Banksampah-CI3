@@ -8,8 +8,18 @@
       $this->db->join('jns_sampah', 'jns_sampah.id_sampah = tb_stok.id_sampah', 'inner');
       return $this->db->get()->result();
     }
+    public function get_jumlah_by_id_sampah($id_sampah)
+    {
+      $this->db->select('tb_stok.jumlah');
+      $this->db->from('tb_stok');
+      $this->db->where('id_sampah', $id_sampah);
+      return $this->db->get()->result();
+    }
     public function input_data($data){
       $this->db->insert('tb_stok', $data);
+    }
+    public function input_barangkeluar($data){
+      $this->db->insert('tb_barangkeluar', $data);
     }
     public function hapus_data($where,$table){
       $this->db->where($where);
@@ -53,6 +63,19 @@
           $sampah_ids[] = $row->id_sampah;
       }
       return $sampah_ids;
+    }
+    
+    public function tampil_barangkeluar()
+    {
+      $this->db->select('tb_barangkeluar.*, jns_sampah.nama_sampah');
+      $this->db->from('tb_barangkeluar');
+      $this->db->join('jns_sampah', 'tb_barangkeluar.id_sampah = jns_sampah.id_sampah', 'left');
+      
+      // Lakukan pengambilan data atau operasi lainnya jika diperlukan
+      $result = $this->db->get()->result();
+      
+      return $result;
+      
     }
 
   }
