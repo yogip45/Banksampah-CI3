@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Setoran</h1>
+            <h1>Data Barang Keluar</h1>
           </div>
           <div class="col-sm-6">            
             <ol class="breadcrumb float-sm-right">
@@ -37,7 +37,7 @@
             <div class="col-md-12">
               <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Pendapatan</h3>
+                    <h3 class="card-title">Tambah Data</h3>
                 </div>
                   <div class="card-body">
                       <div class="tab-content">
@@ -48,7 +48,7 @@
                               <div class="form-group col-md-6">
                                 <label for="inputTanggalKeluar">Tanggal Keluar</label>
                                 <div class="input-group date" id="inputTanggalKeluar" data-target-input="nearest">
-                                  <input placeholder="dd/mm/yyyy" name="tgl_keluar" type="text" class="form-control datetimepicker-input" data-target="#inputTanggalKeluar"/>
+                                  <input value="<?= set_value('tgl_keluar')?>" placeholder="yyyy-mm-dd" name="tgl_keluar" type="text" class="form-control datetimepicker-input" data-target="#inputTanggalKeluar"/>
                                   <div class="input-group-append" data-target="#inputTanggalKeluar" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                   </div>
@@ -58,9 +58,17 @@
                               <div class="form-group col-md-6">
                                 <label for="inputSampah">Pilih Sampah</label>
                                 <select class="form-control" id="inputSampah" name="id_sampah">
-                                        <option data-harga="0" value="">Pilih Sampah</option>
+                                        <option value="">Pilih Sampah</option>
                                         <?php foreach ($jns_sampah as $sampah) : ?>
-                                          <option data-harga="<?= $sampah->harga ?>" value="<?= $sampah->id_sampah ?>"><?= $sampah->nama_sampah ?></option>
+                                          <?php
+                                              $selected = '';
+                                              if (set_value('id_sampah') == $sampah->id_sampah) {
+                                                  $selected = 'selected';
+                                              }
+                                          ?>
+                                          <option data-harga="<?= $sampah->harga ?>" value="<?= $sampah->id_sampah ?>" <?= $selected ?>>
+                                              <?= $sampah->nama_sampah ?>
+                                          </option>
                                         <?php endforeach ?>
                                 </select>
                                 <?= form_error('id_sampah','<small class="text-danger">', '</small>') ?>
@@ -69,19 +77,18 @@
                             <div class="form-row">
                               <div class="form-group col-md-6">
                                 <label for="berat">Jumlah (kg)</label>
-                                <input type="number" class="form-control" id="inputJumlah" name="jumlah" step="0.01" min="0">
+                                <input value="<?=set_value('jumlah')?>" class="form-control" id="inputJumlah" name="jumlah" step="0.01" min="0">
                                 <?= form_error('jumlah','<small class="text-danger">', '</small>') ?>
                               </div>
                             </div>
                             <div class="form-row">
                               <div class="form-group col-md-6">
                                 <label for="berat">Total Penjualan (Rp)</label>
-                                <input type="number" class="form-control" id="inputJumlah" name="total" placeholder="" step="0.01" min="0">
+                                <input value="<?=set_value('total')?>" type="number" class="form-control" id="inputJumlah" name="total" placeholder="" step="0.01" min="0">
                                 <?= form_error('total','<small class="text-danger">', '</small>') ?>
                               </div>
                             </div>
-                              <button type="submit" class="btn btn-primary">Submit</button>
-                              <button type="reset" class="btn btn-warning">Reset</button>
+                              <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
                           </form>
                       </div>
                       </div>
@@ -109,23 +116,35 @@
                     <?php
                         $no = 1;
                         foreach ($barangkeluar as $data) : ?>
+                        <?php  
+                          $timestamp = strtotime($data->tgl_keluar);
+                          $bulanIndonesia = array(
+                              'January' => 'Januari',
+                              'February' => 'Februari',
+                              'March' => 'Maret',
+                              'April' => 'April',
+                              'May' => 'Mei',
+                              'June' => 'Juni',
+                              'July' => 'Juli',
+                              'August' => 'Agustus',
+                              'September' => 'September',
+                              'October' => 'Oktober',
+                              'November' => 'November',
+                              'December' => 'Desember'
+                          );
+                          
+                          $bulanTerjemahan = $bulanIndonesia[date('F', $timestamp)];
+                          $tanggalTerjemahan = date('d', $timestamp) . ' ' . $bulanTerjemahan . ' ' . date('Y', $timestamp);
+                        ?>
                     <tr class="odd gradeX">
                             <td><?php echo $no++?></td>
                             <td><?php echo $data->id ?></td>
                             <td><?php echo $data->nama_sampah ?></td>
-                            <td><?php echo date('d M Y', strtotime($data->tgl_keluar)) ?></td>
+                            <td><?php echo $tanggalTerjemahan ?></td>
                             <td><?php echo $data->jumlah ?></td>
                             <td><?php echo $data->total ?></td>                                                    
-                            <!-- <td>                                                    
-                                <button type="button" class="btn btn-outline btn-success" data-toggle="modal" data-target="#detailModal<?php echo $data->nin; ?>">
-                                <i class="fa fa-bars fa-fw"></i>
-                                </button>
-                            </td>                                                     -->
                             <?php endforeach; ?>
                         </div>                                                                                                            
-                            <!-- <td>
-                            <button type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i></button>
-                            </td> -->
                     </tr>                                                                                                                                                                                                                  
                     </tbody>                                          
                     
@@ -158,7 +177,7 @@
   $(function () {
       $('#inputTanggalKeluar').datetimepicker({
           locale: 'id',
-          format: 'DD/MM/YYYY'
+          format: 'YYYY-MM-DD'
       });
   });
 </script>
@@ -178,9 +197,19 @@
             data : {id_sampah : getId},
             success : function(data){
               var placeholderText ="Maksimal " + data[0].jumlah + " Kg";
-              $("#inputJumlah").attr("placeholder", placeholderText);
+              jumlah = data[0].jumlah;
+              if (jumlah == 0) {
+                $("#inputJumlah").prop("disabled", true);
+                $("#submitBtn").prop("disabled", true);
+                $("#inputJumlah").attr("placeholder", "Stok Tidak Tersedia");
+              } else {
+                $("#inputJumlah").prop("disabled", false);
+                $("#submitBtn").prop("disabled", false);
+                $("#inputJumlah").attr("placeholder", placeholderText);
+              }
             }
           });
-      });
-    }
-  </script>
+        });
+      }
+      </script>
+      

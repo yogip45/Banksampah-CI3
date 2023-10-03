@@ -18,8 +18,8 @@
     }
 
     public function hitung(){
-      $this->db->select_sum('berat', 'total_berat');
-      $this->db->from('tb_detail_setoran');
+      $this->db->select_sum('jumlah', 'total_berat');
+      $this->db->from('tb_stok');
       $result = $this->db->get()->row();
 
       $total_berat = $result->total_berat;

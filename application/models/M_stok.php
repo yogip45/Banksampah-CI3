@@ -8,6 +8,13 @@
       $this->db->join('jns_sampah', 'jns_sampah.id_sampah = tb_stok.id_sampah', 'inner');
       return $this->db->get()->result();
     }
+    public function get_jumlah($id_sampah)
+    {
+      $this->db->select('tb_stok.jumlah');
+      $this->db->from('tb_stok');
+      $this->db->where('id_sampah', $id_sampah);
+      return $this->db->get()->row_array();
+    }
     public function get_jumlah_by_id_sampah($id_sampah)
     {
       $this->db->select('tb_stok.jumlah');
@@ -24,6 +31,12 @@
     public function hapus_data($where,$table){
       $this->db->where($where);
       $this->db->delete($table);
+    }
+    public function ambil_stok($input,$id_sampah)
+    {
+      $this->db->where('id_sampah', $id_sampah);
+      $this->db->set('jumlah', 'jumlah - ' . $input, FALSE);
+      $this->db->update('tb_stok');
     }
     public function edit_data($where,$table)
     {
