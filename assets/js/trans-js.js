@@ -12,7 +12,5 @@ jenisSampah.addEventListener("change", function () {
 });
 
 //AMBIL NASABAH
-function pilih_nasabah(nin, nama) {
-  inputNin.value = nin;
-  inputNama.value = nama;
-}
+
+//AMBIL saldo dll untuk proses penarikan

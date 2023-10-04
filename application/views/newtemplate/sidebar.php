@@ -85,6 +85,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="/banksampah/index.php/penarikan/penarikanindex" class="nav-link <?= ($this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
+                || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran')  ? 'active' : ''; ?>">
+                  <p> Penarikan</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/banksampah/index.php/stok/barangkeluar" class="nav-link <?= ($this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar'
                 )  ? 'active' : ''; ?>">
                   <p>Barang Keluar</p>

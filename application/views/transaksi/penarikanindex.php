@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Setoran</h1>
+            <h1>Data Penarikan Saldo</h1>
           </div>
           <div class="col-sm-6">            
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?= base_url().'index.php/setoran/setoranindex';?>">Setor</a></li>
-              <li class="breadcrumb-item active">Data Setoran</li>
+              <li class="breadcrumb-item"><a href="<?= base_url().'index.php/setoran/setoranindex';?>">Transaksi</a></li>
+              <li class="breadcrumb-item active">Data Penarikan</li>
             </ol>
           </div>
         </div>
@@ -45,30 +45,46 @@
                   <div class="col-md-12">
                     <div class="card card-primary card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Tambah Setoran</h3>
+                        <h3 class="card-title">Proses Penarikan</h3>
                       </div>
-                      <div class="card-body col-md-4">
-                        <form role="form" action="<?= base_url() ?>index.php/setoran/create_setoran" method="POST">
-                          <div class="form-group">
+                      <div class="card-body col-md-8">
+                      <form role="form" method="POST" action="<?php echo base_url().'index.php/penarikan/create_penarikan';?>">
+                        <div class="form-row">
+                          <div class="form-group col-md-5">
                             <label for="inputDesa">Nomor Induk Nasabah</label>
                             <div class="input-group">
-                              <input type="text" class="form-control" id="inputNin" name="nin" readonly>
+                              <input value="<?=set_value('nin')?>" type="text" class="form-control" id="inputNin" name="nin" readonly>
                               <div class="input-group-append">
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#tampilNasabah" type="button">
                                   <i class="fa fa-folder-open fa-fw"></i> Pilih
                                 </button>
                               </div>
                             </div>
-                            <?= form_error('nin', '<small class="text-danger form-text text-muted">', '</small>') ?>
+                            <?= form_error('nin', '<small class="text-danger">', '</small>') ?>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group col-md-5">
                             <label for="inputDesa">Nama Nasabah</label>
-                            <input type="text" class="form-control" id="inputNama" name="nama" readonly>
-                            <?= form_error('nama', '<small class="text-danger form-text text-muted">', '</small>') ?>
+                            <input value="<?=set_value('nama')?>" type="text" class="form-control" id="inputNama" name="nama" readonly>
+                            <?= form_error('nama', '<small class="text-danger">', '</small>') ?>
                           </div>
-                          <button type="submit" class="btn btn-primary">Submit</button>
-                          <button type="reset" class="btn btn-warning">Reset</button>
-                        </form>
+                        </div>
+                        <div class="form-row" id="divSaldo" hidden>
+                          <div class="form-group col-md-4">
+                            <input value="<?= set_value('saldo') ?>" type="number" class="form-control" id="inputSaldo" name="saldo" readonly hidden>
+                            <?= form_error('saldo', '<small class="text-danger">', '</small>') ?>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="InputJumlah">Jumlah Penarikan</label>
+                            <input <?=set_value('jumlah_penarikan')?> type="number" class="form-control" id="inputJumlah" name="jumlah_penarikan">
+                            <?= form_error('jumlah_penarikan', '<small class="text-danger">', '</small>') ?>
+                          </div>
+                        </div>
+                        <button id="btnSubmit" type="submit" class="btn btn-primary">Submit</button>
+                        <button id="btnReset" type="reset" class="btn btn-warning">Reset</button>
+                      </form>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -78,10 +94,11 @@
                         <thead>
                         <tr>
                           <th>No.</th>
-                          <th>Id Setor</th>
+                          <th>Id</th>
                           <th>NIN</th>
-                          <th>Tanggal Setor</th>
-                          <th>Total</th>
+                          <th>Tanggal Penarikan</th>
+                          <th>Saldo</th>
+                          <th>Jumlah Penarikan</th>
                           <th>Status</th>
                           <th>Action</th>
                         </tr>
@@ -89,23 +106,18 @@
                       <tbody>
                         <?php
                         $no = 1;
-                        foreach ($setoran as $data) : ?>
+                        foreach ($penarikan as $data) : ?>
                           <tr class="odd gradeX">
                             <td><?php echo $no++ ?></td>
-                            <td><?php echo $data->id_setor ?></td>
+                            <td><?php echo $data->id_penarikan ?></td>
                             <td><?php echo $data->nin ?></td>
-                            <td><?php echo date('d M Y', strtotime($data->tanggal_setor)) ?></td>
-                            <td>Rp. <?php echo $data->total ?></td>
+                            <td><?php echo date('d M Y', strtotime($data->tgl_penarikan)) ?></td>
+                            <td>Rp. <?php echo $data->saldo ?></td>
+                            <td class="text-danger">Rp. <?php echo $data->jumlah_penarikan ?></td>
                             <td class="text-center <?php echo $data->status == 1 ? 'text-success' : 'text-warning'; ?>">
-                                <?php echo $data->status == 1 ? 'Selesai' : 'Belum Selesai'; ?>
+                                <?php echo $data->status == 1 ? 'Selesai' : 'Belum Dikonfirmasi'; ?>
                             </td>
-                            <td class="text-center">
-                                <?php
-                                $url = '/index.php/setoran/detail_setoran/' . $data->id_setor;
-                                $attributes = array('class' => 'btn btn-info');
-                                echo anchor($url, 'Detail', $attributes);
-                                ?>
-                            </td>
+                            <td>Action Here</td>
                         <?php endforeach; ?>
                       </tbody>
                     </table>
@@ -141,7 +153,7 @@
                                                       <td style="text-align: center; vertical-align: middle;"><?php echo $data->nin ?></td>                                                                    
                                                       <td style="text-align: center; vertical-align: middle;"><?php echo $data->nama ?></td>                                                                    
                                                       <td style="text-align: center; vertical-align: middle;">                                                    
-                                                      <button type="button" class="btn btn-success" data-dismiss="modal" onclick="pilih_nasabah('<?php echo $data->nin ?>', '<?php echo $data->nama ?>')">Pilih</button>                                                                                                                                        
+                                                      <button id="btnPilih" type="button" class="btn btn-success" data-dismiss="modal" onclick="pilih_nasabah('<?php echo $data->nin ?>', '<?php echo $data->nama ?>')">Pilih</button>                                                                                                                                        
                                                       </td>                                                    
                                                       <?php endforeach; ?>                                                                                                                                                                        
                                                       <!-- <td>
@@ -185,4 +197,35 @@
 </div>
 <!-- ./wrapper -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="<?= base_url() ?>assets/js/trans-js.js"></script>
+<script>
+  function pilih_nasabah(nin, nama) {
+  inputNin.value = nin;
+  inputNama.value = nama;
+  getdata_nasabah(nin);
+}
+
+function getdata_nasabah(nin) {
+  $.ajax({
+    type: "POST",
+    dataType: "JSON",
+    url: "<?= base_url().'index.php/penarikan/getdata_nasabah' ?>",
+    data: { nin: nin },
+    success: function (data) {
+      var saldo = data[0].saldo;
+      if (saldo != 0) {
+        $("#inputJumlah").attr("placeholder", "Maksimal Rp. " + saldo);
+        $("#inputSaldo").val(saldo);
+        $("#saldoNasabah").text(saldo);
+        $("#inputJumlah").attr("readonly", false);
+        $("#btnSubmit").attr("disabled", false);
+      } else {
+        $("#inputSaldo").val(0);
+        $("#inputJumlah").attr("placeholder", "Saldo Kosong");
+        $("#inputJumlah").attr("readonly", true);
+        $("#btnSubmit").attr("disabled", true);
+      }
+    },
+  });
+}
+</script>
+
