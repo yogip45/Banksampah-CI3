@@ -43,7 +43,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?= $jumlah['sampah']; ?><sup style="font-size: 20px"> Kg</sup></h3>
+                <h3><?= $jumlah['sampah']; ?><sub style="font-size: 20px"> Kg</sub></h3>
 
                 <p>Sampah Terkumpul</p>
               </div>
