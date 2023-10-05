@@ -146,7 +146,7 @@ class User extends CI_Controller {
 			$this->load->view('user/myprofile',$data);
 		} else {
 			$nama = $this->input->post('nama');
-			$alamat = $this->input->post('alamat');
+			$alamat = $this->input->post('alamat_lengkap');
 			$no_hp = $this->input->post('no_hp');
 			$email = $this->input->post('email');
 			$id_user = $this->input->post('id_user');

@@ -125,4 +125,14 @@ class Penarikan extends CI_Controller {
 		}
 	}
 
+	public function konfirmasi($id_penarikan)
+	{
+		if ($this->m_penarikan->konfirmasiPenarikan($id_penarikan)) {
+				$this->session->set_flashdata('sukses', 'Konfirmasi berhasil.');
+		} else {
+				$this->session->set_flashdata('gagal', 'Konfirmasi gagal.');
+		}
+		redirect('/index.php/nasabah/setoran_saya#tab_2');
+	}
+
 }

@@ -309,7 +309,7 @@ public function hapus_nasabah($id_user)
 			if ($this->session->userdata('role') == 2 || $this->session->userdata('role') == 3) {
 						$this->load->model('m_user');
 						$this->load->model('m_nasabah');
-						$default_password = generate_password(6);
+						$default_password = generate_password(10);
 						$nasabah = $this->m_nasabah->get_user_nasabah_data($id_user);
 						$where = array('id_user' => $id_user);
 						$table = 'tb_user';

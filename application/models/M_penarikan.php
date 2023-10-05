@@ -7,6 +7,13 @@
       $this->db->from('tb_penarikan');
       return $this->db->get();
     }
+    public function tampil_databyNin($nin)
+    {      
+      $this->db->select('tb_penarikan.*');
+      $this->db->from('tb_penarikan');
+      $this->db->where('nin', $nin);
+      return $this->db->get();
+    }
     public function getdata_nasabah($nin)
     {
         $this->db->where('nin', $nin);
@@ -28,6 +35,11 @@
       $this->db->where('nin', $nin);
       $this->db->set('saldo', 'saldo - ' . $jumlah_penarikan, FALSE);
       return $this->db->update('tb_nasabah');
+    }
+    public function konfirmasiPenarikan($id_penarikan)
+    {
+      $this->db->where('id_penarikan', $id_penarikan);
+      return $this->db->update('tb_penarikan', array('status' => 1));
     }
   }
 ?>

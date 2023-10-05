@@ -45,7 +45,7 @@
                                         <th>Nama</th>
                                         <th>Alamat</th>
                                         <th>Email</th>
-                                        <th>Aksi</th>
+                                        <th>Tools</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,10 +59,28 @@
                                         <td class="address-cell"><?php echo $data->alamat_lengkap ?></td>
                                         <td><?php echo $data->email ?></td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-outline btn-success" data-toggle="modal" data-target="#detailModal<?php echo $data->nin; ?>">
-                                                <i class="fa fa-bars fa-fw"></i>
-                                            </button>
-                                            <?php echo anchor('index.php/petugas/edit_nasabah/'.$data->id_user, '<button type="button" class="btn btn-outline btn-warning"><i class="fa fa-edit fa-fw text-white"></i></button>'); ?>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-warning">Aksi</button>
+                                                <button type="button" class="btn btn-warning dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailModal<?php echo $data->nin; ?>"
+                                                >Detail Nasabah</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="<?= site_url('index.php/petugas/edit_nasabah/' . $data->id_user) ?>">
+                                                Edit Nasabah</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_user; ?>">
+                                                Reset Password</a>
+                                                <?php if ($data->is_active == 1): ?>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">
+                                                Nonaktifkan</a>
+                                                <?php endif; ?>
+                                                <?php if ($data->is_active == 0): ?>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Aktifkan</a>
+                                                <?php endif; ?>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -129,12 +147,6 @@
                                             </table>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-warning text-white" data-dismiss="modal" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_user; ?>">Reset Password</button>
-                                            <?php if ($data->is_active == 1): ?>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Non Aktifkan Akun</button>
-                                            <?php else: ?>
-                                                <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Aktifkan Akun</button>
-                                            <?php endif; ?>
                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
                                         </div>
                                     </div>
@@ -202,8 +214,15 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <h5 class="text-bold" id="isi_password"><?= $reset_password; ?></h5>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="copyText" readonly value="<?= $reset_password ?>">
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-primary" type="button" id="copyBtn">
+                                                                <i class="fas fa-clipboard fa-fw"></i> salin
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -247,4 +266,20 @@ $(document).ready(function () {
         $("#tampilPassword").modal("show");
     }
 });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    const copyBtn = document.getElementById('copyBtn')
+    const copyText = document.getElementById('copyText')
+    
+    copyBtn.onclick = () => {
+        copyText.select();    // Selects the text inside the input
+        document.execCommand('copy');    // Simply copies the selected text to clipboard 
+            Swal.fire({         //displays a pop up with sweetalert
+            icon: 'success',
+            title: 'Berhasil di copy',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    }
 </script>

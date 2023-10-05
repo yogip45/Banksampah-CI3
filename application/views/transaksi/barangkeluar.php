@@ -109,7 +109,7 @@
                             <th>No.</th>
                             <th>Id</th>
                             <th>Jenis Sampah</th>
-                            <th>Tanggal Setor</th>
+                            <th>Tanggal Keluar</th>
                             <th>Jumlah</th>
                             <th>Total</th>                                                    
                         </tr>
