@@ -190,6 +190,5 @@
     $("#tampilSaldo").attr("hidden", false);
   inputNin.value = nin;
   inputNama.value = nama;
-  getdata_nasabah(nin);
 }
 </script>
