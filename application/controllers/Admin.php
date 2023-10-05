@@ -1,12 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-// IF SUDAH LOGIN
-// if ($this->session->userdata('email')) {
-// } else {
-// 	$this->session->set_flashdata('message','Login dulu');
-// 	redirect('auth');
-// }
-
 class Admin extends CI_Controller {
 	
 	public function __construct()
