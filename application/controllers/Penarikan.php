@@ -69,20 +69,29 @@ class Penarikan extends CI_Controller {
 					array('required'=>'Masukan nominal penarikan')
 				);
 				if ($this->form_validation->run() == true) {
-					$id_penarikan = getAutoNumber('tb_penarikan','id_penarikan','PN','6');
-					$nin = $this->input->post('nin');
-					$saldo = $this->input->post('saldo');
-					$jumlah_penarikan = $this->input->post('jumlah_penarikan');
-					$data = array(
-						'id_penarikan' => $id_penarikan,
-						'nin' => $nin,
-						'saldo' => $saldo,
-						'jumlah_penarikan' => $jumlah_penarikan,
-						'status' => 0,
-						'id_petugas' => $this->session->userdata('id_user'),
-					);
-					$this->m_penarikan->input_penarikan($data);
-					$this->session->set_flashdata('sukses','Berhasil Ditambahkan');
+					try {
+						$id_penarikan = getAutoNumber('tb_penarikan','id_penarikan','PN','6');
+						$nin = $this->input->post('nin');
+						$saldo = $this->input->post('saldo');
+						$jumlah_penarikan = $this->input->post('jumlah_penarikan');
+						$success = true;
+						$data = array(
+							'id_penarikan' => $id_penarikan,
+							'nin' => $nin,
+							'saldo' => $saldo,
+							'jumlah_penarikan' => $jumlah_penarikan,
+							'status' => 0,
+							'id_petugas' => $this->session->userdata('id_user'),
+						);
+							$success = $this->m_penarikan->input_penarikan($data) && $this->m_penarikan->ambil_saldo($jumlah_penarikan, $nin);
+							if ($success) {
+									$this->session->set_flashdata('sukses', 'Berhasil Ditambahkan');
+							} else {
+									throw new Exception('Gagal menambahkan data.');
+							}
+					} catch (Exception $e) {
+							$this->session->set_flashdata('gagal', $e->getMessage());
+					}
 					redirect('index.php/penarikan/penarikanindex');
 				} else {
 					$data['title'] = "Dashboard - Data Penarikan";
@@ -108,7 +117,7 @@ class Penarikan extends CI_Controller {
 			$this->load->model('m_penarikan');
 			$saldo_value = $this->m_penarikan->get_saldo($nin);
 				if ((int)$input > $saldo_value['saldo']) {
-						$this->form_validation->set_message('compare_with_saldo', 'Jumlah penarikan melebihi saldo yang ada. Max Rp. '. $saldo_value['saldo']);
+						$this->form_validation->set_message('compare_with_saldo', 'Saldo Tidak Mencukupi');
 						return false;
 					} else {
 					return true;

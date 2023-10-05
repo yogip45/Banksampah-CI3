@@ -23,7 +23,7 @@ class Admin extends CI_Controller {
 	public function dashboard()
 	{		
 		if ($this->session->userdata('email')) {
-			if ($this->session->userdata('role')==3) {
+			if ($this->session->userdata('role')==3 || $this->session->userdata('role')==2) {
 				$data['title'] = "Dashboard - Home";
 				$data['user'] = $this->m_petugas->get_petugas();
 				$data['jumlah'] = $this->m_petugas->hitung();

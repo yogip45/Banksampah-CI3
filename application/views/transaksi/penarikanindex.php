@@ -56,16 +56,20 @@
                               <input value="<?=set_value('nin')?>" type="text" class="form-control" id="inputNin" name="nin" readonly>
                               <div class="input-group-append">
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#tampilNasabah" type="button">
-                                  <i class="fa fa-folder-open fa-fw"></i> Pilih
+                                  <i class="fas fa-list fa-fw"></i> Pilih
                                 </button>
                               </div>
                             </div>
                             <?= form_error('nin', '<small class="text-danger">', '</small>') ?>
                           </div>
-                          <div class="form-group col-md-5">
+                          <div class="form-group col-md-4">
                             <label for="inputDesa">Nama Nasabah</label>
                             <input value="<?=set_value('nama')?>" type="text" class="form-control" id="inputNama" name="nama" readonly>
                             <?= form_error('nama', '<small class="text-danger">', '</small>') ?>
+                          </div>
+                          <div class="form-group col-md-3" id="tampilSaldo" hidden>
+                            <label for="tampilSaldo">Saldo Nasabah</label>
+                            <input value="<?= set_value('saldo') ?>" type="text" class="form-control" id="inputTampilSaldo" disabled>
                           </div>
                         </div>
                         <div class="form-row" id="divSaldo" hidden>
@@ -77,7 +81,7 @@
                         <div class="form-row">
                           <div class="form-group col-md-4">
                             <label for="InputJumlah">Jumlah Penarikan</label>
-                            <input <?=set_value('jumlah_penarikan')?> type="number" class="form-control" id="inputJumlah" name="jumlah_penarikan">
+                            <input placeholder="Masukkan jumlah penarikan" <?=set_value('jumlah_penarikan')?> type="number" class="form-control" id="inputJumlah" name="jumlah_penarikan">
                             <?= form_error('jumlah_penarikan', '<small class="text-danger">', '</small>') ?>
                           </div>
                         </div>
@@ -100,7 +104,6 @@
                           <th>Saldo</th>
                           <th>Jumlah Penarikan</th>
                           <th>Status</th>
-                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -117,7 +120,6 @@
                             <td class="text-center <?php echo $data->status == 1 ? 'text-success' : 'text-warning'; ?>">
                                 <?php echo $data->status == 1 ? 'Selesai' : 'Belum Dikonfirmasi'; ?>
                             </td>
-                            <td>Action Here</td>
                         <?php endforeach; ?>
                       </tbody>
                     </table>
@@ -160,12 +162,12 @@
                                                       <button type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i></button>
                                                       </td> -->
                                               </tr>                                                                                                                                                                                                                  
-                                          </tbody>                                                                                      
+                                          </tbody>                                                                                     
                                       </table>                                            
                                   </div>
                               </div>
                               <div class="modal-footer">
-                                  <button type="button" class="btn btn-Primary" data-dismiss="modal">Batal</button>                                                
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>                                                
                               </div>
                               </div>
                           </div>
@@ -199,6 +201,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
   function pilih_nasabah(nin, nama) {
+    $("#tampilSaldo").attr("hidden", false);
   inputNin.value = nin;
   inputNama.value = nama;
   getdata_nasabah(nin);
@@ -213,15 +216,16 @@ function getdata_nasabah(nin) {
     success: function (data) {
       var saldo = data[0].saldo;
       if (saldo != 0) {
-        $("#inputJumlah").attr("placeholder", "Maksimal Rp. " + saldo);
         $("#inputSaldo").val(saldo);
+        $("#inputTampilSaldo").val("Rp. " + saldo);
         $("#saldoNasabah").text(saldo);
-        $("#inputJumlah").attr("readonly", false);
+        $("#inputJumlah").attr("disabled", false);
         $("#btnSubmit").attr("disabled", false);
       } else {
         $("#inputSaldo").val(0);
-        $("#inputJumlah").attr("placeholder", "Saldo Kosong");
+        $("#inputTampilSaldo").val(0);
         $("#inputJumlah").attr("readonly", true);
+        $("#inputJumlah").attr("placeholder", "Saldo Tidak Mencukupi");
         $("#btnSubmit").attr("disabled", true);
       }
     },

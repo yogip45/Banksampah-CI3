@@ -12,16 +12,22 @@
         $this->db->where('nin', $nin);
         return $this->db->get('tb_nasabah')->result();
     }
-    public function input_penarikan($data)
-    {
-      $this->db->insert('tb_penarikan', $data);
-    }
     public function get_saldo($nin)
     {
       $this->db->select('tb_nasabah.saldo');
       $this->db->from('tb_nasabah');
       $this->db->where('nin', $nin);
       return $this->db->get()->row_array();
+    }
+    public function input_penarikan($data)
+    {
+      return $this->db->insert('tb_penarikan', $data);
+    }
+    public function ambil_saldo($jumlah_penarikan,$nin)
+    {
+      $this->db->where('nin', $nin);
+      $this->db->set('saldo', 'saldo - ' . $jumlah_penarikan, FALSE);
+      return $this->db->update('tb_nasabah');
     }
   }
 ?>

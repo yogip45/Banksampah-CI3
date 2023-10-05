@@ -20,7 +20,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-          <a href="/banksampah/index.php/admin/dashboard" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'dashboard') ? 'active' : ''; ?>">
+          <a href="<?= base_url('index.php/admin/dashboard') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'dashboard') ? 'active' : ''; ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -42,7 +42,7 @@
             <ul class="nav nav-treeview">
               <?php if ($role==3) : ?>
                 <li class="nav-item">
-                  <a href="/banksampah/index.php/admin/petugasindex" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex'
+                  <a href="<?= base_url('index.php/admin/petugasindex') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex'
                 || $this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'tambah_petugas' || $this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'edit_petugas'
                 ) ? 'active' : ''; ?>">
                   <p>Petugas</p>
@@ -51,7 +51,7 @@
               <?php endif ?>
               <?php if ($role!=1) : ?>
                 <li class="nav-item">
-                  <a href="/banksampah/index.php/petugas/nasabahindex" class="nav-link <?= ($this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex') ? 'active' : ''; ?>">
+                  <a href="<?= base_url('index.php/petugas/nasabahindex') ?>" class="nav-link <?= ($this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex') ? 'active' : ''; ?>">
                     <p>Nasabah</p>
                   </a>
                 </li>                            
@@ -59,7 +59,7 @@
             </ul>
           </li>
           <li class="nav-item">
-          <a href="/banksampah/index.php/jenissampah" class="nav-link <?= ($this->uri->segment(1) == 'jenissampah') ? 'active' : ''; ?>">
+          <a href="<?= base_url('index.php/jenissampah') ?>" class="nav-link <?= ($this->uri->segment(1) == 'jenissampah') ? 'active' : ''; ?>">
             <i class="nav-icon fas fa-trash"></i>
             <p>
               Sampah
@@ -70,7 +70,7 @@
           <?php if ($role!=1) : ?>
             <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran' ||
             $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran'
-            || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar')  ? 'active' : ''; ?>">
+            || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar' || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'create_barangkeluar')  ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-file-alt"></i>
                 <p>
                   Transaksi
@@ -79,20 +79,20 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/banksampah/index.php/setoran/setoranindex" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
+                <a href="<?= base_url('index.php/setoran/setoranindex') ?>" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
                 || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran')  ? 'active' : ''; ?>">
                   <p> Setor</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/banksampah/index.php/penarikan/penarikanindex" class="nav-link <?= ($this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
+                <a href="<?= base_url('index.php/penarikan/penarikanindex'); ?>"class="nav-link <?= ($this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
                 || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran')  ? 'active' : ''; ?>">
                   <p> Penarikan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/banksampah/index.php/stok/barangkeluar" class="nav-link <?= ($this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar'
-                )  ? 'active' : ''; ?>">
+                <a href="<?= base_url('index.php/stok/barangkeluar') ?>" class="nav-link <?= ($this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar'
+                ||$this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'create_barangkeluar' )  ? 'active' : ''; ?>">
                   <p>Barang Keluar</p>
                 </a>
               </li>
@@ -100,7 +100,7 @@
           </li>
           <?php endif ?>
           <li class="nav-item">
-            <a href="/banksampah/index.php/user/myprofile" class="nav-link <?= ($this->uri->segment(1) == 'user' && $this->uri->segment(2) == 'myprofile') ? 'active' : ''; ?>">
+            <a href="<?= base_url('index.php/user/myprofile') ?>" class="nav-link <?= ($this->uri->segment(1) == 'user' && $this->uri->segment(2) == 'myprofile') ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Profile Saya

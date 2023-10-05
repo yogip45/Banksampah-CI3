@@ -55,7 +55,7 @@
                               <input type="text" class="form-control" id="inputNin" name="nin" readonly>
                               <div class="input-group-append">
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#tampilNasabah" type="button">
-                                  <i class="fa fa-folder-open fa-fw"></i> Pilih
+                                  <i class="fa fa-list fa-fw"></i> Pilih
                                 </button>
                               </div>
                             </div>
@@ -153,7 +153,7 @@
                                   </div>
                               </div>
                               <div class="modal-footer">
-                                  <button type="button" class="btn btn-Primary" data-dismiss="modal">Batal</button>                                                
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>                                                
                               </div>
                               </div>
                           </div>
