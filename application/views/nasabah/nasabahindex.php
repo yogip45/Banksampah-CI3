@@ -272,10 +272,12 @@ $(document).ready(function () {
     const copyText = document.getElementById('copyText')
     const is_copy = document.getElementById('is_salin')
     
-    copyBtn.onclick = () => {
-        copyText.select();
-        document.execCommand('copy');
-        is_copy.textContent = ' disalin';
-        copyBtn.disabled = true;
+    if (copyBtn!=null) {
+        copyBtn.onclick = () => {
+            copyText.select();
+            document.execCommand('copy');
+            is_copy.textContent = ' disalin';
+            copyBtn.disabled = true;
+        }
     }
 </script>
