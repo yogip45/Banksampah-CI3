@@ -185,4 +185,11 @@
 </div>
 <!-- ./wrapper -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="<?= base_url() ?>assets/js/trans-js.js"></script>
+<script>
+  function pilih_nasabah(nin, nama) {
+    $("#tampilSaldo").attr("hidden", false);
+  inputNin.value = nin;
+  inputNama.value = nama;
+  getdata_nasabah(nin);
+}
+</script>

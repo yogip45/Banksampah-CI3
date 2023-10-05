@@ -17,8 +17,6 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
           <li class="nav-item">
           <a href="<?= base_url('index.php/admin/dashboard') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'dashboard') ? 'active' : ''; ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -70,7 +68,8 @@
           <?php if ($role!=1) : ?>
             <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran' ||
             $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran'
-            || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar' || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'create_barangkeluar')  ? 'active' : ''; ?>">
+            || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar' || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'create_barangkeluar'
+            || $this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex')  ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-file-alt"></i>
                 <p>
                   Transaksi
@@ -85,8 +84,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('index.php/penarikan/penarikanindex'); ?>"class="nav-link <?= ($this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
-                || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran')  ? 'active' : ''; ?>">
+                <a href="<?= base_url('index.php/penarikan/penarikanindex'); ?>"class="nav-link <?= ($this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex')  ? 'active' : ''; ?>">
                   <p> Penarikan</p>
                 </a>
               </li>
