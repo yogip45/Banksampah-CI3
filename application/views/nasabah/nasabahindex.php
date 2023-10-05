@@ -45,7 +45,7 @@
                                         <th>Nama</th>
                                         <th>Alamat</th>
                                         <th>Email</th>
-                                        <th>Tools</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,7 +60,7 @@
                                         <td><?php echo $data->email ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-warning">Aksi</button>
+                                                <button type="button" class="btn btn-warning">Pilih Aksi</button>
                                                 <button type="button" class="btn btn-warning dropdown-toggle dropdown-icon" data-toggle="dropdown">
                                                 <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
@@ -219,7 +219,7 @@
                                                             <input type="text" class="form-control" id="copyText" readonly value="<?= $reset_password ?>">
                                                             <div class="input-group-append">
                                                                 <button class="btn btn-primary" type="button" id="copyBtn">
-                                                                <i class="fas fa-clipboard fa-fw"></i> salin
+                                                                <i class="fas fa-clipboard fa-fw"></i> <span id="is_salin"> salin</span>
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -267,19 +267,15 @@ $(document).ready(function () {
     }
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     const copyBtn = document.getElementById('copyBtn')
     const copyText = document.getElementById('copyText')
+    const is_copy = document.getElementById('is_salin')
     
     copyBtn.onclick = () => {
-        copyText.select();    // Selects the text inside the input
-        document.execCommand('copy');    // Simply copies the selected text to clipboard 
-            Swal.fire({         //displays a pop up with sweetalert
-            icon: 'success',
-            title: 'Berhasil di copy',
-            showConfirmButton: false,
-            timer: 2000
-        });
+        copyText.select();
+        document.execCommand('copy');
+        is_copy.textContent = ' disalin';
+        copyBtn.disabled = true;
     }
 </script>

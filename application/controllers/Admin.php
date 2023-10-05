@@ -226,7 +226,7 @@ class Admin extends CI_Controller {
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role') == 2 || $this->session->userdata('role') == 3) {
 						$this->load->model('m_user');
-						$default_password = generate_password(6);
+						$default_password = generate_password(10);
 						$where = array('id_user' => $id_user);
 						$table = 'tb_user';
 						// Hash default password							

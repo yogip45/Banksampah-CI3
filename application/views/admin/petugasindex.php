@@ -51,13 +51,33 @@
                                             <td><?php echo $no++?></td>                                                    
                                             <td><?php echo $data->username ?></td>                                                                                                        
                                             <td><?php echo $data->nama_petugas ?></td>                                                                                                        
-                                            <td class="text-center">                                                        
-                                                <a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#detailModal<?php echo $data->id_user; ?>">
-                                                    <i class="fa fa-bars fa-fw"></i>
-                                                </a>
-                                                <a href="<?php echo base_url('index.php/admin/edit_petugas/'.$data->id_user); ?>" class="btn btn-outline-warning">
-                                                    <i class="fa fa-edit fa-fw"></i>
-                                                </a>
+                                            <td class="text-center">
+                                            <?php if ($data->role != 3): ?>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-warning">Pilih Aksi</button>
+                                                    <button type="button" class="btn btn-warning dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                <div class="dropdown-menu" role="menu">
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailModal<?php echo $data->id_user; ?>"
+                                                    >Detail Petugas</a>
+                                                    <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="<?= site_url('index.php/admin/edit_petugas/' . $data->id_user) ?>">
+                                                    Edit Petugas</a>
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_user; ?>">
+                                                    Reset Password</a>
+                                                    <?php if ($data->is_active == 1): ?>
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">
+                                                    Nonaktifkan</a>
+                                                    <?php endif; ?>
+                                                    <?php if ($data->is_active == 0): ?>
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Aktifkan</a>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php else: ?>
+                                            -
+                                            <?php endif;?>
+                                            </div>
                                             </td>                                                    
                                         </tr>
                                     <?php endforeach; ?>
@@ -194,7 +214,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Apakah Anda yakin ingin mereset password user ini?
+                                    Apakah Anda yakin ingin mereset password akun ini?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -202,7 +222,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                                            
+                    </div>                                           
                     <?php endforeach; ?>
                     <!-- RESET PASSWD -->
 
@@ -220,8 +240,15 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-lg-6">
-                                                <h5 class="text-bold" id="isi_password"><?= $reset_password; ?></h5>
+                                            <div class="col-lg-12">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="copyText" readonly value="<?= $reset_password ?>">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="button" id="copyBtn">
+                                                        <i class="fas fa-clipboard fa-fw"></i> <span id="is_salin"> salin</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -248,4 +275,16 @@ $(document).ready(function () {
         $("#tampilPassword").modal("show");
     }
 });
+</script>
+<script>
+    const copyBtn = document.getElementById('copyBtn')
+    const copyText = document.getElementById('copyText')
+    const is_copy = document.getElementById('is_salin')
+    
+    copyBtn.onclick = () => {
+        copyText.select();
+        document.execCommand('copy');
+        is_copy.textContent = ' disalin';
+        copyBtn.disabled = true;
+    }
 </script>
