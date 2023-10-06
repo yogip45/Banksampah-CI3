@@ -129,7 +129,7 @@ class JenisSampah extends CI_Controller {
 				);
 
 				$where = array(
-					'id'=>$id
+					'id_sampah'=>$id
 				);
 
 				$this->m_jns_sampah->update_data($where,$data,'jns_sampah');

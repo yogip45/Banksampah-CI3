@@ -24,5 +24,6 @@ $(document).ready(function () {
       sEmptyTable: "Tidak ada data yang tersedia",
     },
     responsive: true,
+    autoWidth: true,
   });
 });

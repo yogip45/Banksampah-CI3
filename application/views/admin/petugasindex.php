@@ -34,55 +34,68 @@
                     <br><br>
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-bordered table-hover" id="dataNasabah">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">No.</th>                                                    
-                                        <th class="text-center">Username</th>                                                    
-                                        <th class="text-center">Nama</th>                                          
-                                        <th class="text-center">Aksi</th>                                                    
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $no = 1;
-                                    foreach ($petugas as $data) : ?>
-                                        <tr class="odd gradeX">
-                                            <td><?php echo $no++?></td>                                                    
-                                            <td><?php echo $data->username ?></td>                                                                                                        
-                                            <td><?php echo $data->nama_petugas ?></td>                                                                                                        
-                                            <td class="text-center">
-                                            <?php if ($data->role != 3): ?>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-warning">Pilih Aksi</button>
-                                                    <button type="button" class="btn btn-warning dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                    </button>
-                                                <div class="dropdown-menu" role="menu">
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailModal<?php echo $data->id_user; ?>"
-                                                    >Detail Petugas</a>
-                                                    <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="<?= site_url('index.php/admin/edit_petugas/' . $data->id_user) ?>">
-                                                    Edit Petugas</a>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_user; ?>">
-                                                    Reset Password</a>
-                                                    <?php if ($data->is_active == 1): ?>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">
-                                                    Nonaktifkan</a>
-                                                    <?php endif; ?>
-                                                    <?php if ($data->is_active == 0): ?>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Aktifkan</a>
-                                                    <?php endif; ?>
-                                                </div>
-                                            <?php else: ?>
-                                            -
-                                            <?php endif;?>
-                                            </div>
-                                            </td>                                                    
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover" id="dataNasabah">
+                                    <thead>
+                                        <tr>
+                                        <th style="width: 5%;">No.</th>
+                                        <th style="width: 15%;">Username</th>
+                                        <th style="width: 50%;">Nama</th>
+                                        <th style="width: 12%;">Aksi</th>                                                    
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        foreach ($petugas as $data) : ?>
+                                            <tr class="odd gradeX">
+                                                <td><?php echo $no++?></td>                                                    
+                                                <td><?php echo $data->username ?></td>                                                                                                        
+                                                <td><?php echo $data->nama_petugas ?></td>                                                                                                        
+                                                <td>
+                                                <?php if ($data->role != 3): ?>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-warning">Pilih Aksi</button>
+                                                        <button type="button" class="btn btn-warning dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailModal<?php echo $data->id_user; ?>"
+                                                        >Detail Petugas</a>
+                                                        <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" href="<?= site_url('index.php/admin/edit_petugas/' . $data->id_user) ?>">
+                                                        Edit Petugas</a>
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_user; ?>">
+                                                        Reset Password</a>
+                                                        <?php if ($data->is_active == 1): ?>
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">
+                                                        Nonaktifkan</a>
+                                                        <?php endif; ?>
+                                                        <?php if ($data->is_active == 0): ?>
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Aktifkan</a>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-warning">Pilih Aksi</button>
+                                                        <button type="button" class="btn btn-warning dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailModal<?php echo $data->id_user; ?>"
+                                                        >Detail Petugas</a>
+                                                        <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" href="<?= site_url('index.php/admin/edit_petugas/' . $data->id_user) ?>">
+                                                        Edit Petugas</a>
+                                                    </div>
+                                                <?php endif;?>
+                                                </div>
+                                                </td>                                                    
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>            
 
@@ -100,77 +113,73 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <table class="table">
-                                            <tr>
-                                                <th>User Id</th>
-                                                <td><?php echo $data->id_user ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Nama</th>
-                                                <td><?php echo $data->nama_petugas ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Username</th>
-                                                <td><?php echo $data->username ?></td>
-                                            </tr>                                                        
-                                            <tr>
-                                                <th>Email</th>
-                                                <td><?php echo $data->email ?></td>
-                                            </tr>                                                                                                                                          
-                                            <tr>
-                                                <th>No HP</th>
-                                                <td><?php echo $data->no_hp ?></td>
-                                            </tr>                                                                                                                                          
-                                            <tr>
-                                                <th>Jenis Akun</th>
-                                                <td>
-                                                    <?php
-                                                    $roleText = '';
-                                                    $roleClass = '';
-                                                    if ($data->role == 1) {
-                                                        $roleText = 'Nasabah';
-                                                        $roleClass = 'text-primary';
-                                                    } elseif ($data->role == 2) {
-                                                        $roleText = 'Petugas';
-                                                        $roleClass = 'text-success';
-                                                    } elseif ($data->role == 3) {
-                                                        $roleText = 'Super Admin';
-                                                        $roleClass = 'text-danger';
-                                                    }
-                                                    ?>
-                                                    <span class="<?php echo $roleClass; ?>"><?php echo $roleText; ?></span>
-                                                </td>
-                                            </tr>    
-                                            <tr>
-                                                <th>Status Akun</th>
-                                                <td>
-                                                    <?php
-                                                    $roleText = '';
-                                                    $roleClass = '';
-                                                    if ($data->is_active == 1) {
-                                                        $is_activeText = 'Aktif';
-                                                        $is_activeClass = 'text-primary';
-                                                    } else {
-                                                        $is_activeText = 'Tidak Aktif';
-                                                        $is_activeClass = 'text-danger';
-                                                    }
-                                                    ?>
-                                                    <span class="<?php echo $is_activeClass; ?>"><?php echo $is_activeText; ?></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Last Login</th>
-                                                <td><?= date('d M Y H:i', strtotime($data->last_login)) ?></td>
-                                            </tr>                                                      
-                                        </table>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tr>
+                                                    <th>User Id</th>
+                                                    <td><?php echo $data->id_user ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Nama</th>
+                                                    <td><?php echo $data->nama_petugas ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Username</th>
+                                                    <td><?php echo $data->username ?></td>
+                                                </tr>                                                        
+                                                <tr>
+                                                    <th>Email</th>
+                                                    <td><?php echo $data->email ?></td>
+                                                </tr>                                                                                                                                          
+                                                <tr>
+                                                    <th>No HP</th>
+                                                    <td><?php echo $data->no_hp ?></td>
+                                                </tr>                                                                                                                                          
+                                                <tr>
+                                                    <th>Jenis Akun</th>
+                                                    <td>
+                                                        <?php
+                                                        $roleText = '';
+                                                        $roleClass = '';
+                                                        if ($data->role == 1) {
+                                                            $roleText = 'Nasabah';
+                                                            $roleClass = 'text-primary';
+                                                        } elseif ($data->role == 2) {
+                                                            $roleText = 'Petugas';
+                                                            $roleClass = 'text-success';
+                                                        } elseif ($data->role == 3) {
+                                                            $roleText = 'Super Admin';
+                                                            $roleClass = 'text-danger';
+                                                        }
+                                                        ?>
+                                                        <span class="<?php echo $roleClass; ?>"><?php echo $roleText; ?></span>
+                                                    </td>
+                                                </tr>    
+                                                <tr>
+                                                    <th>Status Akun</th>
+                                                    <td>
+                                                        <?php
+                                                        $roleText = '';
+                                                        $roleClass = '';
+                                                        if ($data->is_active == 1) {
+                                                            $is_activeText = 'Aktif';
+                                                            $is_activeClass = 'text-primary';
+                                                        } else {
+                                                            $is_activeText = 'Tidak Aktif';
+                                                            $is_activeClass = 'text-danger';
+                                                        }
+                                                        ?>
+                                                        <span class="<?php echo $is_activeClass; ?>"><?php echo $is_activeText; ?></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Last Login</th>
+                                                    <td><?= date('d M Y H:i', strtotime($data->last_login)) ?></td>
+                                                </tr>                                                      
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="modal-footer"> 
-                                        <button type="button" class="btn btn-warning" data-dismiss="modal" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_user; ?>">Reset Password</button>
-                                        <?php if ($data->is_active == 1): ?>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Non Aktifkan Akun</button>
-                                        <?php else: ?>
-                                            <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Aktifkan Akun</button>
-                                        <?php endif; ?>                                                           
                                         <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
                                     </div>
                                 </div>

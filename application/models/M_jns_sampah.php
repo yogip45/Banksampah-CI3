@@ -3,7 +3,10 @@
   {
     public function tampil_data()
     {
-      return $this->db->get('jns_sampah');
+      $this->db->select('jns_sampah.*, tb_stok.jumlah');
+      $this->db->from('jns_sampah');
+      $this->db->join('tb_stok', 'jns_sampah.id_sampah = tb_stok.id_sampah', 'left');
+      return $this->db->get();
       
     }
     public function tampil_sampah_with_stok()
