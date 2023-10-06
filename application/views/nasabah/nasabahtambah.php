@@ -40,39 +40,41 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputNama">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="inputNama" name="nama" value="<?= set_value('nama')?>">  
+                            <input placeholder="Masukkan nama lengkap nasabah" type="text" class="form-control" id="inputNama" name="nama" value="<?= set_value('nama')?>">  
                             <?= form_error('nama','<small class="text-danger">', '</small>') ?>                                          
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputEmail">Email</label>
-                            <input type="text" class="form-control" id="inputEmail" name="email" value="<?= set_value('email')?>">
+                            <input placeholder="Alamat email nasabah" type="text" class="form-control" id="inputEmail" name="email" value="<?= set_value('email')?>">
                             <?= form_error('email','<small class="text-danger">', '</small>') ?>
                         </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-4">
                         <label for="inputPassword1">Password</label>                                                                                                   
-                        <input type="password" class="form-control" id="inputPassword1" name="password1">
+                        <input placeholder="Password untuk nasabah" type="password" class="form-control" id="inputPassword1" name="password1">
                         <?= form_error('password1','<small class="text-danger">', '</small>') ?>                                           
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-4">
                         <label for="inputPassword2">Konfirmasi Password</label>
-                        <input type="password" class="form-control" id="inputPassword2" name="password2">                                                
+                        <input placeholder="Konfirmasi password" type="password" class="form-control" id="inputPassword2" name="password2">                                                
                         <?= form_error('password2','<small class="text-danger">', '</small>') ?>                                           
                       </div>
                     </div>
-                    <div class="form-group col-md-8">
+                    <div class="form-row">
+                      <div class="form-group col-md-8">
                         <label>Jenis Kelamin</label>
                         <div class="form-check">
                             <input type="radio" class="form-check-input" id="laki" name="jk" value="Laki-laki">
                             <label class="form-check-label" for="laki">Laki-laki</label>
                         </div>
                         <div class="form-check">
-                            <input type="radio" class="form-check-input" id="perempuan" name="jk" value="Perempuan">
-                            <label class="form-check-label" for="perempuan">Perempuan</label>
-                        </div>
+                          <input type="radio" class="form-check-input" id="perempuan" name="jk" value="Perempuan">
+                          <label class="form-check-label" for="perempuan">Perempuan</label>
+                          </div>
+                      </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -105,16 +107,20 @@
                             <?= form_error('rt','<small class="text-danger">', '</small>') ?>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
                         <label for="inputAlamatLengkap">Alamat Lengkap</label>
-                        <input type="text" class="form-control" id="inputAlamatLengkap" rows="3" name="alamat_lengkap" value="<?= set_value('alamat_lengkap')?>"></input>
+                        <input placeholder="Alamat lengkap nasabah seperti, nama jalan, dukuh rt dan rw" type="text" class="form-control" id="inputAlamatLengkap" rows="3" name="alamat_lengkap" value="<?= set_value('alamat_lengkap')?>"></input>
                         <?= form_error('alamat_lengkap','<small class="text-danger">', '</small>') ?>
+                      </div>
                     </div>
-                    <div class="form-row col-md-6">
+                    <div class="form-row">
+                      <div class="form-row col-md-6">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-warning">Reset</button>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="reset" class="btn btn-warning">Reset</button>
                         </div>
+                      </div>
                     </div>
                 </form>
               </div>

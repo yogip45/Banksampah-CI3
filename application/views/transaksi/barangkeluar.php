@@ -82,14 +82,14 @@
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
                                     <label for="berat">Jumlah (kg)</label>
-                                    <input type="number" value="<?=set_value('jumlah')?>" class="form-control" id="inputJumlah" name="jumlah" step="0.1" min="0">
+                                    <input placeholder="Masukan total berat sampah" type="number" value="<?=set_value('jumlah')?>" class="form-control" id="inputJumlah" name="jumlah" step="0.1" min="0">
                                     <?= form_error('jumlah','<small class="text-danger">', '</small>') ?>
                                   </div>
                                 </div>
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
                                     <label for="berat">Total Penjualan (Rp)</label>
-                                    <input value="<?=set_value('total')?>" type="number" class="form-control" id="inputJumlah" name="total" placeholder="" step="0.01" min="0">
+                                    <input value="<?=set_value('total')?>" type="number" class="form-control" id="inputJumlah" name="total" placeholder="Masukkan total penjualan sampah" step="0.01" min="0">
                                     <?= form_error('total','<small class="text-danger">', '</small>') ?>
                                   </div>
                                 </div>

@@ -112,11 +112,11 @@ class JenisSampah extends CI_Controller {
 		}
 	}
 
-	public function update()
+	public function update($id_sampah)
 	{
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role')==2||$this->session->userdata('role')==3) {
-				$id = $this->input->post('id');
+				$id = $id_sampah;
 				$nama_sampah = $this->input->post('nama_sampah');
 				$harga = $this->input->post('harga');
 				$kategori = $this->input->post('kategori');

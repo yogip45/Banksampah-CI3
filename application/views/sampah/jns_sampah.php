@@ -72,8 +72,8 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
-                                                            <?= anchor('index.php/jenissampah/edit/' . $sampah->id_sampah, 'Edit', 'class="dropdown-item"') ?>
-                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal<?php echo $sampah->id_sampah; ?>">Hapus Data</a>
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal<?php echo $sampah->id_sampah; ?>">Edit</a>
+                                                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#hapusModal<?php echo $sampah->id_sampah; ?>">Hapus Data</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -98,7 +98,48 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- Modal untuk edit -->
+                                            <!-- Modal untuk HAPUS -->
+                                            <!-- Modal untuk EDIT SAMPAH -->
+                                            <div class="modal fade" id="editModal<?php echo $sampah->id_sampah; ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?php echo $sampah->id_sampah; ?>" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editModalLabel<?php echo $sampah->id_sampah; ?>">Edit Data Sampah</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Form untuk mengedit data sampah -->
+                                                            <form action="<?php echo base_url().'index.php/jenissampah/update/'.$sampah->id_sampah;?>" method="post">
+                                                                <div class="form-group">
+                                                                    <label for="jenisSampahEdit">Jenis Sampah</label>
+                                                                    <input type="text" class="form-control" id="jenisSampahEdit" name="nama_sampah" value="<?php echo $sampah->nama_sampah; ?>" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="hargaEdit">Harga / kg</label>
+                                                                    <input type="number" class="form-control" id="hargaEdit" name="harga" value="<?php echo $sampah->harga; ?>" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="kategoriSampahEdit">Kategori Sampah</label>
+                                                                    <select class="form-control" id="kategoriSampahEdit" name="kategori">
+                                                                        <option value="Plastik" <?php if ($sampah->kategori == 'Plastik') echo 'selected'; ?>>Plastik</option>
+                                                                        <option value="Kertas" <?php if ($sampah->kategori == 'Kertas') echo 'selected'; ?>>Kertas</option>
+                                                                        <option value="Logam" <?php if ($sampah->kategori == 'Logam') echo 'selected'; ?>>Logam</option>
+                                                                        <option value="Kaca" <?php if ($sampah->kategori == 'Kaca') echo 'selected'; ?>>Kaca</option>
+                                                                        <option value="Lain-lain" <?php if ($sampah->kategori == 'Lain-lain') echo 'selected'; ?>>Lain - Lain</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                    <button type="submit" class="btn btn-primary" id="btnSimpan">Simpan</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal untuk EDIT SAMPAH -->
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -194,3 +235,4 @@
 </div>
 <!-- ./wrapper -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
