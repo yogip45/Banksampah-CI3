@@ -17,7 +17,6 @@ class JenisSampah extends CI_Controller {
 			$this->load->model('m_jns_sampah');
 			$data['title'] = 'Dashboard - Data Sampah';
 			$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
-			$data['stok'] = $this->m_stok->tampil_data();
 			$data['user'] = $this->m_user->get_user();
 			$this->load->view('newtemplate/header', $data);
 			$this->load->view('newtemplate/top', $data);
