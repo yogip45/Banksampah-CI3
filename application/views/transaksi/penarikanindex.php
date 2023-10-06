@@ -50,7 +50,7 @@
                       <div class="card-body col-md-8">
                       <form role="form" method="POST" action="<?php echo base_url().'index.php/penarikan/create_penarikan';?>">
                         <div class="form-row">
-                          <div class="form-group col-md-5">
+                          <div class="form-group col-md-4">
                             <label for="inputDesa">Nomor Induk Nasabah</label>
                             <div class="input-group">
                               <input value="<?=set_value('nin')?>" type="text" class="form-control" id="inputNin" name="nin" readonly>
@@ -62,7 +62,7 @@
                             </div>
                             <?= form_error('nin', '<small class="text-danger">', '</small>') ?>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-5">
                             <label for="inputDesa">Nama Nasabah</label>
                             <input value="<?=set_value('nama')?>" type="text" class="form-control" id="inputNama" name="nama" readonly>
                             <?= form_error('nama', '<small class="text-danger">', '</small>') ?>
@@ -85,8 +85,8 @@
                             <?= form_error('jumlah_penarikan', '<small class="text-danger">', '</small>') ?>
                           </div>
                         </div>
-                        <button id="btnSubmit" type="submit" class="btn btn-primary">Submit</button>
-                        <button id="btnReset" type="reset" class="btn btn-warning">Reset</button>
+                        <button id="btnSubmit" type="submit" class="btn btn-primary">Proses</button>
+                        <!-- <button id="btnReset" type="reset" class="btn btn-warning">Reset</button> -->
                       </form>
                       </div>
                       </div>

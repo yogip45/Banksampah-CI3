@@ -50,17 +50,17 @@
                         </div>
                     </div>
                     <div class="form-row">
-                      <div class="form-group col-md-4">
-                        <label for="inputPassword1">Password</label>                                                                                                   
-                        <input placeholder="Password untuk nasabah" type="password" class="form-control" id="inputPassword1" name="password1">
-                        <?= form_error('password1','<small class="text-danger">', '</small>') ?>                                           
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-4">
-                        <label for="inputPassword2">Konfirmasi Password</label>
-                        <input placeholder="Konfirmasi password" type="password" class="form-control" id="inputPassword2" name="password2">                                                
-                        <?= form_error('password2','<small class="text-danger">', '</small>') ?>                                           
+                      <div class="form-group col-md-3">
+                        <label for="inputPassword1">Password (Auto generate)</label>                                                                                                   
+                        <div class="input-group">
+                          <input value="<?= generate_password(8); ?>" placeholder="Password untuk nasabah" type="text" class="form-control" id="inputPassword1" name="password1" readonly>
+                          <div class="input-group-append">
+                              <button class="btn btn-primary" type="button" id="copyBtn">
+                              <i class="fas fa-clipboard fa-fw"></i> <span id="is_salin"> salin</span>
+                              </button>
+                          </div>
+                          <?= form_error('password1','<small class="text-danger">', '</small>') ?>                                           
+                        </div>
                       </div>
                     </div>
                     <div class="form-row">
@@ -177,3 +177,17 @@
       });
     }
   </script>
+  <script>
+    const copyBtn = document.getElementById('copyBtn')
+    const copyText = document.getElementById('inputPassword1')
+    const is_copy = document.getElementById('is_salin')
+    
+    if (copyBtn!=null) {
+        copyBtn.onclick = () => {
+            copyText.select();
+            document.execCommand('copy');
+            is_copy.textContent = ' disalin';
+            copyBtn.disabled = true;
+        }
+    }
+</script>

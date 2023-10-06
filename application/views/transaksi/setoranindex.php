@@ -67,7 +67,7 @@
                             <?= form_error('nama', '<small class="text-danger form-text text-muted">', '</small>') ?>
                           </div>
                           <button type="submit" class="btn btn-primary">Submit</button>
-                          <button type="reset" class="btn btn-warning">Reset</button>
+                          <!-- <button type="reset" class="btn btn-warning">Reset</button> -->
                         </form>
                       </div>
                     </div>

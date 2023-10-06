@@ -123,19 +123,12 @@ class Petugas extends CI_Controller {
 		$this->form_validation->set_rules('rw','Rw','required|trim',
 		array('required'=>'Rw Harus Diisi')
 		);
-		$this->form_validation->set_rules('password1','Password','required|trim|min_length[8]|matches[password2]',
+		$this->form_validation->set_rules('password1','Password','required|trim|min_length[8]',
 		array(
 			'required'=>'Password Harus Diisi',
 			'min_length'=>'Minimal 8 karakter',
 			'matches'=>'Password tidak cocok',)
 		);
-		$this->form_validation->set_rules('password2','Password','required|trim|matches[password1]',
-		array(
-			'required'=>'Password Harus Diisi',			
-			'matches'=>'Password tidak cocok',)
-		);							
-
-
 		if ($this->form_validation->run() == false) {
 				$getdata = $this->m_alamat->getdatakecamatan();
 				$data['alamat'] = $getdata;
