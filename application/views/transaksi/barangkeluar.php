@@ -51,14 +51,14 @@
                               <form role="form" action="<?= base_url() ?>index.php/stok/create_barangkeluar" method="POST">
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
-                                    <label for="inputTanggalKeluar">Tanggal Keluar</label>
-                                    <div class="input-group date" id="inputTanggalKeluar" data-target-input="nearest">
-                                      <input value="<?= set_value('tgl_keluar')?>" placeholder="yyyy-mm-dd" name="tgl_keluar" type="text" class="form-control datetimepicker-input" data-target="#inputTanggalKeluar"/>
-                                      <div class="input-group-append" data-target="#inputTanggalKeluar" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                      </div>
-                                    </div>
-                                    <?= form_error('tgl_keluar','<small class="text-danger">', '</small>') ?>
+                                      <label for="inputTanggalKeluar">Tanggal Barang Keluar</label>
+                                      <div class="input-group date" id="inputTanggalKeluar" data-target-input="nearest">
+                                          <input placeholder="Masukkan tanggal barang keluar" value="<?=set_value('tgl_keluar')?>" type="text" class="form-control datetimepicker-input" data-target="#inputTanggalKeluar" name="tgl_keluar"/>
+                                          <div class="input-group-append" data-target="#inputTanggalKeluar" data-toggle="datetimepicker">
+                                              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                          </div>
+                                          <?= form_error('tgl_keluar','<small class="text-danger">', '</small>') ?>
                                   </div>
                                   <div class="form-group col-md-6">
                                     <label for="inputSampah">Pilih Sampah</label>
@@ -102,7 +102,6 @@
                   </div>
                   <!-- Konten di sebelah kanan -->
                 </div>
-
                 <table class="table table-striped table-bordered table-hover" id="dataNasabah">
                     <thead>
                         <tr>
@@ -179,7 +178,7 @@
   $(function () {
       $('#inputTanggalKeluar').datetimepicker({
           locale: 'id',
-          format: 'YYYY-MM-DD'
+          format: 'YYYY-MM-DD HH:mm:ss'
       });
   });
 </script>

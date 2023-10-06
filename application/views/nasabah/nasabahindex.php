@@ -73,11 +73,11 @@
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#resetPassword<?php echo $data->id_user; ?>">
                                                 Reset Password</a>
                                                 <?php if ($data->is_active == 1): ?>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">
+                                                <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">
                                                 Nonaktifkan</a>
                                                 <?php endif; ?>
                                                 <?php if ($data->is_active == 0): ?>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Aktifkan</a>
+                                                    <a class="dropdown-item text-success" href="#" data-toggle="modal" data-target="#ubahStatus<?php echo $data->id_user; ?>">Aktifkan</a>
                                                 <?php endif; ?>
                                                 </div>
                                             </div>

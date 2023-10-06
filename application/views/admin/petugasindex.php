@@ -40,7 +40,8 @@
                                         <tr>
                                         <th style="width: 5%;">No.</th>
                                         <th style="width: 15%;">Username</th>
-                                        <th style="width: 50%;">Nama</th>
+                                        <th style="width: 25%;">Nama</th>
+                                        <th style="width: 25%;">Nomor HP</th>
                                         <th style="width: 12%;">Aksi</th>                                                    
                                         </tr>
                                     </thead>
@@ -52,6 +53,7 @@
                                                 <td><?php echo $no++?></td>                                                    
                                                 <td><?php echo $data->username ?></td>                                                                                                        
                                                 <td><?php echo $data->nama_petugas ?></td>                                                                                                        
+                                                <td><?php echo $data->no_hp ?></td>                                                                                                        
                                                 <td>
                                                 <?php if ($data->role != 3): ?>
                                                     <div class="btn-group">

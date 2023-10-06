@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-3">
-                        <label for="inputPassword1">Password (Auto generate)</label>                                                                                                   
+                        <label for="inputPassword1">Password (auto generate)</label>                                                                                                   
                         <div class="input-group">
                           <input value="<?= generate_password(8); ?>" placeholder="Password untuk nasabah" type="text" class="form-control" id="inputPassword1" name="password1" readonly>
                           <div class="input-group-append">
@@ -177,7 +177,7 @@
       });
     }
   </script>
-  <script>
+<script>
     const copyBtn = document.getElementById('copyBtn')
     const copyText = document.getElementById('inputPassword1')
     const is_copy = document.getElementById('is_salin')

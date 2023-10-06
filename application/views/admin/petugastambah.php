@@ -58,22 +58,22 @@
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="inputPassword1">Password</label>                                                                                                   
-                        <input placeholder="Password untuk petugas" type="password" class="form-control" id="inputPassword1" name="password1">
+                      <label for="inputPassword1">Password (auto generate)</label>                                                                                                   
+                      <div class="input-group">
+                        <input value="<?= generate_password(8); ?>" placeholder="Password untuk petugas" type="text" class="form-control" id="inputPassword1" name="password1" readonly>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="copyBtn">
+                            <i class="fas fa-clipboard fa-fw"></i> <span id="is_salin"> salin</span>
+                            </button>
+                        </div>
                         <?= form_error('password1','<small class="text-danger">', '</small>') ?>                                           
-                    </div>                                                                                                                           
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="inputPassword2">Konfirmasi Password</label>
-                        <input placeholder="Konfirmasi password" type="password" class="form-control" id="inputPassword2" name="password2">                                                
-                    </div>                                                                                                                                                                                                                                                                                                                                          
+                      </div>
+                    </div>
                   </div>
                   <div class="form-row">
                     <div class="col-md-12">
                       <button type="submit" class="btn btn-primary">Submit</button>
-                      <button type="reset" class="btn btn-warning text-white">Reset</button>
-                      <a href="/banksampah/index.php/admin/petugasindex"  type="reset" class="btn btn-danger">Batal</a>
+                      <a href="<?= base_url()?>index.php/admin/petugasindex"  type="reset" class="btn btn-danger">Batal</a>
                     </div>
                   </div>
                 </form>
@@ -98,4 +98,18 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->    
+<!-- ./wrapper -->
+<script>
+    const copyBtn = document.getElementById('copyBtn')
+    const copyText = document.getElementById('inputPassword1')
+    const is_copy = document.getElementById('is_salin')
+    
+    if (copyBtn!=null) {
+        copyBtn.onclick = () => {
+            copyText.select();
+            document.execCommand('copy');
+            is_copy.textContent = ' disalin';
+            copyBtn.disabled = true;
+        }
+    }
+</script>
