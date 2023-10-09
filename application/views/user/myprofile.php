@@ -29,8 +29,8 @@
             <?php if ($this->session->flashdata('hapus')): ?>
                 <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
             <?php endif; ?>
-            <?php if ($this->session->flashdata('gagal')): ?>
-                <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
+            <?php if ($this->session->flashdata('error')): ?>
+                <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
             <?php endif; ?>
             <!-- ALERT -->                                                
             <div class="card">
