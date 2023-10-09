@@ -10,8 +10,8 @@
           </div>
           <div class="col-sm-6">            
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?= base_url().'index.php/setoran/setoranindex';?>">Setor</a></li>
-              <li class="breadcrumb-item active">Data Setoran</li>
+              <li class="breadcrumb-item">Transaksi</li>
+              <li class="breadcrumb-item active">Setoran</li>
             </ol>
           </div>
         </div>

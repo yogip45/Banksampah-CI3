@@ -2,7 +2,7 @@
 function generate_password($length)
 {
     // Daftar karakter yang akan digunakan dalam kode acak
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyz!#$%&';
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyz#@';
 
     $random_code = '';
     $max = strlen($characters) - 1;

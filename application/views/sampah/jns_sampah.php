@@ -10,8 +10,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Sampah</a></li>
-                        <li class="breadcrumb-item active">Data Sampah</li>
+                        <li class="breadcrumb-item">Sampah</li>
+                        <li class="breadcrumb-item active">Master Sampah</li>
                     </ol>
                 </div>
             </div>

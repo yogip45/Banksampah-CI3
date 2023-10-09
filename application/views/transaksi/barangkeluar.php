@@ -10,8 +10,8 @@
           </div>
           <div class="col-sm-6">            
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Transaksi</a></li>
-              <li class="breadcrumb-item active">Setoran</li>
+              <li class="breadcrumb-item">Transaksi</li>
+              <li class="breadcrumb-item active">Barang Keluar</li>
             </ol>
           </div>
         </div>
