@@ -83,17 +83,11 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('email','Email','required|trim|valid_email|is_unique[tb_user.email]',
 		array('required'=>'Email Harus Diisi','valid_email'=>'Alamat Email Tidak Valid','is_unique'=>'Alamat Email Sudah Digunakan')
 		);
-		$this->form_validation->set_rules('password1','Password','required|trim|min_length[8]|matches[password2]',
+		$this->form_validation->set_rules('password1','Password','required|trim|min_length[8]',
 		array(
 			'required'=>'Password Harus Diisi',
-			'min_length'=>'Minimal 8 karakter',
-			'matches'=>'Password tidak cocok',)
+			'min_length'=>'Minimal 8 karakter',)
 		);
-		$this->form_validation->set_rules('password2','Password','required|trim|matches[password1]',
-		array(
-			'required'=>'Password Harus Diisi',			
-			'matches'=>'Password tidak cocok',)
-		);		
 		if ($this->form_validation->run() == false) {
 			$data['title'] = "Dashboard - Tambah Data Petugas";
 			$data['user'] = $this->m_petugas->get_petugas();

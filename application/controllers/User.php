@@ -187,7 +187,7 @@ class User extends CI_Controller {
 		$this->load->model('m_petugas');
 		$this->load->model('m_user');
 	
-		$foto = $_FILES['foto'];				
+		$foto = $_FILES['foto'];			
 		$id_user = $this->input->post('id_user');						
 		$config['upload_path'] = './assets/foto';
 		$config['allowed_types'] = 'jpg|png';		

@@ -60,7 +60,7 @@
                                         <td><?php echo $data->email ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-warning">Pilih Aksi</button>
+                                                <button type="button" class="btn btn-warning" data-toggle="dropdown">Pilih Aksi</button>
                                                 <button type="button" class="btn btn-warning dropdown-toggle dropdown-icon" data-toggle="dropdown">
                                                 <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
