@@ -191,11 +191,11 @@ class User extends CI_Controller {
 		$id_user = $this->input->post('id_user');						
 		$config['upload_path'] = './assets/foto';
 		$config['allowed_types'] = 'jpg|png';
-		$config['max_size'] = 1024;
+		$config['max_size'] = 2048;
 		$this->load->library('upload',$config);
 	
 		if (!$this->upload->do_upload('foto')) {
-			$this->session->set_flashdata('error','Tidak ada gambar yang di pilih / gambar terlalu besar Max 1Mb');
+			$this->session->set_flashdata('error','Tidak ada gambar yang di pilih / gambar terlalu besar Max 2Mb');
 			redirect('index.php/user/myprofile');
 		}else {
 			$foto = $this->upload->data('file_name');
