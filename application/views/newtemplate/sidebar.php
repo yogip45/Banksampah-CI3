@@ -25,12 +25,14 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex' || 'admin' && $this->uri->segment(2) == 'edit_petugas'
+            || 'admin' && $this->uri->segment(2) == 'tambah_petugas' || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex'
+            || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'tambah_nasabah' || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'edit_nasabah'
+            ) ? 'menu-open' : ''; ?>">
           <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex' || 'admin' && $this->uri->segment(2) == 'edit_petugas'
             || 'admin' && $this->uri->segment(2) == 'tambah_petugas' || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex'
             || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'tambah_nasabah' || $this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'edit_nasabah'
             ) ? 'active' : ''; ?>">
-
               <i class="nav-icon fas fa-user-cog"></i>
               <p>
                 Pengguna
@@ -43,28 +45,23 @@
                   <a href="<?= base_url('index.php/admin/petugasindex') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'petugasindex'
                 || $this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'tambah_petugas' || $this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'edit_petugas'
                 ) ? 'active' : ''; ?>">
-                  <p>Petugas</p>
+                  <p class="nav-link">Petugas</p>
                 </a>
-              </li>                            
+                </li>                            
               <?php endif ?>
               <?php if ($role!=1) : ?>
                 <li class="nav-item">
                   <a href="<?= base_url('index.php/petugas/nasabahindex') ?>" class="nav-link <?= ($this->uri->segment(1) == 'petugas' && $this->uri->segment(2) == 'nasabahindex') ? 'active' : ''; ?>">
-                    <p>Nasabah</p>
+                    <p class="nav-link">Nasabah</p>
                   </a>
                 </li>                            
-                <?php endif ?>
+              <?php endif ?>
             </ul>
-          </li>
-          <li class="nav-item">
-          <a href="<?= base_url('index.php/jenissampah') ?>" class="nav-link <?= ($this->uri->segment(1) == 'jenissampah') ? 'active' : ''; ?>">
-            <i class="nav-icon fas fa-trash"></i>
-            <p>
-              Sampah
-            </p>
-          </a>
         </li>
-          <li class="nav-item">
+          <li class="nav-item <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran' ||
+            $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran'
+            || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar' || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'create_barangkeluar'
+            || $this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex')  ? 'menu-open' : ''; ?>">
           <?php if ($role!=1) : ?>
             <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran' ||
             $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran'
@@ -80,23 +77,39 @@
               <li class="nav-item">
                 <a href="<?= base_url('index.php/setoran/setoranindex') ?>" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran'
                 || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran')  ? 'active' : ''; ?>">
-                  <p> Setor</p>
+                  <p class="nav-link"> Setor</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?= base_url('index.php/penarikan/penarikanindex'); ?>"class="nav-link <?= ($this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex')  ? 'active' : ''; ?>">
-                  <p> Penarikan</p>
+                  <p class="nav-link"> Penarikan</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?= base_url('index.php/stok/barangkeluar') ?>" class="nav-link <?= ($this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar'
                 ||$this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'create_barangkeluar' )  ? 'active' : ''; ?>">
-                  <p>Barang Keluar</p>
+                  <p class="nav-link">Barang Keluar</p>
                 </a>
               </li>
             </ul>
           </li>
           <?php endif ?>
+          <li class="nav-item">
+            <a href="<?= base_url('index.php/jenissampah') ?>" class="nav-link <?= ($this->uri->segment(1) == 'jenissampah') ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-trash"></i>
+              <p>
+                Sampah
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('index.php/cetaklaporan') ?>" class="nav-link <?= ($this->uri->segment(1) == 'cetaklaporan') ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-print"></i>
+              <p>
+                Laporan
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="<?= base_url('index.php/user/myprofile') ?>" class="nav-link <?= ($this->uri->segment(1) == 'user' && $this->uri->segment(2) == 'myprofile') ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-user-circle"></i>

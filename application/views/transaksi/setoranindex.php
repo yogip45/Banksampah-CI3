@@ -100,11 +100,20 @@
                                 <?php echo $data->status == 1 ? 'Selesai' : 'Belum Selesai'; ?>
                             </td>
                             <td class="text-center">
+                            <?php if ($data->status == 1): ?>
                                 <?php
                                 $url = '/index.php/setoran/detail_setoran/' . $data->id_setor;
                                 $attributes = array('class' => 'btn btn-info');
                                 echo anchor($url, 'Detail', $attributes);
                                 ?>
+                            <?php endif ?>
+                            <?php if ($data->status == 0): ?>
+                                <?php
+                                $url = '/index.php/setoran/hapus_setoran/' . $data->id_setor;
+                                $attributes = array('class' => 'btn btn-danger');
+                                echo anchor($url, 'Hapus', $attributes);
+                                ?>
+                            <?php endif ?>
                             </td>
                         <?php endforeach; ?>
                       </tbody>

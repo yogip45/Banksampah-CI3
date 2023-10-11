@@ -23,15 +23,16 @@ class Admin extends CI_Controller {
 				$data['title'] = "Dashboard - Home";
 				$data['user'] = $this->m_petugas->get_petugas();
 				$data['jumlah'] = $this->m_petugas->hitung();
-				$tahun = 2023; // Ganti dengan tahun yang diinginkan
+        $data['tahun'] = $this->m_setoran->getTahun();
+				$tahun = date('Y');
         $data['jml_setoran'] = $this->m_setoran->getSetoranByMonth($tahun);
         $data['jml_penarikan'] = $this->m_penarikan->getPenarikanByMonth($tahun);
         $data['jml_barangkeluar'] = $this->m_stok->getBarangKeluarByMonth($tahun);
-        $data['tahun'] = $this->m_setoran->getTahun();
 				$this->load->view('newtemplate/header',$data);
 				$this->load->view('newtemplate/top', $data);
 				$this->load->view('newtemplate/sidebar',$data);
 				$this->load->view('admin/dashboard',$data);
+				$this->load->view('admin/footer',$data);
 			} else {
 				$this->load->view('error/403');
 			}
@@ -42,7 +43,6 @@ class Admin extends CI_Controller {
 
 	public function petugasindex()	
 	{
-		//HARUS LOGIN DAN ROLE = 3 (SuperAdmin)
 		if ($this->session->userdata('email')) {			
 			if ($this->session->userdata('role') == 3) {					
 					$data['title'] = "Dashboard - Data Petugas";

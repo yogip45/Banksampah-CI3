@@ -136,6 +136,9 @@ class Auth extends CI_Controller {
 								$this->session->set_userdata('nin', $data1);
 								redirect('/index.php/nasabah/dashboard');
 							} else {
+								$nasabah = $this->db->get_where('tb_nasabah',['id_user'=>$user['id_user']])->row_array();
+								$data1 = $nasabah['nin'];
+								$this->session->set_userdata('nin', $data1);
 								redirect('/index.php/auth/changepassword');
 							}
 						}
@@ -187,9 +190,15 @@ class Auth extends CI_Controller {
 								redirect('/index.php/auth/changepassword');
 							}											
 						} elseif ($username['role']==1){
-							if ($this->session->userdata('default_password')==0) {							
+							if ($this->session->userdata('default_password')==0) {		
+								$nasabah = $this->db->get_where('tb_nasabah',['id_user'=>$user['id_user']])->row_array();
+								$data1 = $nasabah['nin'];
+								$this->session->set_userdata('nin', $data1);					
 								redirect('/index.php/nasabah/dashboard');
 							} else {
+								$nasabah = $this->db->get_where('tb_nasabah',['id_user'=>$user['id_user']])->row_array();
+								$data1 = $nasabah['nin'];
+								$this->session->set_userdata('nin', $data1);
 								redirect('/index.php/auth/changepassword');
 							}
 						}

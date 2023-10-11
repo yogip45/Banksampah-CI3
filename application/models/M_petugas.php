@@ -18,6 +18,10 @@
     }
 
     public function hitung(){
+      $transaksi_setoran = $this->db->count_all('tb_setoran');
+      $transaksi_penarikan = $this->db->count_all('tb_penarikan');
+      $transaksi_barangkeluar = $this->db->count_all('tb_barangkeluar');
+      $total_transaksi = $transaksi_setoran + $transaksi_penarikan + $transaksi_barangkeluar;
       $this->db->select_sum('jumlah', 'total_berat');
       $this->db->from('tb_stok');
       $result = $this->db->get()->row();
@@ -29,7 +33,7 @@
         'nasabah' => $this->db->count_all('tb_nasabah'),
         'sampah' => $total_berat,
         'petugas' => $count_petugas,
-        'transaksi' => $this->db->count_all('tb_setoran')
+        'transaksi' => $total_transaksi
       );
     return $jumlah;
     }

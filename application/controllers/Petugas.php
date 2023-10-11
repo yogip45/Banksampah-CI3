@@ -141,7 +141,7 @@ class Petugas extends CI_Controller {
 				$this->load->view('newtemplate/footer');
 		} else {			
 			$kodeunik = 'U' . uniqid();
-			$nin = getAutoNumber('tb_nasabah','nin','NSB','7');
+			$nin = getAutoNin();
 			$nama = $this->input->post('nama');
 			$jk = $this->input->post('jk');	
 			$desa = $this->input->post('id_desa');		

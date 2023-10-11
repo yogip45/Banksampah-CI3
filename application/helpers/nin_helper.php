@@ -38,5 +38,31 @@ function getAutoSetoranId() {
 
   return $id_setor;
 }
+function getAutoNin() {
+  $ci = &get_instance();
+  $table = 'tb_nasabah';
+  $field = 'nin';
+  
+  // Mendapatkan tahun dan bulan saat ini (misal: 202309)
+  $date = date('YmHi');
+  
+  // Membentuk prefix "ST-" dan tahun bulan
+  $prefix = 'NB' . $date;
+
+  // Query untuk mencari nilai maksimum
+  $query = "SELECT IFNULL(MAX(CONVERT(SUBSTRING($field, " . (strlen($prefix) + 1) . "), UNSIGNED INTEGER)), 0) + 1 AS NOMOR
+            FROM $table
+            WHERE LEFT($field, " . (strlen($prefix)) . ") = '$prefix'";
+
+  $result = $ci->db->query($query)->row();
+  
+  // Format nomor dengan leading zeros
+  $nomor = str_pad($result->NOMOR, 2, '0', STR_PAD_LEFT);
+
+  // Menggabungkan prefix, tahun bulan, dan nomor
+  $nin = $prefix . $nomor;
+
+  return $nin;
+}
 
 ?>
