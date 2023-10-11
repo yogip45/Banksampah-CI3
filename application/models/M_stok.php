@@ -8,6 +8,23 @@
       $this->db->join('jns_sampah', 'jns_sampah.id_sampah = tb_stok.id_sampah', 'inner');
       return $this->db->get()->result();
     }
+    public function getBarangKeluarByMonth($tahun)
+    {
+      $query = $this->db->query("
+          SELECT
+              MONTH(tgl_keluar) AS bulan,
+              SUM(total) AS jumlah_barangkeluar
+          FROM
+              tb_barangkeluar
+          WHERE
+              YEAR(tgl_keluar) = $tahun
+          GROUP BY
+              MONTH(tgl_keluar)
+          ORDER BY
+              bulan
+      ");
+      return $query->result();
+    }
     public function get_jumlah($id_sampah)
     {
       $this->db->select('tb_stok.jumlah');

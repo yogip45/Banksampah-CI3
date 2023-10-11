@@ -7,6 +7,30 @@
       $this->db->from('tb_setoran');
       return $this->db->get();
     }
+    public function getSetoranByMonth($tahun)
+    {
+      $query = $this->db->query("
+          SELECT
+              MONTH(tanggal_setor) AS bulan,
+              SUM(total) AS jumlah_setoran
+          FROM
+              tb_setoran
+          WHERE
+              YEAR(tanggal_setor) = $tahun
+          GROUP BY
+              MONTH(tanggal_setor)
+          ORDER BY
+              bulan
+      ");
+      return $query->result();
+    }
+    public function getTahun(){
+      $this->db->distinct();
+      $this->db->select("YEAR(tanggal_setor) AS tahun");
+      $this->db->from("tb_setoran");
+      $query = $this->db->get();
+      return $query->result();
+    }
     public function tampil_databyNin($nin)
     {      
       $this->db->where('nin',$nin);

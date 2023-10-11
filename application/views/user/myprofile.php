@@ -96,9 +96,6 @@
 
                               <hr>
 
-                              <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                              <p class="text-muted">Nothing worth nothing</p>
                           </div>
                         <!-- /.card-body -->
                         </div>
@@ -106,71 +103,68 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-md-9">
-                        <!-- FORM EDIT PROFILE -->
-                        <div class="card card-primary card-outline">
-                          <div class="card-header">
-                              <h3 class="card-title">Edit Profile</h3>
-                          </div>
-                            <div class="card-body">
-                                <div class="tab-content">
-                                <div class="active tab-pane" id="settings">
-                                    <form class="form-horizontal" action="<?php echo base_url().'index.php/user/update_profile';?>" method="POST">
-                                    <div class="form-group row">
-                                        <label for="inputNama" class="col-sm-2 col-form-label">Nama</label>
-                                        <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputNama" placeholder="Nama Lengkap" name="nama" value="<?= $user['nama_petugas']?>">
-                                        </div>
+                      <div class="card">
+                        <div class="card-header p-2">
+                          <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#editProfile" data-toggle="tab">Edit Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#gantiFoto" data-toggle="tab">Foto Profile</a></li>
+                          </ul>
+                        </div><!-- /.card-header -->
+                        <div class="card-body">
+                          <div class="tab-content">
+                            <div class="active tab-pane" id="editProfile">
+                              <form class="form-horizontal" action="<?php echo base_url().'index.php/user/update_profile';?>" method="POST">
+                                <div class="form-group row">
+                                    <label for="inputNama" class="col-sm-2 col-form-label">Nama</label>
+                                    <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputNama" placeholder="Nama Lengkap" name="nama" value="<?= $user['nama_petugas']?>">
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputNo" class="col-sm-2 col-form-label">Nomor HP</label>
-                                        <div class="col-sm-10">
-                                        <input type="number" class="form-control" id="inputNo" placeholder="08xxx" name="no_hp" value="<?= $user['no_hp']?>">
-                                        <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="offset-sm-2 col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </div>
-                                    </form>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="inputNo" class="col-sm-2 col-form-label">Nomor HP</label>
+                                    <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inputNo" placeholder="08xxx" name="no_hp" value="<?= $user['no_hp']?>">
+                                    <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                    </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="offset-sm-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </div>
+                              </form>
                             </div>
-                        </div>
-                        <!-- FORM EDIT PROFILE -->
-                        <!-- FORM EDIT PROFILE -->
-                        <div class="card card-primary card-outline">
-                          <div class="card-header">
-                              <h3 class="card-title">Foto Profile</h3>
-                          </div>
-                            <div class="card-body">
-                                <div class="tab-content">
-                                <div class="active tab-pane" id="settings">
-                                    <?= form_open_multipart('index.php/user/updatefoto');?>                                                                                                    
-                                    <div class="form-group">
-                                        <!-- <label for="inputFoto">File input</label> -->
-                                        <div class="input-group">
-                                        <div class="custom-file col-md-8">
-                                            <input type="file" class="custom-file-input" id="inputFoto" name="foto">
-                                            <label class="custom-file-label" for="inputFoto">Choose file</label>
-                                        </div>
-                                        <div class="form-group">
-                                        <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
-                                        </div>                                        
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </div>
-                                    <?= form_close();?>
-                                </div>
-                                </div>
+                            <div class="tab-pane" id="gantiFoto">
+                              <!-- FORM EDIT PROFILE -->
+                                  <div class="card-body">
+                                      <div class="tab-content">
+                                          <?= form_open_multipart('index.php/user/updatefoto');?>                                                                                                    
+                                          <div class="form-group">
+                                              <label for="inputFoto">Pilih File, Max (2Mb)</label>
+                                              <div class="input-group">
+                                                <div class="custom-file col-md-8">
+                                                    <input type="file" class="custom-file-input" id="inputFoto" name="foto">
+                                                    <label class="custom-file-label" for="inputFoto">Choose file</label>
+                                                </div>
+                                                <div class="form-group">
+                                                <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                                </div>                                        
+                                              </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <div class="col-sm-10">
+                                              <button type="submit" class="btn btn-primary">Simpan</button>
+                                              </div>
+                                          </div>
+                                          <?= form_close();?>
+                                      </div>
+                                  </div>
+                              <!-- FORM EDIT PROFILE -->
                             </div>
-                        </div>
-                        <!-- FORM EDIT PROFILE -->
+                          </div>
+                          <!-- /.tab-content -->
+                        </div><!-- /.card-body -->
+                      </div>
                         <!-- /.card -->
                     </div>
                     <!-- /.col -->

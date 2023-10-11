@@ -7,6 +7,23 @@
       $this->db->from('tb_penarikan');
       return $this->db->get();
     }
+    public function getPenarikanByMonth($tahun)
+    {
+      $query = $this->db->query("
+          SELECT
+              MONTH(tgl_penarikan) AS bulan,
+              SUM(jumlah_penarikan) AS jumlah_penarikan
+          FROM
+              tb_penarikan
+          WHERE
+              YEAR(tgl_penarikan) = $tahun
+          GROUP BY
+              MONTH(tgl_penarikan)
+          ORDER BY
+              bulan
+      ");
+      return $query->result();
+    }
     public function tampil_databyNin($nin)
     {      
       $this->db->select('tb_penarikan.*');

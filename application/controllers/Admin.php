@@ -11,6 +11,9 @@ class Admin extends CI_Controller {
 		$this->load->model('m_petugas');
 		$this->load->model('m_user');                  
 		$this->load->model('m_jns_sampah');
+		$this->load->model('m_setoran');
+		$this->load->model('m_penarikan');
+		$this->load->model('m_stok');
 		date_default_timezone_set('Asia/Jakarta');
 	}
 	public function dashboard()
@@ -20,6 +23,11 @@ class Admin extends CI_Controller {
 				$data['title'] = "Dashboard - Home";
 				$data['user'] = $this->m_petugas->get_petugas();
 				$data['jumlah'] = $this->m_petugas->hitung();
+				$tahun = 2023; // Ganti dengan tahun yang diinginkan
+        $data['jml_setoran'] = $this->m_setoran->getSetoranByMonth($tahun);
+        $data['jml_penarikan'] = $this->m_penarikan->getPenarikanByMonth($tahun);
+        $data['jml_barangkeluar'] = $this->m_stok->getBarangKeluarByMonth($tahun);
+        $data['tahun'] = $this->m_setoran->getTahun();
 				$this->load->view('newtemplate/header',$data);
 				$this->load->view('newtemplate/top', $data);
 				$this->load->view('newtemplate/sidebar',$data);

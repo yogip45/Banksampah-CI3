@@ -43,7 +43,7 @@
             || $this->uri->segment(1) == 'nasabah' && $this->uri->segment(2) == 'detail_setoran') ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
-                Setoran Saya
+                Riwayat Transaksi
               </p>
             </a>
           </li>
