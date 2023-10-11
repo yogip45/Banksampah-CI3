@@ -158,12 +158,10 @@ class Setoran extends CI_Controller {
 	{
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role')==2||$this->session->userdata('role')==3) {
-				
 				$this->load->model('m_nasabah');
 				$this->load->model('m_jns_sampah');
 				$this->load->model('m_stok');
 				$id_setor = $this->input->post('id_setor');
-					// $data['nasabah'] = $this->m_setoran->get_nasabah($id_setor);
 					$jns_sampah = $this->input->post('jenis_sampah');
 					$berat = $this->input->post('berat');
 					$harga = $this->input->post('harga');
