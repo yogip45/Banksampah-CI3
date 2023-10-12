@@ -29,7 +29,6 @@
                     <?php if ($this->session->flashdata('gagal')): ?>
                     <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
                     <?php endif; ?>
-
                     <?php echo anchor('/index.php/admin/tambah_petugas/', '<button class="btn btn-info"><i class="fa fa-plus"></i> Tambah</button>'); ?>
                     <br><br>
                     <div class="card">

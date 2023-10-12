@@ -24,6 +24,16 @@
       ");
       return $query->result();
     }
+    public function getSetoranByDateRange($tglAwal, $tglAkhir)
+    {
+      $this->db->select('tb_setoran.*, tb_nasabah.nama');
+      $this->db->from('tb_setoran');
+      $this->db->join('tb_nasabah', 'tb_nasabah.nin = tb_setoran.nin', 'inner');
+      $this->db->where('tanggal_setor >=', $tglAwal);
+      $this->db->where('tanggal_setor <=', $tglAkhir);
+      $query = $this->db->get();
+      return $query->result();
+    }
     public function getTahun(){
       $this->db->distinct();
       $this->db->select("YEAR(tanggal_setor) AS tahun");

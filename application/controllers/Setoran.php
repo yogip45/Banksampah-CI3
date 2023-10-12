@@ -232,6 +232,4 @@ class Setoran extends CI_Controller {
 			redirect('/index.php/auth');			
 		}
 	}
-
-
 }

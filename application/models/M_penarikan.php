@@ -24,6 +24,16 @@
       ");
       return $query->result();
     }
+    public function getPenarikanByDateRange($tglAwal, $tglAkhir)
+    {
+      $this->db->select('tb_penarikan.*, tb_nasabah.nama');
+      $this->db->from('tb_penarikan');
+      $this->db->join('tb_nasabah', 'tb_nasabah.nin = tb_penarikan.nin', 'inner');
+      $this->db->where('tgl_penarikan >=', $tglAwal);
+      $this->db->where('tgl_penarikan <=', $tglAkhir);
+      $query = $this->db->get();
+      return $query->result();
+    }
     public function tampil_databyNin($nin)
     {      
       $this->db->select('tb_penarikan.*');

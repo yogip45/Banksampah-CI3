@@ -56,9 +56,37 @@ class Cetaklaporan extends CI_Controller {
 					$this->load->view('admin/cetaklaporan',$data);
 					$this->load->view('newtemplate/footer',$data);
 				} else {
-					$jenis = $this->input->post('jns_transaksi');
-					$awal = $this->input->post('tgl_awal');
-					$akhir = $this->input->post('tgl_akhir');
+					$tglAwal = $this->input->post('tgl_awal');
+					$tglAkhir = $this->input->post('tgl_akhir');
+					$jns = $this->input->post('jns_transaksi');
+					$this->load->library('pdf');
+					$data['tglAwal'] = date('d F Y', strtotime($tglAwal));
+					$data['tglAkhir'] = date('d F Y', strtotime($tglAkhir));
+					switch ($jns) {
+					case 1:
+						//setoran
+						$data['setoran'] = $this->m_setoran->getSetoranByDateRange($tglAwal, $tglAkhir);
+						$data['penarikan'] = NULL;
+						$data['barangkeluar'] = NULL;
+						$html = $this->load->view('transaksi/cetak', $data, true);
+						$this->pdf->createPDF($html, "Setoran " . $tglAwal . " - " . $tglAkhir . ".pdf");
+						break;
+						case 2:
+						//penarikan
+						$data['penarikan'] = $this->m_penarikan->getPenarikanByDateRange($tglAwal, $tglAkhir);
+						$data['setoran'] = NULL;
+						$data['barangkeluar'] = NULL;
+						$html = $this->load->view('transaksi/cetak', $data, true);
+						$this->pdf->createPDF($html, "Penarikan Saldo " . $data['tglAwal'] . " - " . $data['tglAkhir'] . ".pdf");
+						break;
+					case 3:
+						//barangkeluar
+						redirect('index.php/admin/dashboard');
+						break;
+					default:
+						$this->load->view('error/404');
+						break;
+					}
 				}
 			} else {
 				$this->load->view('error/403');
