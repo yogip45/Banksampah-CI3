@@ -179,6 +179,7 @@ class Petugas extends CI_Controller {
 			
 			$this->m_user->input_data($data,'tb_user');
 			$this->m_nasabah->input_data($data1,'tb_nasabah');
+			// $this->_sendEmail();
 			$this->session->set_flashdata('sukses','Data Berhasil Ditambahkan');
 			redirect('/index.php/petugas/nasabahindex');
 		}
@@ -187,7 +188,45 @@ class Petugas extends CI_Controller {
 		}
 
 	}
-public function hapus_nasabah($id_user)
+	private function _sendEmail()
+	{
+		$config = [
+			'protocol' => 'smtp',
+			'smtp_host' => 'smtp.elasticemail.com',
+			'smtp_user' => 'cikrakjatimulyo@gmail.com',
+			'smtp_pass' => '3259F7F6D4802577093F093BE0E0AA1C9E61',
+			'smtp_port' => 2525,
+			'mailtype' => 'html',
+			'charset' => 'utf-8',
+			'newline' => "\r\n"
+		];
+
+		$this->load->library('email',$config);
+		$this->email->initialize($config);
+
+		$this->email->from('cikrakjatimulyo@gmail.com','Cikrak Jatimulyo');
+		$this->email->to('rivaa8311@gmail.com');
+		$this->email->subject('Aktivasi akun banksampah anda');
+		$message = "Hello Yogi Pradana,
+
+		Thank you for registering with Bank Sampah Jatimulyo. We appreciate your commitment to environmental sustainability. To get started, please activate your account by clicking the button below.
+
+		
+
+		If you have any questions or need assistance, please don't hesitate to contact our support team at support@banksampah-jatimulyo.com.
+
+		Best regards,
+		Banksampah Cikrak Jatimulyo";
+
+		$this->email->message($message);
+		if ($this->email->send()) {
+			return true;
+		} else {
+			echo $this->email->print_debugger();
+			die;
+		}
+	}
+	public function hapus_nasabah($id_user)
 	{
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role')==2 || $this->session->userdata('role')==3) {				

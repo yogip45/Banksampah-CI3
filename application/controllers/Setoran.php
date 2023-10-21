@@ -186,6 +186,25 @@ class Setoran extends CI_Controller {
 		}
 	}
 
+	public function hapus_setoran($id_setor)
+	{
+		if ($this->session->userdata('email')) {
+			if ($this->session->userdata('role')==2||$this->session->userdata('role')==3) {				
+				$result = $this->m_setoran->hapus_setoran($id_setor);
+				if ($result) {
+					$this->session->set_flashdata('sukses', 'Data setoran berhasil dihapus');
+					redirect('index.php/setoran/setoranindex');
+				} else {
+					$this->session->set_flashdata('gagal', 'Data setoran tidak dapat dihapus');
+					redirect('index.php/setoran/setoranindex');
+				}
+			} else {
+				$this->load->view('index.php/error/403');
+			}
+		} else {
+			redirect('index.php/auth');
+		}
+	}
 	public function hapus_detail_setoran()
 	{
 		if ($this->session->userdata('email')) {

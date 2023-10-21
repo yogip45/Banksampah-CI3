@@ -84,6 +84,11 @@ class Auth extends CI_Controller {
 	public function logout()
 	{
 		$this->session->unset_userdata('email');
+		$this->session->unset_userdata('role');
+		$this->session->unset_userdata('username');
+		$this->session->unset_userdata('id_user');
+		$this->session->unset_userdata('login_attempts');
+		$this->session->unset_userdata('default_password');
 		$this->session->set_flashdata('sukses','Berhasil Logout');
 		redirect('/index.php/auth');
 	}
@@ -116,7 +121,6 @@ class Auth extends CI_Controller {
 						$this->db->where('email', $user['email']);
 						$this->db->update('tb_user');
 						$this->session->set_userdata($data);
-						
 						if ($user['role']==3) {
 							if ($this->session->userdata('default_password')==0) {			
 								redirect('/index.php/admin/dashboard');
@@ -125,7 +129,7 @@ class Auth extends CI_Controller {
 							}
 						} elseif ($user['role']==2){
 							if ($this->session->userdata('default_password')==0) {							
-								redirect('/index.php/petugas/dashboard');
+								redirect('/index.php/admin/dashboard');
 							} else {
 								redirect('/index.php/auth/changepassword');
 							}											

@@ -5,6 +5,7 @@ class Admin extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		cek_login();
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->model('m_nasabah');
@@ -17,28 +18,24 @@ class Admin extends CI_Controller {
 		date_default_timezone_set('Asia/Jakarta');
 	}
 	public function dashboard()
-	{		
-		if ($this->session->userdata('email')) {
-			if ($this->session->userdata('role')==3 || $this->session->userdata('role')==2) {
-				$data['title'] = "Dashboard - Home";
-				$data['user'] = $this->m_petugas->get_petugas();
-				$data['jumlah'] = $this->m_petugas->hitung();
-        $data['tahun'] = $this->m_setoran->getTahun();
-				$tahun = date('Y');
-        $data['jml_setoran'] = $this->m_setoran->getSetoranByMonth($tahun);
-        $data['jml_penarikan'] = $this->m_penarikan->getPenarikanByMonth($tahun);
-        $data['jml_barangkeluar'] = $this->m_stok->getBarangKeluarByMonth($tahun);
-				$this->load->view('newtemplate/header',$data);
-				$this->load->view('newtemplate/top', $data);
-				$this->load->view('newtemplate/sidebar',$data);
-				$this->load->view('admin/dashboard',$data);
-				$this->load->view('admin/footer',$data);
-			} else {
-				$this->load->view('error/403');
-			}
+	{	
+		if ($this->session->userdata('role')==3 || $this->session->userdata('role')==2) {
+			$data['title'] = "Dashboard - Home";
+			$data['user'] = $this->m_petugas->get_petugas();
+			$data['jumlah'] = $this->m_petugas->hitung();
+			$data['tahun'] = $this->m_setoran->getTahun();
+			$tahun = date('Y');
+			$data['jml_setoran'] = $this->m_setoran->getSetoranByMonth($tahun);
+			$data['jml_penarikan'] = $this->m_penarikan->getPenarikanByMonth($tahun);
+			$data['jml_barangkeluar'] = $this->m_stok->getBarangKeluarByMonth($tahun);
+			$this->load->view('newtemplate/header',$data);
+			$this->load->view('newtemplate/top', $data);
+			$this->load->view('newtemplate/sidebar',$data);
+			$this->load->view('admin/dashboard',$data);
+			$this->load->view('admin/footer',$data);
 		} else {
-			redirect('index.php/auth');
-		}		
+			$this->load->view('error/403');
+		}
 	}
 
 	public function petugasindex()	

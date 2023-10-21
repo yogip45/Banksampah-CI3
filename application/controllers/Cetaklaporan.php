@@ -66,23 +66,30 @@ class Cetaklaporan extends CI_Controller {
 					case 1:
 						//setoran
 						$data['setoran'] = $this->m_setoran->getSetoranByDateRange($tglAwal, $tglAkhir);
+						$data['detail'] = $this->m_setoran->getDetailSetoranByDateRange($tglAwal, $tglAkhir);
 						$data['penarikan'] = NULL;
 						$data['barangkeluar'] = NULL;
 						$html = $this->load->view('transaksi/cetak', $data, true);
-						$this->pdf->createPDF($html, "Setoran " . $tglAwal . " - " . $tglAkhir . ".pdf");
-						break;
-						case 2:
+						$this->pdf->createPDF($html, "Laporan Setoran " . $data['tglAwal'] . " - " . $data['tglAkhir'] . ".pdf");
+					break;
+					case 2:
 						//penarikan
 						$data['penarikan'] = $this->m_penarikan->getPenarikanByDateRange($tglAwal, $tglAkhir);
 						$data['setoran'] = NULL;
+						$data['detail'] = NULL;
 						$data['barangkeluar'] = NULL;
 						$html = $this->load->view('transaksi/cetak', $data, true);
-						$this->pdf->createPDF($html, "Penarikan Saldo " . $data['tglAwal'] . " - " . $data['tglAkhir'] . ".pdf");
-						break;
+						$this->pdf->createPDF($html, "Laporan Penarikan Saldo " . $data['tglAwal'] . " - " . $data['tglAkhir'] . ".pdf");
+					break;
 					case 3:
 						//barangkeluar
-						redirect('index.php/admin/dashboard');
-						break;
+						$data['barangkeluar'] = $this->m_setoran->getBarangKeluarByDateRange($tglAwal, $tglAkhir);
+						$data['setoran'] = NULL;
+						$data['penarikan'] = NULL;
+						$data['detail'] = NULL;
+						$html = $this->load->view('transaksi/cetak', $data, true);
+						$this->pdf->createPDF($html, "Laporan Barang Keluar " . $data['tglAwal'] . " - " . $data['tglAkhir'] . ".pdf");
+					break;
 					default:
 						$this->load->view('error/404');
 						break;

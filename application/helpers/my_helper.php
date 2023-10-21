@@ -44,7 +44,7 @@ function getAutoNin() {
   $field = 'nin';
   
   // Mendapatkan tahun dan bulan saat ini (misal: 202309)
-  $date = date('YmHi');
+  $date = date('Ymi');
   
   // Membentuk prefix "ST-" dan tahun bulan
   $prefix = 'NB' . $date;
@@ -64,5 +64,26 @@ function getAutoNin() {
 
   return $nin;
 }
+function generate_password($length)
+{
+    // Daftar karakter yang akan digunakan dalam kode acak
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyz#@';
 
+    $random_code = '';
+    $max = strlen($characters) - 1;
+
+    for ($i = 0; $i < $length; $i++) {
+        $random_code .= $characters[mt_rand(0, $max)];
+    }
+    return $random_code;
+}
+
+function cek_login()
+{
+  $ci =& get_instance();
+  $user_session = $ci->session->userdata('email');
+  if (!$user_session) {
+    redirect('index.php/auth');
+  }
+}
 ?>

@@ -34,6 +34,7 @@ td {
                 <tr>
                     <th>No</th>
                     <th>Tanggal</th>
+                    <th>Id Setor</th>
                     <th>NIN</th>
                     <th>Nama Nasabah</th>
                     <th>Total Setoran</th>
@@ -44,13 +45,13 @@ td {
                 <tr>
                     <td><?= $no++ ?></td>
                     <td><?= date('d F Y', strtotime($data->tanggal_setor)) ?></td>
+                    <td><?= $data->id_setor ?></td>
                     <td><?= $data->nin ?></td>
                     <td><?= $data->nama ?></td>
                     <td><?= $data->total ?></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php endif ?>
-
                 <?php if ($penarikan != NULL): ?>
                 <tr>
                     <th>No</th>
@@ -70,6 +71,53 @@ td {
                     <td><?= $data->nama ?></td>
                     <td><?= $data->saldo ?></td>
                     <td><?= $data->jumlah_penarikan ?></td>
+                </tr>
+                <?php endforeach; ?>
+                <?php endif ?>
+                <?php if ($barangkeluar != NULL): ?>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Jenis Sampah</th>
+                    <th>Jumlah (Kg)</th>
+                    <th>Total Penjualan (Rp)</th>
+                </tr>
+                <?php
+                    $no = 1;
+                    foreach ($barangkeluar as $data) : ?>
+                <tr>
+                    <td><?= $no++ ?></td>
+                    <td><?= date('d F Y', strtotime($data->tgl_keluar)) ?></td>
+                    <td><?= $data->nama_sampah ?></td>
+                    <td><?= $data->jumlah ?></td>
+                    <td><?= $data->total ?></td>
+                </tr>
+                <?php endforeach; ?>
+                <?php endif ?>
+            </tbody>
+        </table>
+        <?php if ($detail != NULL): ?>
+        <h1 style="text-align: center;">Detail Setoran Sampah</h1>
+        <table style="margin: 0 auto; text-align: center; width: 80%;" class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>No</th>
+                    <th>Id Setor</th>
+                    <th>Jenis Sampah</th>
+                    <th>Berat (Kg)</th>
+                    <th>Harga (/Kg)</th>
+                    <th>Total Harga</th>
+                </tr>
+                <?php
+                    $no = 1;
+                    foreach ($detail as $data) : ?>
+                <tr>
+                    <td><?= $no++ ?></td>
+                    <td><?= $data->id_setor ?></td>
+                    <td><?= $data->nama_sampah ?></td>
+                    <td><?= $data->berat ?> Kg</td>
+                    <td>Rp. <?= $data->harga ?></td>
+                    <td><?= $data->total ?></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php endif ?>

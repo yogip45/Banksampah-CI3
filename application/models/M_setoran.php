@@ -31,6 +31,28 @@
       $this->db->join('tb_nasabah', 'tb_nasabah.nin = tb_setoran.nin', 'inner');
       $this->db->where('tanggal_setor >=', $tglAwal);
       $this->db->where('tanggal_setor <=', $tglAkhir);
+      $this->db->order_by('tb_setoran.tanggal_setor', 'ASC');
+      $query = $this->db->get();
+      return $query->result();
+    }
+    public function getBarangKeluarByDateRange($tglAwal, $tglAkhir)
+    {
+      $this->db->select('tb_barangkeluar.*, jns_sampah.nama_sampah');
+      $this->db->from('tb_barangkeluar');
+      $this->db->join('jns_sampah', 'tb_barangkeluar.id_sampah = jns_sampah.id_sampah', 'inner');
+      $this->db->where('tgl_keluar >=', $tglAwal);
+      $this->db->where('tgl_keluar <=', $tglAkhir);
+      $this->db->order_by('tb_barangkeluar.tgl_keluar', 'ASC');
+      $query = $this->db->get();
+      return $query->result();
+    }
+    public function getDetailSetoranByDateRange($tglAwal, $tglAkhir)
+    {
+      $this->db->select('tb_detail_setoran.id_setor, tb_detail_setoran.berat, tb_detail_setoran.harga, tb_detail_setoran.total, jns_sampah.nama_sampah');
+      $this->db->from('tb_detail_setoran');
+      $this->db->join('jns_sampah', 'jns_sampah.id_sampah = tb_detail_setoran.id_sampah', 'inner');
+      $this->db->where('tanggal >=', $tglAwal);
+      $this->db->where('tanggal <=', $tglAkhir);
       $query = $this->db->get();
       return $query->result();
     }
@@ -86,6 +108,18 @@
       return $this->db->update('tb_setoran', $data);
     }
 
+    public function hapus_setoran($id_setor)
+    {
+      $this->db->where('id_setor', $id_setor);
+      $detail_exists = $this->db->get('tb_detail_setoran')->num_rows() > 0;
+      if ($detail_exists) {
+          return false;
+      } else {
+          $this->db->where('status', 0);
+          $this->db->delete('tb_setoran');
+          return true;
+      }
+    }
     public function hapus_detail($id_detail_setoran)
     {
       $this->db->where('id', $id_detail_setoran);
