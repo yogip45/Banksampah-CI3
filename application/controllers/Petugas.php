@@ -216,9 +216,12 @@ class Petugas extends CI_Controller {
 
 
 		$this->email->subject('Aktivasi Akun Banksampah');
-		$message = 'Hallo, Silahkan aktifkan akun anda terlebih dahulu dengan klik link ini : <a
-		href="'. base_url() . 'index.php/auth/verify?email=' . $this->input->post('email') . '&token=' . 
-		urlencode($token) . '"> Aktifkan Akun </a>';
+
+		$message = 'Hallo, ' . $this->input->post('nama') . '<br><br>';
+		$message .= 'Terima kasih telah mendaftar di Bank Sampah. Untuk melanjutkan, silakan aktifkan akun Anda dengan mengeklik tombol di bawah ini:<br><br>';
+		$message .= '<div style="text-align:left;"><a href="' . base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token) . '" style="background-color:#4CAF50; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; display:inline-block;">Aktifkan Akun</a></div><br><br>';
+		$message .= 'Jika tombol di atas tidak berfungsi, Anda juga dapat menyalin dan menempelkan tautan berikut ini ke peramban web Anda: ' . base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token) . '<br><br>';
+		$message .= 'Terima kasih, dan selamat bergabung dengan Bank Sampah.';
 
 		$this->email->message($message);
 		if ($this->email->send()) {
