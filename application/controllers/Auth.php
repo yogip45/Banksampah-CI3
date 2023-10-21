@@ -97,7 +97,6 @@ class Auth extends CI_Controller {
 		// $this->ClearCaptcha();
 		$email = $this->input->post('email');		
 		$password = $this->input->post('password');
-		$this->ClearCaptcha();
 		
 		$user = $this->db->get_where('tb_user',['email'=>$email])->row_array();		
 		$username = $this->db->get_where('tb_user',['username'=>$email])->row_array();
@@ -154,7 +153,7 @@ class Auth extends CI_Controller {
 						redirect('/index.php/auth');
 					}
 				}else {
-					$this->session->set_flashdata('message','Email / Username tidak aktif');
+					$this->session->set_flashdata('message','Email / Username tidak aktif, silahkan cek email anda');
 					$login_attempts = ($login_attempts) ? $login_attempts + 1 : 1;
 					$this->session->set_userdata('login_attempts', $login_attempts);
 					redirect('/index.php/auth');
@@ -167,7 +166,6 @@ class Auth extends CI_Controller {
 					//cek passwd
 					if (password_verify($password,$username['password']))
 					{
-						$this->ClearCaptcha();
 						$this->session->set_userdata('login_attempts', 0);
 						$data = [
 							'email'=>$username['email'],
@@ -221,23 +219,42 @@ class Auth extends CI_Controller {
 			
 			}else {
 				$this->session->set_flashdata('message','Email / Username tidak terdaftar');
-        $login_attempts = ($login_attempts) ? $login_attempts + 1 : 1;
-        $this->session->set_userdata('login_attempts', $login_attempts);
+				$login_attempts = ($login_attempts) ? $login_attempts + 1 : 1;
+				$this->session->set_userdata('login_attempts', $login_attempts);
 				redirect('/index.php/auth');
 			}
 	}
 
-	private function ClearCaptcha() {
-		// Path direktori captcha
-		$captchaDir = './captcha/';
-		// Hapus semua file di direktori captcha
-		$files = get_filenames($captchaDir);
+	public function verify()
+	{
+		$email = $this->input->get('email');
+		$token = $this->input->get('token');
 
-		foreach ($files as $file) {
-			// Check if the file exists before attempting to delete
-			if (file_exists($captchaDir . $file)) {
-					unlink($captchaDir . $file);
+		$user = $this->db->get_where('tb_user', ['email' => $email])->row_array();
+
+		if ($user) {
+			$user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
+			if ($user_token) {
+				if (time() - $user_token['date_created'] < (60 * 60 * 12)) {
+					$this->db->set('is_active',1);
+					$this->db->where('email',$email);
+					$this->db->update('tb_user');
+					$this->db->delete('user_token', ['email' => $email]);
+					$this->session->set_flashdata('sukses','Akun '. $email .' Berhasil diaktifkan, silahkan login');
+					redirect('/index.php/auth');
+				} else {
+					$this->db->delete('user_token', ['email' => $email]);
+					$this->session->set_flashdata('message','Link aktivasi kedaluarsa');
+					redirect('/index.php/auth');
+				}
+			} else {
+				$this->session->set_flashdata('message','Token tidak berlaku / salah');
+				redirect('/index.php/auth');
 			}
+		} else {
+			$this->session->set_flashdata('message','Email salah');
+			redirect('/index.php/auth');
+		}
 	}
-}
+
 }

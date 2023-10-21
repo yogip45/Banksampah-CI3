@@ -159,11 +159,17 @@ class Petugas extends CI_Controller {
 				'role' => 1,
 				'email' => $email,
 				'password' =>password_hash($password,PASSWORD_DEFAULT),
-				'is_active' => 1,
+				'is_active' => 0,
 				'foto' => 'default.jpg',
 				'dibuat_oleh' => $pembuat['nama_petugas'],
 				'default_password' => 1,
 			);
+			$token = base64_encode(random_bytes(16));
+			$user_token = [
+				'email' => $email,
+				'token' => $token,
+				'date_created' => time()
+			];
 			$data1 = array(
 				'id_user' =>$kodeunik,
 				'nin' => $nin,
@@ -179,7 +185,8 @@ class Petugas extends CI_Controller {
 			
 			$this->m_user->input_data($data,'tb_user');
 			$this->m_nasabah->input_data($data1,'tb_nasabah');
-			// $this->_sendEmail();
+			$this->db->insert('user_token',$user_token);
+			$this->_sendEmail($token);
 			$this->session->set_flashdata('sukses','Data Berhasil Ditambahkan');
 			redirect('/index.php/petugas/nasabahindex');
 		}
@@ -188,14 +195,14 @@ class Petugas extends CI_Controller {
 		}
 
 	}
-	private function _sendEmail()
+	private function _sendEmail($token)
 	{
 		$config = [
 			'protocol' => 'smtp',
-			'smtp_host' => 'smtp.elasticemail.com',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
 			'smtp_user' => 'cikrakjatimulyo@gmail.com',
-			'smtp_pass' => '3259F7F6D4802577093F093BE0E0AA1C9E61',
-			'smtp_port' => 2525,
+			'smtp_pass' => 'mpsw yjod ohga qlsx',
+			'smtp_port' => 465,
 			'mailtype' => 'html',
 			'charset' => 'utf-8',
 			'newline' => "\r\n"
@@ -204,19 +211,14 @@ class Petugas extends CI_Controller {
 		$this->load->library('email',$config);
 		$this->email->initialize($config);
 
-		$this->email->from('cikrakjatimulyo@gmail.com','Cikrak Jatimulyo');
-		$this->email->to('rivaa8311@gmail.com');
-		$this->email->subject('Aktivasi akun banksampah anda');
-		$message = "Hello Yogi Pradana,
+		$this->email->from('cikrakjatimulyo@gmail.com','Tim Cikrak Jatimulyo');
+		$this->email->to($this->input->post('email'));
 
-		Thank you for registering with Bank Sampah Jatimulyo. We appreciate your commitment to environmental sustainability. To get started, please activate your account by clicking the button below.
 
-		
-
-		If you have any questions or need assistance, please don't hesitate to contact our support team at support@banksampah-jatimulyo.com.
-
-		Best regards,
-		Banksampah Cikrak Jatimulyo";
+		$this->email->subject('Aktivasi Akun Banksampah');
+		$message = 'Hallo, Silahkan aktifkan akun anda terlebih dahulu dengan klik link ini : <a
+		href="'. base_url() . 'index.php/auth/verify?email=' . $this->input->post('email') . '&token=' . 
+		urlencode($token) . '"> Aktifkan Akun </a>';
 
 		$this->email->message($message);
 		if ($this->email->send()) {
