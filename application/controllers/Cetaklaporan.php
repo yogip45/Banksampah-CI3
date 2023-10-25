@@ -8,7 +8,7 @@ class Cetaklaporan extends CI_Controller
 	{
 		parent::__construct();
 		cek_login();
-		// cek_petugas();
+		cek_petugas();
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->model('m_nasabah');
