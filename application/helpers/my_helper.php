@@ -86,4 +86,25 @@ function cek_login()
     redirect('index.php/auth');
   }
 }
+
+function cek_admin()
+{
+  $ci =& get_instance();
+  $ci->load->library('ceklogin');
+  $data = $ci->ceklogin->cek_role();
+  
+  if ($data['role'] != 3) {
+    redirect('index.php/gagal/forbidden');
+  }
+}
+function cek_petugas()
+{
+  $ci =& get_instance();
+  $ci->load->library('ceklogin');
+  $data = $ci->ceklogin->cek_role();
+  
+  if ($data['role'] != 3 || $data['role'] != 2) {
+    redirect('index.php/gagal/forbidden');
+  }
+}
 ?>

@@ -3,36 +3,64 @@
 
 <head>
     <title>Laporan Setoran Sampah</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    /* Lebarkan tabel dan sel-selnya */
+    table {
+        width: 100%;
+    }
+
+    th,
+    td {
+        width: 20%;
+        /* Sesuaikan lebar sel sesuai kebutuhan */
+    }
+
+    /* Sel No lebih kecil */
+    th.no,
+    td.no {
+        width: 5%;
+        /* Sesuaikan lebar sel No sesuai kebutuhan */
+    }
+    </style>
+
 </head>
-<style>
-table,
-th,
-td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-</style>
 
 <body>
     <div style="text-align: center;">
-        <?php if ($setoran != NULL): ?>
+        <?php if ($setoran != NULL) : ?>
         <h1 style="text-align: center;">Laporan Setoran Sampah</h1>
         <?php endif ?>
-        <?php if ($penarikan != NULL): ?>
+        <?php if ($penarikan != NULL) : ?>
         <h1 style="text-align: center;">Laporan Penarikan Saldo</h1>
         <?php endif ?>
-        <?php if ($barangkeluar != NULL): ?>
+        <?php if ($barangkeluar != NULL) : ?>
         <h1 style="text-align: center;">Laporan Barang Keluar</h1>
         <?php endif ?>
         <p style="text-align: center;">Tanggal: <?= date('d F Y', strtotime($tglAwal)) ?> -
             <?= date('d F Y', strtotime($tglAkhir)) ?></p>
 
-        <table style="margin: 0 auto; text-align: center; width: 80%;" class="table table-bordered">
+        <table style="margin: 0 auto; text-align: center; width: 80%;">
             <tbody>
-                <?php if ($setoran != NULL): ?>
+                <?php if ($setoran != NULL) : ?>
                 <tr>
-                    <th>No</th>
+                    <th class="no">No</th>
                     <th>Tanggal</th>
                     <th>Id Setor</th>
                     <th>NIN</th>
@@ -43,7 +71,7 @@ td {
                     $no = 1;
                     foreach ($setoran as $data) : ?>
                 <tr>
-                    <td><?= $no++ ?></td>
+                    <td class="no"><?= $no++ ?></td>
                     <td><?= date('d F Y', strtotime($data->tanggal_setor)) ?></td>
                     <td><?= $data->id_setor ?></td>
                     <td><?= $data->nin ?></td>
@@ -52,9 +80,9 @@ td {
                 </tr>
                 <?php endforeach; ?>
                 <?php endif ?>
-                <?php if ($penarikan != NULL): ?>
+                <?php if ($penarikan != NULL) : ?>
                 <tr>
-                    <th>No</th>
+                    <th class="no">No</th>
                     <th>Tanggal</th>
                     <th>NIN</th>
                     <th>Nama Nasabah</th>
@@ -65,7 +93,7 @@ td {
                     $no = 1;
                     foreach ($penarikan as $data) : ?>
                 <tr>
-                    <td><?= $no++ ?></td>
+                    <td class="no"><?= $no++ ?></td>
                     <td><?= date('d F Y', strtotime($data->tgl_penarikan)) ?></td>
                     <td><?= $data->nin ?></td>
                     <td><?= $data->nama ?></td>
@@ -74,9 +102,9 @@ td {
                 </tr>
                 <?php endforeach; ?>
                 <?php endif ?>
-                <?php if ($barangkeluar != NULL): ?>
+                <?php if ($barangkeluar != NULL) : ?>
                 <tr>
-                    <th>No</th>
+                    <th class="no">No</th>
                     <th>Tanggal</th>
                     <th>Jenis Sampah</th>
                     <th>Jumlah (Kg)</th>
@@ -86,7 +114,7 @@ td {
                     $no = 1;
                     foreach ($barangkeluar as $data) : ?>
                 <tr>
-                    <td><?= $no++ ?></td>
+                    <td class="no"><?= $no++ ?></td>
                     <td><?= date('d F Y', strtotime($data->tgl_keluar)) ?></td>
                     <td><?= $data->nama_sampah ?></td>
                     <td><?= $data->jumlah ?></td>
@@ -96,12 +124,12 @@ td {
                 <?php endif ?>
             </tbody>
         </table>
-        <?php if ($detail != NULL): ?>
+        <?php if ($detail != NULL) : ?>
         <h1 style="text-align: center;">Detail Setoran Sampah</h1>
-        <table style="margin: 0 auto; text-align: center; width: 80%;" class="table table-bordered">
+        <table style="margin: 0 auto; text-align: center; width: 80%;">
             <tbody>
                 <tr>
-                    <th>No</th>
+                    <th style="width: 12%;">No</th>
                     <th>Id Setor</th>
                     <th>Jenis Sampah</th>
                     <th>Berat (Kg)</th>
@@ -112,7 +140,7 @@ td {
                     $no = 1;
                     foreach ($detail as $data) : ?>
                 <tr>
-                    <td><?= $no++ ?></td>
+                    <td style="width: 12%;"><?= $no++ ?></td>
                     <td><?= $data->id_setor ?></td>
                     <td><?= $data->nama_sampah ?></td>
                     <td><?= $data->berat ?> Kg</td>

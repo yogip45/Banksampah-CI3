@@ -128,7 +128,7 @@ class Auth extends CI_Controller {
 							}
 						} elseif ($user['role']==2){
 							if ($this->session->userdata('default_password')==0) {							
-								redirect('/index.php/admin/dashboard');
+								redirect('/index.php/petugas/dashboard');
 							} else {
 								redirect('/index.php/auth/changepassword');
 							}											

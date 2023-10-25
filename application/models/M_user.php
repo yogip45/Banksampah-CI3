@@ -28,6 +28,13 @@
     {
         return $this->db->get_where('tb_user', array('id_user' => $id_user))->row_array();
     }
+    public function get_role_by_id($id_user)
+    {
+      $this->db->select('role');
+      $this->db->where('id_user', $id_user);
+      $query = $this->db->get('tb_user');
+      return $query->row_array();
+    }
     public function change_status($where, $data, $table)
     {
       $this->db->where($where);
