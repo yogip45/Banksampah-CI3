@@ -23,7 +23,7 @@ class Penarikan extends CI_Controller
 	{
 		$data['title'] = "Dashboard - Data Penarikan";
 		$data['user'] = $this->m_user->get_user();
-		$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
+		$data['nasabah'] = $this->m_nasabah->tampil_data();
 		$data['penarikan'] = $this->m_penarikan->tampil_data()->result();
 		$this->load->view('newtemplate/header', $data);
 		$this->load->view('newtemplate/top', $data);
@@ -113,15 +113,5 @@ class Penarikan extends CI_Controller
 				return true;
 			}
 		}
-	}
-
-	public function konfirmasi($id_penarikan)
-	{
-		if ($this->m_penarikan->konfirmasiPenarikan($id_penarikan)) {
-			$this->session->set_flashdata('sukses', 'Konfirmasi berhasil.');
-		} else {
-			$this->session->set_flashdata('gagal', 'Konfirmasi gagal.');
-		}
-		redirect('/index.php/nasabah/setoran_saya#tab_2');
 	}
 }

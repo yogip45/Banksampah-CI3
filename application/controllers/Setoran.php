@@ -15,6 +15,7 @@ class Setoran extends CI_Controller
 		$this->load->model('m_user');
 		$this->load->model('m_jns_sampah');
 		$this->load->model('m_setoran');
+		$this->load->model('m_penarikan');
 		$this->load->model('m_stok');
 		date_default_timezone_set('Asia/Jakarta');
 	}
@@ -23,25 +24,46 @@ class Setoran extends CI_Controller
 		$data['title'] = "Dashboard - Data Setoran";
 		$data['user'] = $this->m_user->get_user();
 		$data['setoran'] = $this->m_setoran->tampil_data()->result();
-		$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
+		$data['nasabah'] = $this->m_nasabah->tampil_data();
 		$this->load->view('newtemplate/header', $data);
 		$this->load->view('newtemplate/top', $data);
 		$this->load->view('newtemplate/sidebar', $data);
 		$this->load->view('transaksi/setoranindex', $data);
 		$this->load->view('newtemplate/footer');
 	}
-	public function pernasabah()
+	public function search()
 	{
 		$keyword = $this->input->post('keyword');
 		$data['title'] = "Dashboard - Data Transaksi Nasabah";
-		$data['transaksi'] = $this->m_setoran->get_keyword($keyword);
+		// $data['transaksi'] = $this->m_setoran->get_keyword($keyword);
 		$data['user'] = $this->m_user->get_user();
-		// $data['nasabah'] = $this->m_setoran->tampil_data()->result();
-		$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
+		$data['nama'] = null;
+		$data['keyword'] = null;
+		$data['setoran'] = null;
+		$data['riwayat_transaksi'] = null;
+		$data['nasabah'] = $this->m_nasabah->tampil_data();
 		$this->load->view('newtemplate/header', $data);
 		$this->load->view('newtemplate/top', $data);
 		$this->load->view('newtemplate/sidebar', $data);
 		$this->load->view('transaksi/pernasabah', $data);
+		$this->load->view('newtemplate/footer', $data);
+	}
+	public function history()
+	{
+		$keyword = $this->input->post('keyword');
+		$nama = $this->input->post('nama');
+		$data['title'] = "Dashboard - Data Transaksi Nasabah";
+		$data['setoran'] = null;
+		$data['riwayat_transaksi'] = $this->m_setoran->get_keyword($keyword);
+		$data['title'] = "Dashboard - Riwayat Transaksi Nasabah";
+		$data['nasabah'] = $this->m_nasabah->tampil_data();
+		$data['nama'] = $nama;
+		$data['keyword'] = $keyword;
+		$data['user'] = $this->m_user->get_user();
+		$this->load->view('newtemplate/header', $data);
+		$this->load->view('newtemplate/top', $data);
+		$this->load->view('newtemplate/sidebar', $data);
+		$this->load->view('transaksi/riwayat', $data);
 		$this->load->view('newtemplate/footer', $data);
 	}
 	public function detail_setoran($id_setor)
@@ -164,25 +186,5 @@ class Setoran extends CI_Controller
 		} else {
 			echo json_encode(array('status' => 'error', 'message' => 'Gagal menghapus data.'));
 		}
-	}
-
-	public function search()
-	{
-		$this->load->model('m_setoran');
-		$keyword = $this->input->post('keyword');
-		$nama = $this->input->post('nama');
-		$data['transaksi'] = $this->m_setoran->get_keyword($keyword);
-
-		$this->session->set_flashdata('nama', $nama);
-		$this->session->set_flashdata('keyword', $keyword);
-
-		$data['title'] = "Dashboard - Data Transaksi Nasabah";
-		$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
-		$data['user'] = $this->m_user->get_user();
-		$this->load->view('newtemplate/header', $data);
-		$this->load->view('newtemplate/top', $data);
-		$this->load->view('newtemplate/sidebar', $data);
-		$this->load->view('transaksi/pernasabah', $data);
-		$this->load->view('newtemplate/footer', $data);
 	}
 }

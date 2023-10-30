@@ -23,16 +23,16 @@
           <div class="container-fluid">
               <div class="row">
                   <div class="col-12">
-                      <?php if ($this->session->flashdata('sukses')): ?>
+                      <?php if ($this->session->flashdata('sukses')) : ?>
                       <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
                       <?php endif; ?>
-                      <?php if ($this->session->flashdata('hapus')): ?>
+                      <?php if ($this->session->flashdata('hapus')) : ?>
                       <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
                       <?php endif; ?>
-                      <?php if ($this->session->flashdata('gagal')): ?>
+                      <?php if ($this->session->flashdata('gagal')) : ?>
                       <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
                       <?php endif; ?>
-                      <?php if ($this->session->flashdata('edit')): ?>
+                      <?php if ($this->session->flashdata('edit')) : ?>
                       <div class="alert alert-danger"><?php echo $this->session->flashdata('edit'); ?></div>
                       <?php endif; ?>
                       <!-- ALERT -->
@@ -93,8 +93,8 @@
                                               </thead>
                                               <tbody>
                                                   <?php
-                        $no = 1;
-                        foreach ($setoran as $data) : ?>
+                                                    $no = 1;
+                                                    foreach ($setoran as $data) : ?>
                                                   <tr class="odd gradeX">
                                                       <td><?php echo $no++ ?></td>
                                                       <td><?php echo $data->id_setor ?></td>
@@ -107,19 +107,19 @@
                                                           <?php echo $data->status == 1 ? 'Selesai' : 'Belum Selesai'; ?>
                                                       </td>
                                                       <td class="text-center">
-                                                          <?php if ($data->status == 1 || $data->status == 0):?>
+                                                          <?php if ($data->status == 1 || $data->status == 0) : ?>
                                                           <?php
-                                $url = '/index.php/setoran/detail_setoran/' . $data->id_setor;
-                                $attributes = array('class' => 'btn btn-info');
-                                echo anchor($url, 'Detail', $attributes);
-                                ?>
+                                                                    $url = '/index.php/setoran/detail_setoran/' . $data->id_setor;
+                                                                    $attributes = array('class' => 'btn btn-info');
+                                                                    echo anchor($url, 'Detail', $attributes);
+                                                                    ?>
                                                           <?php endif ?>
-                                                          <?php if ($data->status == 0): ?>
+                                                          <?php if ($data->status == 0) : ?>
                                                           <?php
-                                $url = '/index.php/setoran/hapus_setoran/' . $data->id_setor;
-                                $attributes = array('class' => 'btn btn-danger');
-                                echo anchor($url, 'Hapus', $attributes);
-                                ?>
+                                                                    $url = '/index.php/setoran/hapus_setoran/' . $data->id_setor;
+                                                                    $attributes = array('class' => 'btn btn-danger');
+                                                                    echo anchor($url, 'Hapus', $attributes);
+                                                                    ?>
                                                           <?php endif ?>
                                                       </td>
                                                       <?php endforeach; ?>
@@ -153,12 +153,12 @@
                                                               </thead>
                                                               <tbody>
                                                                   <?php
-                                              $no = 1;
-                                              foreach ($nasabah as $data) : ?>
+                                                                    $no = 1;
+                                                                    foreach ($nasabah as $data) : ?>
                                                                   <tr class="odd gradeX">
                                                                       <td
                                                                           style="text-align: center; vertical-align: middle;">
-                                                                          <?php echo $no++?></td>
+                                                                          <?php echo $no++ ?></td>
                                                                       <td
                                                                           style="text-align: center; vertical-align: middle;">
                                                                           <?php echo $data->nin ?></td>

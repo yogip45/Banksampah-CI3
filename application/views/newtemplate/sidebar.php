@@ -77,7 +77,8 @@
             <a href="#" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'setoranindex' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'tambah_setoran' ||
                                           $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'pernasabah' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'detail_setoran'
                                           || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar' || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'create_barangkeluar'
-                                          || $this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex')  ? 'active' : ''; ?>">
+                                          || $this->uri->segment(1) == 'penarikan' && $this->uri->segment(2) == 'penarikanindex'
+                                          || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'search' || $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'history')  ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Transaksi
@@ -100,6 +101,12 @@
                 <a href="<?= base_url('index.php/stok/barangkeluar') ?>" class="nav-link <?= ($this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'barangkeluar'
                                                                                             || $this->uri->segment(1) == 'stok' && $this->uri->segment(2) == 'create_barangkeluar')  ? 'active' : ''; ?>">
                   <p class="nav-link">Barang Keluar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('index.php/setoran/search') ?>" class="nav-link <?= ($this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'history' ||
+                                                                                        $this->uri->segment(1) == 'setoran' && $this->uri->segment(2) == 'search')  ? 'active' : ''; ?>">
+                  <p class="nav-link">History Transaksi</p>
                 </a>
               </li>
             </ul>

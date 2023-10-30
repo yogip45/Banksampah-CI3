@@ -70,36 +70,38 @@ class Cetaklaporan extends CI_Controller
 					//setoran
 					$data['setoran'] = $this->m_setoran->getSetoranByDateRange($tglAwal, $tglAkhir);
 					$data['detail'] = $this->m_setoran->getDetailSetoranByDateRange($tglAwal, $tglAkhir);
-					$data['penarikan'] = NULL;
-					$data['barangkeluar'] = NULL;
-					$html = $this->load->view('transaksi/cetak', $data, true);
-					// echo $html;
-					$mpdf = new \Mpdf\Mpdf();
-					$mpdf->debug = true;
-					$mpdf->WriteHTML($html);
-					$mpdf->Output();
 					break;
 				case 2:
 					//penarikan
 					$data['penarikan'] = $this->m_penarikan->getPenarikanByDateRange($tglAwal, $tglAkhir);
-					$data['setoran'] = NULL;
-					$data['detail'] = NULL;
-					$data['barangkeluar'] = NULL;
-					$html = $this->load->view('transaksi/cetak', $data, true);
-					$this->pdf->createPDF($html, "Laporan Penarikan Saldo " . $data['tglAwal'] . " - " . $data['tglAkhir'] . ".pdf");
 					break;
 				case 3:
 					//barangkeluar
 					$data['barangkeluar'] = $this->m_setoran->getBarangKeluarByDateRange($tglAwal, $tglAkhir);
-					$data['setoran'] = NULL;
-					$data['penarikan'] = NULL;
-					$data['detail'] = NULL;
-					$html = $this->load->view('transaksi/cetak', $data, true);
-					$this->pdf->createPDF($html, "Laporan Barang Keluar " . $data['tglAwal'] . " - " . $data['tglAkhir'] . ".pdf");
 					break;
 				default:
 					$this->load->view('error/404');
-					break;
+					return;
+			}
+			$data['setoran'] = $data['setoran'] ?? null;
+			$data['detail'] = $data['detail'] ?? null;
+			$data['penarikan'] = $data['penarikan'] ?? null;
+			$data['barangkeluar'] = $data['barangkeluar'] ?? null;
+			$namaFile = '';
+			if ($data['setoran'] != null) {
+				$html = $this->load->view('transaksi/cetak1', $data, true);
+				$namaFile = 'Laporan Setoran ' . $data['tglAwal'] . ' - ' . $data['tglAkhir'] . '.pdf';
+			} elseif ($data['penarikan'] != null) {
+				$html = $this->load->view('transaksi/cetak2', $data, true);
+				$namaFile = 'Laporan Penarikan Saldo ' . $data['tglAwal'] . ' - ' . $data['tglAkhir'] . '.pdf';
+			} elseif ($data['barangkeluar'] != null) {
+				$html = $this->load->view('transaksi/cetak3', $data, true);
+				$namaFile = 'Laporan Barang Keluar ' . $data['tglAwal'] . ' - ' . $data['tglAkhir'] . '.pdf';
+			}
+			if (!empty($namaFile)) {
+				$mpdf = new \Mpdf\Mpdf();
+				$mpdf->WriteHTML($html);
+				$mpdf->Output($namaFile, 'D');
 			}
 		}
 	}

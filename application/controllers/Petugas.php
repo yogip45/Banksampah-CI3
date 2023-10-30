@@ -42,7 +42,10 @@ class Petugas extends CI_Controller
 	{
 		$data['title'] = "Dashboard - Data Nasabah";
 		$data['user'] = $this->m_user->get_user();
-		$data['nasabah'] = $this->m_nasabah->tampil_data()->result();
+		$data['nasabah'] = $this->m_nasabah->tampil_data();
+		foreach ($data['nasabah'] as $nasabah) {
+			$nasabah->showHapusAkun = $this->m_nasabah->cek_hapus($nasabah);
+		}
 		$this->load->view('newtemplate/header', $data);
 		$this->load->view('newtemplate/top', $data);
 		$this->load->view('newtemplate/sidebar');
@@ -245,16 +248,6 @@ class Petugas extends CI_Controller
 			echo $this->email->print_debugger();
 			die;
 		}
-	}
-	public function hapus_nasabah($id_user)
-	{
-		$this->load->model('m_nasabah');
-		$this->load->model('m_user');
-		$where = array('id_user' => $id_user);
-		$this->m_nasabah->hapus_data($where, 'tb_nasabah');
-		$this->m_user->hapus_data($where, 'tb_user');
-		$this->session->set_flashdata('hapus', 'Data Berhasil Dihapus');
-		redirect('/index.php/petugas/nasabahindex');
 	}
 
 	public function edit_nasabah($id_user)

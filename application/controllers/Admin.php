@@ -177,6 +177,17 @@ class Admin extends CI_Controller
 		redirect('/index.php/admin/petugasindex');
 	}
 
+	public function hapus_nasabah($id_user)
+	{
+		if ($this->m_nasabah->hapus_nasabah($id_user) == true) {
+			$this->session->set_flashdata('sukses', 'Data Berhasil Dihapus');
+			redirect('/index.php/petugas/nasabahindex');
+		} else {
+			$this->session->set_flashdata('hapus', 'Data Tidak Dapat Dihapus');
+			redirect('/index.php/petugas/nasabahindex');
+		}
+	}
+
 	public function ubahstatus($id_user)
 	{
 		$this->load->model('m_user');
