@@ -8,6 +8,11 @@ class M_nasabah extends CI_Model
     $this->db->join('tb_user', 'tb_user.id_user = tb_nasabah.id_user', 'inner');
     return $this->db->get()->result();
   }
+  public function getNamaByNin($nin)
+  {
+    $query = $this->db->get_where('tb_nasabah', array('nin' => $nin));
+    return $query->row(); // Mengembalikan hasil query
+  }
 
   public function input_data($data)
   {

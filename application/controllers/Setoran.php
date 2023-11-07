@@ -66,6 +66,24 @@ class Setoran extends CI_Controller
 		$this->load->view('transaksi/riwayat', $data);
 		$this->load->view('newtemplate/footer', $data);
 	}
+	public function historybynin($nin)
+	{
+		$keyword = $nin;
+		$data['title'] = "Dashboard - Data Transaksi Nasabah";
+		$data['setoran'] = null;
+		$data['riwayat_transaksi'] = $this->m_setoran->get_keyword($keyword);
+		$data['title'] = "Dashboard - Riwayat Transaksi Nasabah";
+		$data['nasabah'] = $this->m_nasabah->tampil_data();
+		$nasabah = $this->m_nasabah->getNamaByNin($nin);
+		$data['nama'] = $nasabah->nama;
+		$data['keyword'] = $keyword;
+		$data['user'] = $this->m_user->get_user();
+		$this->load->view('newtemplate/header', $data);
+		$this->load->view('newtemplate/top', $data);
+		$this->load->view('newtemplate/sidebar', $data);
+		$this->load->view('transaksi/riwayat', $data);
+		$this->load->view('newtemplate/footer', $data);
+	}
 	public function detail_setoran($id_setor)
 	{
 		$data['title'] = "Dashboard - Form Detail Setoran";

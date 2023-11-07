@@ -6,6 +6,8 @@ class Nasabah extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		cek_login();
+		cek_nasabah();
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->model('m_nasabah');
@@ -30,6 +32,161 @@ class Nasabah extends CI_Controller
 			}
 		} else {
 			redirect('/index.php/auth');
+		}
+	}
+	public function penarikan()
+	{
+		$nin = $this->session->userdata('nin');
+		$data['title'] = "Dashboard - Ajukan Penarikan";
+		$data['user'] = $this->m_user->get_user();
+		$data['nasabah'] = $this->m_user->get_nasabah();
+		$data['penarikan'] = $this->m_penarikan->tampil_databyNin($nin)->result();
+		$this->load->view('usertemplate/header', $data);
+		$this->load->view('usertemplate/top', $data);
+		$this->load->view('usertemplate/sidebar', $data);
+		$this->load->view('nasabah/penarikan', $data);
+		$this->load->view('usertemplate/footer');
+	}
+	public function verify_penarikan()
+	{
+		$this->form_validation->set_rules(
+			'nin',
+			'Nin',
+			'required|trim',
+			array('required' => 'Nin Harus Diisi')
+		);
+		$nin = $this->input->post('nin');
+		$this->form_validation->set_rules(
+			'jumlah_penarikan',
+			'Jumlah',
+			'required|trim|callback_compare_with_saldo[' . $nin . ']',
+			array('required' => 'Masukan nominal penarikan')
+		);
+		if ($this->form_validation->run() == true) {
+			try {
+				$jumlah_penarikan = $this->input->post('jumlah_penarikan');
+				$email = $this->session->userdata('email');
+
+				$token = mt_rand(100000, 999999);
+				$user_token = [
+					'email' => $email,
+					'token' => $token,
+					'date_created' => time()
+				];
+				$this->db->insert('user_token', $user_token);
+				$config = [
+					'protocol' => 'smtp',
+					'smtp_host' => 'ssl://smtp.googlemail.com',
+					'smtp_user' => 'cikrakjatimulyo@gmail.com',
+					'smtp_pass' => 'mpsw yjod ohga qlsx',
+					'smtp_port' => 465,
+					'mailtype' => 'html',
+					'charset' => 'utf-8',
+					'newline' => "\r\n"
+				];
+
+				$this->load->library('email', $config);
+				$this->email->initialize($config);
+
+				$this->email->from('cikrakjatimulyo@gmail.com', 'Tim Cikrak Jatimulyo');
+				$this->email->to($email);
+
+
+				$this->email->subject('Verifikasi Penarikan Saldo');
+
+				$message = '<div style="text-align: left;">';
+				$message .= '<h3>Hallo</h3>';
+				$message .= '<div style="text-align: left;">';
+				$message .= 'Terima Kasih, permintaan anda sedang diproses. Untuk melanjutkan, silakan gunakan kode ini untuk mengkonfirmasi penarikan saldo<br>';
+				$message .= '<div style="text-align: left;">';
+				$message .= '<h2>' . $token . '</h2>';
+				$this->email->message($message);
+				if ($this->email->send()) {
+					$this->session->set_flashdata('sukses', 'Cek email anda untuk mendapatkan kode verifikasi');
+					$redirect_url = site_url('/index.php/nasabah/cek_otp?nin=' . $nin . '&jumlah_penarikan=' . $jumlah_penarikan);
+					redirect($redirect_url);
+				} else {
+					$this->session->set_flashdata('gagal', 'Terjadi error');
+					redirect('index.php/nasabah/penarikan');
+					echo $this->email->print_debugger();
+				}
+			} catch (Exception $e) {
+				$this->session->set_flashdata('gagal', $e->getMessage());
+			}
+		} else {
+			$nin = $this->session->userdata('nin');
+			$data['title'] = "Dashboard - Ajukan Penarikan";
+			$data['user'] = $this->m_user->get_user();
+			$data['nasabah'] = $this->m_user->get_nasabah();
+			$data['penarikan'] = $this->m_penarikan->tampil_databyNin($nin)->result();
+			$this->load->view('usertemplate/header', $data);
+			$this->load->view('usertemplate/top', $data);
+			$this->load->view('usertemplate/sidebar', $data);
+			$this->load->view('nasabah/penarikan', $data);
+			$this->load->view('usertemplate/footer');
+		}
+	}
+	public function cek_otp()
+	{
+		$data['title'] = "Dashboard - Ajukan Penarikan";
+		$data['user'] = $this->m_user->get_user();
+		$data['nasabah'] = $this->m_user->get_nasabah();
+		$this->load->view('usertemplate/header', $data);
+		$this->load->view('usertemplate/top', $data);
+		$this->load->view('usertemplate/sidebar', $data);
+		$this->load->view('nasabah/verify_penarikan', $data);
+		$this->load->view('usertemplate/footer');
+	}
+
+	public function create_penarikan()
+	{
+		$nin = $this->input->post('nin');
+		$token = $this->input->post('otp');
+		$jumlah_penarikan = $this->input->post('jumlah_penarikan');
+		$email = $this->session->userdata('email');
+		$user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
+		if ($user_token) {
+			if (time() - $user_token['date_created'] < 180) {
+				$id_penarikan = getAutoNumber('tb_penarikan', 'id_penarikan', 'PN', '6');
+				$success = true;
+				$data = array(
+					'id_penarikan' => $id_penarikan,
+					'nin' => $nin,
+					'jumlah_penarikan' => $jumlah_penarikan,
+					'status' => 0,
+					'id_petugas' => $this->session->userdata('id_user'),
+				);
+				$success = $this->m_penarikan->input_penarikan($data) && $this->m_penarikan->ambil_saldo($jumlah_penarikan, $nin);
+				if ($success) {
+					$this->session->set_flashdata('sukses', 'Berhasil Ditambahkan');
+				} else {
+					throw new Exception('Gagal menambahkan data.');
+				}
+				$this->db->delete('user_token', ['email' => $email]);
+				$this->session->set_flashdata('sukses', 'Berhasil diproses, menunggu konfirmasi admin');
+				redirect('/index.php/nasabah/penarikan');
+			} else {
+				$this->db->delete('user_token', ['email' => $email]);
+				$this->session->set_flashdata('gagal', 'Kode kedaluarsa');
+				redirect('/index.php/nasabah/penarikan');
+			}
+		} else {
+			$this->session->set_flashdata('gagal', 'Kode tidak berlaku / salah');
+			$redirect_url = site_url('/index.php/nasabah/cek_otp?nin=' . $nin . '&jumlah_penarikan=' . $jumlah_penarikan);
+			redirect($redirect_url);
+		}
+	}
+	public function compare_with_saldo($input, $nin)
+	{
+		if ($nin != NULL) {
+			$this->load->model('m_penarikan');
+			$saldo_value = $this->m_penarikan->get_saldo($nin);
+			if ((int)$input > $saldo_value['saldo']) {
+				$this->form_validation->set_message('compare_with_saldo', 'Saldo Tidak Mencukupi');
+				return false;
+			} else {
+				return true;
+			}
 		}
 	}
 	public function setoran_saya()
@@ -75,14 +232,5 @@ class Nasabah extends CI_Controller
 		} else {
 			redirect('/index.php/auth');
 		}
-	}
-	public function konfirmasi($id_penarikan)
-	{
-		if ($this->m_penarikan->konfirmasiPenarikan($id_penarikan)) {
-			$this->session->set_flashdata('sukses', 'Konfirmasi berhasil.');
-		} else {
-			$this->session->set_flashdata('gagal', 'Konfirmasi gagal.');
-		}
-		redirect('/index.php/nasabah/setoran_saya#tab_2');
 	}
 }

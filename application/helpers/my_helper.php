@@ -110,3 +110,13 @@ function cek_petugas()
     redirect('index.php/gagal/forbidden');
   }
 }
+function cek_nasabah()
+{
+  $ci = &get_instance();
+  $ci->load->library('ceklogin');
+  $data = $ci->ceklogin->cek_role();
+
+  if ($data['role'] != 1) {
+    redirect('index.php/gagal/forbidden');
+  }
+}

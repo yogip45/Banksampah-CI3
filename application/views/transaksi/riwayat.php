@@ -126,6 +126,12 @@
                                                     }
                                                     ?>
                                                   <tr>
+                                                      <td class="text-bold" style="width: 56%;">Saldo Nasabah</td>
+                                                      <td class="text-success text-bold" style="width: 15%;">Rp.
+                                                          <?= $totalSetoran - $totalPenarikan; ?>
+                                                      </td>
+                                                  </tr>
+                                                  <tr>
                                                       <td class="text-bold" style="width: 56%;">Total Setoran</td>
                                                       <td class="text-success text-bold" style="width: 15%;">Rp.
                                                           <?= $totalSetoran; ?>
@@ -137,12 +143,6 @@
                                                           <?= $totalPenarikan; ?>
                                                   </tr>
                                                   </td>
-                                                  <tr>
-                                                      <td class="text-bold" style="width: 56%;">Saldo Nasabah</td>
-                                                      <td class="text-success text-bold" style="width: 15%;">Rp.
-                                                          <?= $totalSetoran - $totalPenarikan; ?>
-                                                      </td>
-                                                  </tr>
                                               </table>
                                           </div>
 

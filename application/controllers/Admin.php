@@ -29,6 +29,7 @@ class Admin extends CI_Controller
 		$data['jml_setoran'] = $this->m_setoran->getSetoranByMonth($tahun);
 		$data['jml_penarikan'] = $this->m_penarikan->getPenarikanByMonth($tahun);
 		$data['jml_barangkeluar'] = $this->m_stok->getBarangKeluarByMonth($tahun);
+		$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
 		$this->load->view('newtemplate/header', $data);
 		$this->load->view('newtemplate/top', $data);
 		$this->load->view('newtemplate/sidebar', $data);

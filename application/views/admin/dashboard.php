@@ -115,6 +115,33 @@
               </div>
             </div><!-- /.card-body -->
           </div>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-chart-pie mr-1"></i>
+                Stok Sampah
+              </h3>
+              <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <!-- <li class="nav-item ml-2">
+                    <select class="form-control nav-link" id="tahunDropdown">
+                          <?php foreach ($tahun as $tahun) { ?>
+                              <option value="<?php echo $tahun->tahun; ?>"><?php echo $tahun->tahun; ?></option>
+                          <?php } ?>
+                    </select>
+                    </li> -->
+                </ul>
+              </div>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+              <div class="tab-content p-0">
+                <!-- Morris chart - Area (tab pertama) -->
+                <div class="chart tab-pane active" id="sampah-chart" style="position: relative; height: 100%;">
+                  <canvas id="myLine"></canvas>
+                </div>
+              </div>
+            </div><!-- /.card-body -->
+          </div>
           <!-- /.card -->
         </section>
         <!-- /.Left col -->
