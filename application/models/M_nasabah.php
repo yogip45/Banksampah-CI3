@@ -8,6 +8,69 @@ class M_nasabah extends CI_Model
     $this->db->join('tb_user', 'tb_user.id_user = tb_nasabah.id_user', 'inner');
     return $this->db->get()->result();
   }
+  public function totalKgSetoran($nin)
+  {
+    $this->db->select_sum('ds.berat');
+    $this->db->from('tb_detail_setoran as ds');
+    $this->db->join('tb_setoran as s', 'ds.id_setor = s.id_setor');
+    $this->db->where('s.nin', $nin);
+
+    $query = $this->db->get();
+
+    $result = $query->row();
+
+    return $result->berat;
+  }
+  public function totalRpSetoran($nin)
+  {
+    $this->db->select_sum('total');
+    $this->db->where('nin', $nin);
+    $query = $this->db->get('tb_setoran');
+    $result = $query->row();
+
+    return $result->total;
+  }
+  public function totalRpPenarikan($nin)
+  {
+    $this->db->select_sum('jumlah_penarikan');
+    $this->db->where('nin', $nin);
+    $query = $this->db->get('tb_penarikan');
+    $result = $query->row();
+
+    return $result->jumlah_penarikan;
+  }
+  public function getSetoranByMonth($tahun, $nin)
+  {
+    $query = $this->db->query("
+    SELECT
+        MONTH(tanggal_setor) AS bulan,
+        SUM(total) AS jumlah_setoran
+    FROM
+        tb_setoran
+    WHERE
+        YEAR(tanggal_setor) = ? AND nin = ?
+    GROUP BY
+        MONTH(tanggal_setor)
+    ORDER BY
+        bulan", array($tahun, $nin));
+    return $query->result();
+  }
+  public function getPenarikanByMonth($tahun, $nin)
+  {
+    $query = $this->db->query("
+    SELECT
+        MONTH(tgl_penarikan) AS bulan,
+        SUM(jumlah_penarikan) AS jumlah_penarikan
+    FROM
+        tb_penarikan
+    WHERE
+        YEAR(tgl_penarikan) = ? AND nin = ?
+    GROUP BY
+        MONTH(tgl_penarikan)
+    ORDER BY
+        bulan", array($tahun, $nin));
+    return $query->result();
+  }
   public function getNamaByNin($nin)
   {
     $query = $this->db->get_where('tb_nasabah', array('nin' => $nin));

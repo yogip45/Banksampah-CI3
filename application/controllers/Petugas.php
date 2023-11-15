@@ -31,6 +31,7 @@ class Petugas extends CI_Controller
 		$data['jml_setoran'] = $this->m_setoran->getSetoranByMonth($tahun);
 		$data['jml_penarikan'] = $this->m_penarikan->getPenarikanByMonth($tahun);
 		$data['jml_barangkeluar'] = $this->m_stok->getBarangKeluarByMonth($tahun);
+		$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();
 		$this->load->view('newtemplate/header', $data);
 		$this->load->view('newtemplate/top', $data);
 		$this->load->view('newtemplate/sidebar', $data);
@@ -196,12 +197,12 @@ class Petugas extends CI_Controller
 			$this->m_user->input_data($data, 'tb_user');
 			$this->m_nasabah->input_data($data1, 'tb_nasabah');
 			$this->db->insert('user_token', $user_token);
-			$this->_sendEmail($token);
+			$this->_sendEmail($token, 'verify', NULL);
 			$this->session->set_flashdata('sukses', 'Data Berhasil Ditambahkan');
 			redirect('/index.php/petugas/nasabahindex');
 		}
 	}
-	private function _sendEmail($token)
+	private function _sendEmail($token, $type, $user)
 	{
 		$config = [
 			'protocol' => 'smtp',
@@ -220,33 +221,55 @@ class Petugas extends CI_Controller
 		$this->email->from('cikrakjatimulyo@gmail.com', 'Tim Cikrak Jatimulyo');
 		$this->email->to($this->input->post('email'));
 
+		if ($type == 'verify') {
 
-		$this->email->subject('Aktivasi Akun Banksampah');
-
-		$message = '<div style="text-align: center;">';
-		$message .= '<h3>Hallo, ' . $this->input->post('nama') . '</h3>';
-		$message .= '</div><br><br>';
-		$message .= '<div style="text-align: center;">';
-		$message .= 'Terima kasih telah mendaftar di Bank Sampah. Untuk melanjutkan, silakan aktifkan akun Anda dengan mengeklik tombol di bawah ini:<br><br>';
-		$message .= '</div><br><br>';
-		$message .= '<div style="text-align: center;">';
-		$message .= '<a href="' . base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token) . '" style="background-color:#4CAF50; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; display:inline-block;">Aktifkan Akun</a>';
-		$message .= '</div><br><br>';
-		$message .= '<div style="text-align: center;">';
-		$message .= 'Jika tombol di atas tidak berfungsi, Anda juga dapat menyalin dan menempelkan tautan berikut ini ke peramban web Anda:<br><br>';
-		$message .= '</div><br><br>';
-		$message .= '<div style="text-align: center;">';
-		$message .= base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token);
-		$message .= '</div><br><br>';
-		$message .= '<div style="text-align: center;">';
-		$message .= 'Terima kasih, dan selamat bergabung dengan Bank Sampah Cikrak Jatimulyo.';
-		$message .= '</div><br><br>';
-		$this->email->message($message);
-		if ($this->email->send()) {
-			return true;
-		} else {
-			echo $this->email->print_debugger();
-			die;
+			$this->email->subject('Aktivasi Akun Banksampah');
+			$message = '<div style="text-align: center;">';
+			$message .= '<h3>Hallo, ' . $this->input->post('nama') . '</h3>';
+			$message .= '</div><br><br>';
+			$message .= '<div style="text-align: center;">';
+			$message .= 'Terima kasih telah mendaftar di Bank Sampah. Untuk melanjutkan, silakan aktifkan akun Anda dengan mengeklik tombol di bawah ini:<br><br>';
+			$message .= '</div><br><br>';
+			$message .= '<div style="text-align: center;">';
+			$message .= '<a href="' . base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token) . '" style="background-color:#4CAF50; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; display:inline-block;">Aktifkan Akun</a>';
+			$message .= '</div><br><br>';
+			$message .= '<div style="text-align: center;">';
+			$message .= 'Jika tombol di atas tidak berfungsi, Anda juga dapat menyalin dan menempelkan tautan berikut ini ke peramban web Anda:<br><br>';
+			$message .= '</div><br><br>';
+			$message .= '<div style="text-align: center;">';
+			$message .= base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token);
+			$message .= '</div><br><br>';
+			$message .= '<div style="text-align: center;">';
+			$message .= 'Terima kasih, dan selamat bergabung dengan Bank Sampah Cikrak Jatimulyo.';
+			$message .= '</div><br><br>';
+			$this->email->message($message);
+			if ($this->email->send()) {
+				return true;
+			} else {
+				echo $this->email->print_debugger();
+				die;
+			}
+		} elseif ($type == 'resetpassword') {
+			$this->email->to($user);
+			$this->email->subject('Reset Password Anda');
+			$message = '<div style="text-align: center;">';
+			$message .= 'Untuk meret password anda, klik tombol dibawah ini :<br><br>';
+			$message .= '</div><br><br>';
+			$message .= '<div style="text-align: center;">';
+			$message .= '<a href="' . base_url() . 'index.php/auth/resetpassword?email=' . urlencode($user) . '&token=' . urlencode($token) . '" style="background-color:#4CAF50; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; display:inline-block;">Reset Password</a>';
+			$message .= '</div><br><br>';
+			$message .= '<div style="text-align: center;">';
+			$message .= 'Jika tombol di atas tidak berfungsi, Anda juga dapat menggunakan link dibawah ini :<br><br>';
+			$message .= '</div><br><br>';
+			$message .= '<div style="text-align: center;">';
+			$message .= base_url() . 'index.php/auth/resetpassword?email=' . urlencode($user) . '&token=' . urlencode($token);
+			$this->email->message($message);
+			if ($this->email->send()) {
+				return true;
+			} else {
+				echo $this->email->print_debugger();
+				die;
+			}
 		}
 	}
 
@@ -324,27 +347,50 @@ class Petugas extends CI_Controller
 		}
 		redirect('/index.php/petugas/nasabahindex');
 	}
-
 	public function resetpassword_nasabah($id_user)
 	{
 		$this->load->model('m_user');
 		$this->load->model('m_nasabah');
-		$default_password = generate_password(10);
 		$nasabah = $this->m_nasabah->get_user_nasabah_data($id_user);
-		$where = array('id_user' => $id_user);
-		$table = 'tb_user';
-		// Hash default password							
-		// Update password dalam tabel
-		$data = array(
-			'password' => password_hash($default_password, PASSWORD_DEFAULT),
-			'default_password' => 1, // Mengatur default_password menjadi 1
-			'diedit' => date('Y-m-d H:i:s')
-		);
-		$this->m_user->reset_password($where, $data, $table);
-		$this->session->set_flashdata('sukses', 'Password berhasil direset');
-		$this->session->set_flashdata('password', $default_password);
-		$this->session->set_flashdata('nasabah', $nasabah['nama']);
-		redirect('/index.php/petugas/nasabahindex');
+		$email = $nasabah[0]->email;
+		if ($email) {
+			$token = base64_encode(random_bytes(16));
+			$user_token = [
+				'email' => $email,
+				'token' => $token,
+				'date_created' => time()
+			];
+			$this->db->insert('user_token', $user_token);
+			$this->_sendEmail($token, 'resetpassword', $email);
+			$this->session->set_flashdata('sukses', 'Email reset pasword berhasil dikirimkan ke ' . $email);
+			redirect('/index.php/petugas/nasabahindex');
+		} else {
+			$this->session->set_flashdata('gagal', 'Terjadi Kesalahan');
+			redirect('/index.php/petugas/nasabahindex');
+		}
 	}
-	// FUNGSI UNTUK AMBIL DATA DESA
+
+
+	// public function resetpassword_nasabah($id_user)
+	// {
+	// 	$this->load->model('m_user');
+	// 	$this->load->model('m_nasabah');
+	// 	$default_password = generate_password(10);
+	// 	$nasabah = $this->m_nasabah->get_user_nasabah_data($id_user);
+	// 	$where = array('id_user' => $id_user);
+	// 	$table = 'tb_user';
+	// 	// Hash default password							
+	// 	// Update password dalam tabel
+	// 	$data = array(
+	// 		'password' => password_hash($default_password, PASSWORD_DEFAULT),
+	// 		'default_password' => 1, // Mengatur default_password menjadi 1
+	// 		'diedit' => date('Y-m-d H:i:s')
+	// 	);
+	// 	$this->m_user->reset_password($where, $data, $table);
+	// 	$this->session->set_flashdata('sukses', 'Password berhasil direset');
+	// 	$this->session->set_flashdata('password', $default_password);
+	// 	$this->session->set_flashdata('nasabah', $nasabah['nama']);
+	// 	redirect('/index.php/petugas/nasabahindex');
+	// }
+
 }

@@ -6,7 +6,7 @@
           <div class="container-fluid">
               <div class="row mb-2">
                   <div class="col-sm-6">
-                      <h1>Silahkan Ubah Password</h1>
+                      <h1>Silahkan Ubah Password Anda</h1>
                   </div>
                   <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
@@ -36,7 +36,7 @@
                       <div class="card">
                           <!-- /.card-header -->
                           <div class="card-body">
-                              <form role="form" action="<?php echo base_url() . 'index.php/user/passwordmake'; ?>"
+                              <form role="form" action="<?php echo base_url() . 'index.php/user/passwordreset'; ?>"
                                   method="POST">
                                   <div class="form-group col-md-4">
                                       <label for="inputRw">Password</label>

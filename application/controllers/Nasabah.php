@@ -21,12 +21,21 @@ class Nasabah extends CI_Controller
 	{
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role') == 1) {
+				$nin = $this->session->userdata('nin');
+				$tahun = date('Y');
 				$data['title'] = "Dashboard - Home Nasabah";
 				$data['nasabah'] = $this->m_user->get_nasabah();
+				$data['jumlah_setoran'] = $this->m_nasabah->totalKgSetoran($nin);
+				$data['total_setoran'] = $this->m_nasabah->totalRpSetoran($nin);
+				$data['total_penarikan'] = $this->m_nasabah->totalRpPenarikan($nin);
+				//DATA CHART
+				$data['jml_setoran'] = $this->m_nasabah->getSetoranByMonth($tahun, $nin);
+				$data['jml_penarikan'] = $this->m_nasabah->getPenarikanByMonth($tahun, $nin);
 				$this->load->view('usertemplate/header', $data);
 				$this->load->view('usertemplate/top', $data);
 				$this->load->view('usertemplate/sidebar', $data);
 				$this->load->view('nasabah/dashboard', $data);
+				$this->load->view('usertemplate/footer');
 			} else {
 				redirect('/index.php/auth/dashboard');
 			}
@@ -197,6 +206,7 @@ class Nasabah extends CI_Controller
 				$data['title'] = "Dashboard - Setoran Saya";
 				$data['nasabah'] = $this->m_user->get_nasabah();
 				$data['setoran'] = $this->m_setoran->tampil_databyNin($nin)->result();
+				$data['riwayat_transaksi'] = $this->m_setoran->get_keyword($nin);
 				$data['penarikan'] = $this->m_penarikan->tampil_databyNin($nin)->result();
 				$this->load->view('usertemplate/header', $data);
 				$this->load->view('usertemplate/top', $data);
@@ -210,11 +220,11 @@ class Nasabah extends CI_Controller
 			redirect('/index.php/auth');
 		}
 	}
-	public function detail_setoran()
+	public function detail_setoran($id_setor)
 	{
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role') == 1) {
-				$id_setor = $this->input->post('id_setor');
+				// $id_setor = $this->input->post('id_setor');
 				$data['title'] = "Dashboard - Detail Setoran Saya";
 				$data['nasabah'] = $this->m_user->get_nasabah();
 				$data['jns_sampah'] = $this->m_jns_sampah->tampil_data()->result();

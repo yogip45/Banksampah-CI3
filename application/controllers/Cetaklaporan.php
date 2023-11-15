@@ -70,14 +70,26 @@ class Cetaklaporan extends CI_Controller
 					//setoran
 					$data['setoran'] = $this->m_setoran->getSetoranByDateRange($tglAwal, $tglAkhir);
 					$data['detail'] = $this->m_setoran->getDetailSetoranByDateRange($tglAwal, $tglAkhir);
+					$config = [
+						'mode' => 'utf-8', // Encoding
+						'format' => 'A4-L', // A4 Landscape
+					];
 					break;
 				case 2:
 					//penarikan
 					$data['penarikan'] = $this->m_penarikan->getPenarikanByDateRange($tglAwal, $tglAkhir);
+					$config = [
+						'mode' => 'utf-8', // Encoding
+						'format' => 'A4-P', // A4 Landscape
+					];
 					break;
 				case 3:
 					//barangkeluar
 					$data['barangkeluar'] = $this->m_setoran->getBarangKeluarByDateRange($tglAwal, $tglAkhir);
+					$config = [
+						'mode' => 'utf-8', // Encoding
+						'format' => 'A4-P', // A4 Landscape
+					];
 					break;
 				default:
 					$this->load->view('error/404');
@@ -88,6 +100,7 @@ class Cetaklaporan extends CI_Controller
 			$data['penarikan'] = $data['penarikan'] ?? null;
 			$data['barangkeluar'] = $data['barangkeluar'] ?? null;
 			$namaFile = '';
+
 			if ($data['setoran'] != null) {
 				$html = $this->load->view('transaksi/cetak1', $data, true);
 				$namaFile = 'Laporan Setoran ' . $data['tglAwal'] . ' - ' . $data['tglAkhir'] . '.pdf';
@@ -99,7 +112,7 @@ class Cetaklaporan extends CI_Controller
 				$namaFile = 'Laporan Barang Keluar ' . $data['tglAwal'] . ' - ' . $data['tglAkhir'] . '.pdf';
 			}
 			if (!empty($namaFile)) {
-				$mpdf = new \Mpdf\Mpdf();
+				$mpdf = new \Mpdf\Mpdf($config);
 				$mpdf->WriteHTML($html);
 				$mpdf->Output($namaFile, 'D');
 			}
