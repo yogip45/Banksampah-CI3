@@ -86,7 +86,7 @@
             <!-- Main row -->
             <div class="row">
                 <!-- Left col -->
-                <section class="col-lg-12 connectedSortable">
+                <section class="col-lg-8 connectedSortable">
                     <!-- Custom tabs (Charts with tabs)-->
                     <div class="card">
                         <div class="card-header">
@@ -96,13 +96,7 @@
                             </h3>
                             <div class="card-tools">
                                 <ul class="nav nav-pills ml-auto">
-                                    <!-- <li class="nav-item ml-2">
-                    <select class="form-control nav-link" id="tahunDropdown">
-                          <?php foreach ($tahun as $tahun) { ?>
-                              <option value="<?php echo $tahun->tahun; ?>"><?php echo $tahun->tahun; ?></option>
-                          <?php } ?>
-                    </select>
-                    </li> -->
+                                    <!-- ... (card 1 tools) -->
                                 </ul>
                             </div>
                         </div><!-- /.card-header -->
@@ -110,35 +104,28 @@
                             <div class="tab-content p-0">
                                 <!-- Morris chart - Area (tab pertama) -->
                                 <div class="chart tab-pane active" id="revenue-chart"
-                                    style="position: relative; height: 100%;">
+                                    style="position: center; height: 100%;">
                                     <canvas id="myBar"></canvas>
                                 </div>
                             </div>
                         </div><!-- /.card-body -->
                     </div>
+                    <!-- /.card -->
+                </section>
+                <section class="col-lg-4 connectedSortable">
+                    <!-- Custom tabs (Charts with tabs)-->
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fas fa-chart-pie mr-1"></i>
                                 Stok Sampah
                             </h3>
-                            <div class="card-tools">
-                                <ul class="nav nav-pills ml-auto">
-                                    <!-- <li class="nav-item ml-2">
-                    <select class="form-control nav-link" id="tahunDropdown">
-                          <?php foreach ($tahun as $tahun) { ?>
-                              <option value="<?php echo $tahun->tahun; ?>"><?php echo $tahun->tahun; ?></option>
-                          <?php } ?>
-                    </select>
-                    </li> -->
-                                </ul>
-                            </div>
                         </div><!-- /.card-header -->
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <!-- Morris chart - Area (tab pertama) -->
                                 <div class="chart tab-pane active" id="sampah-chart"
-                                    style="position: relative; height: 100%;">
+                                    style="position: center; height: 100%;">
                                     <canvas id="myLine"></canvas>
                                 </div>
                             </div>
@@ -154,13 +141,13 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<footer class="main-footer">
+<!-- <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> 3.2.0
     </div>
-</footer>
+</footer> -->
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->

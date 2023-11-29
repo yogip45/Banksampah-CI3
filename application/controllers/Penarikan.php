@@ -123,4 +123,20 @@ class Penarikan extends CI_Controller
 		}
 		redirect('/index.php/penarikan/penarikanindex');
 	}
+	public function batalkan($id_penarikan)
+	{
+		$data_penarikan = $this->db->where('id_penarikan', $id_penarikan)->get('tb_penarikan')->row();
+		$nin = $data_penarikan->nin;
+		$jumlah_penarikan = $data_penarikan->jumlah_penarikan;
+
+		if ($this->m_penarikan->batalkanPenarikan($nin, $jumlah_penarikan, $id_penarikan)) {
+			$this->session->set_flashdata('sukses', 'Pembatalan berhasil.');
+		} else {
+			$this->session->set_flashdata('gagal', 'Terjadi error.');
+		}
+
+		$this->session->set_flashdata('sukses', 'Pembatalan berhasil.');
+
+		redirect('/index.php/penarikan/penarikanindex');
+	}
 }

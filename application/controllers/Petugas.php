@@ -208,7 +208,7 @@ class Petugas extends CI_Controller
 			'protocol' => 'smtp',
 			'smtp_host' => 'ssl://smtp.googlemail.com',
 			'smtp_user' => 'cikrakjatimulyo@gmail.com',
-			'smtp_pass' => 'mpsw yjod ohga qlsx',
+			'smtp_pass' => 'nypk qrne gwca exnu',
 			'smtp_port' => 465,
 			'mailtype' => 'html',
 			'charset' => 'utf-8',

@@ -97,13 +97,27 @@
                                                       <tr class="odd gradeX">
                                                           <td><?php echo $no++ ?></td>
                                                           <td><?php echo $data->id_penarikan ?></td>
-                                                          <td><?php echo date('d M Y', strtotime($data->tgl_penarikan)) ?>
+                                                          <td><?php echo date('d M Y', strtotime($data->tgl_penarikan)); ?>
                                                           </td>
-                                                          <td class="text-red">-
-                                                              <?php echo $data->jumlah_penarikan ?></td>
+                                                          <?php if ($data->status == 3) : ?>
+                                                          <td class="text-success">
+                                                              + <?php echo $data->jumlah_penarikan; ?></td>
+                                                          <?php else : ?>
+                                                          <td class="text-red">- <?php echo $data->jumlah_penarikan; ?>
+                                                          </td>
+                                                          <?php endif; ?>
+
                                                           <td
-                                                              class="text-center <?php echo $data->status == 1 ? 'text-success' : 'text-warning'; ?>">
-                                                              <?php echo $data->status == 1 ? 'Selesai' : 'Belum Dikonfirmasi'; ?>
+                                                              class="text-center <?php echo $data->status == 1 ? 'text-success' : ($data->status == 3 ? 'text-danger' : 'text-warning'); ?>">
+                                                              <?php
+                                                                        if ($data->status == 1) {
+                                                                            echo 'Selesai';
+                                                                        } elseif ($data->status == 3) {
+                                                                            echo 'Dibatalkan';
+                                                                        } else {
+                                                                            echo 'Belum Dikonfirmasi';
+                                                                        }
+                                                                        ?>
                                                           </td>
                                                           <td class="text-center">-</td>
                                                           <?php endforeach; ?>
@@ -121,16 +135,19 @@
                                                     }
 
                                                     // Perhitungan total penarikan
+                                                    $totalPenarikan = 0;
                                                     foreach ($riwayat_transaksi['penarikan'] as $item) {
-                                                        $totalPenarikan += $item->jumlah_penarikan;
+                                                        if ($item->status == 1 || $item->status == 0) {
+                                                            $totalPenarikan += $item->jumlah_penarikan;
+                                                        }
                                                     }
                                                     ?>
-                                                  <tr>
+                                                  <!-- <tr>
                                                       <td class="text-bold" style="width: 56%;">Saldo Nasabah</td>
                                                       <td class="text-success text-bold" style="width: 15%;">Rp.
-                                                          <?= $totalSetoran - $totalPenarikan; ?>
+                                                          <?php echo $nasabah[0]->saldo; ?>
                                                       </td>
-                                                  </tr>
+                                                  </tr> -->
                                                   <tr>
                                                       <td class="text-bold" style="width: 56%;">Total Setoran</td>
                                                       <td class="text-success text-bold" style="width: 15%;">Rp.

@@ -116,9 +116,18 @@
                                                       <td><?php echo $data->nin ?></td>
                                                       <td><?php echo date('d M Y', strtotime($data->tgl_penarikan)) ?></td>
                                                       <td class="text-danger">Rp. <?php echo $data->jumlah_penarikan ?></td>
-                                                      <td class="text-center <?php echo $data->status == 1 ? 'text-success' : 'text-warning'; ?>">
-                                                          <?php echo $data->status == 1 ? 'Selesai' : 'Belum Dikonfirmasi'; ?>
+                                                      <td class="text-center <?php echo $data->status == 1 ? 'text-success' : ($data->status == 3 ? 'text-danger' : 'text-warning'); ?>">
+                                                          <?php
+                                                            if ($data->status == 1) {
+                                                                echo 'Selesai';
+                                                            } elseif ($data->status == 3) {
+                                                                echo 'Dibatalkan';
+                                                            } else {
+                                                                echo 'Belum Dikonfirmasi';
+                                                            }
+                                                            ?>
                                                       </td>
+
                                                       <td class="text-center">
                                                           <?php if ($data->status == 0) : ?>
                                                               <div class="btn-group">
@@ -128,6 +137,9 @@
                                                                   </button>
                                                                   <div class="dropdown-menu" role="menu">
                                                                       <a class="dropdown-item text-success" href="#" data-toggle="modal" data-target="#Selesai<?php echo $data->id_penarikan; ?>"><i class="far fa-check-circle"></i> Konfirmasi</a>
+                                                                      <div class="dropdown-divider"></div>
+                                                                      <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#Batalkan<?php echo $data->id_penarikan; ?>"><i class="far fa-window-close"></i> Batalkan
+                                                                          Penarikan</a>
                                                                   <?php else : ?>
                                                                       -
                                                                   <?php endif; ?>
@@ -205,7 +217,27 @@
                                                   </div>
                                                   <div class="modal-footer">
                                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                      <?php echo anchor('index.php/penarikan/konfirmasi/' . $data->id_penarikan, '<button type="button" class="btn btn-danger">OK</button>'); ?>
+                                                      <?php echo anchor('index.php/penarikan/konfirmasi/' . $data->id_penarikan, '<button type="button" class="btn btn-primary">OK</button>'); ?>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="modal fade" id="Batalkan<?php echo $data->id_penarikan; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                      <h5 class="modal-title" id="hapusModalLabel">Konfirmasi Pembatalan
+                                                          Transaksi</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      Apakah anda yakin?, saldo nasabah akan dikembalikan
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                      <?php echo anchor('index.php/penarikan/batalkan/' . $data->id_penarikan, '<button type="button" class="btn btn-danger">OK</button>'); ?>
                                                   </div>
                                               </div>
                                           </div>

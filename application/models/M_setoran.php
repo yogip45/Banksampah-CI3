@@ -30,7 +30,7 @@ class M_setoran extends CI_Model
     $this->db->from('tb_setoran');
     $this->db->join('tb_nasabah', 'tb_nasabah.nin = tb_setoran.nin', 'inner');
     $this->db->where('tanggal_setor >=', $tglAwal);
-    $this->db->where('tanggal_setor <=', $tglAkhir);
+    $this->db->where('tanggal_setor <=', date('Y-m-d 23:59:59', strtotime($tglAkhir)));
     $this->db->order_by('tb_setoran.tanggal_setor', 'ASC');
     $query = $this->db->get();
     return $query->result();
@@ -41,7 +41,7 @@ class M_setoran extends CI_Model
     $this->db->from('tb_barangkeluar');
     $this->db->join('jns_sampah', 'tb_barangkeluar.id_sampah = jns_sampah.id_sampah', 'inner');
     $this->db->where('tgl_keluar >=', $tglAwal);
-    $this->db->where('tgl_keluar <=', $tglAkhir);
+    $this->db->where('tgl_keluar <=', date('Y-m-d 23:59:59', strtotime($tglAkhir)));
     $this->db->order_by('tb_barangkeluar.tgl_keluar', 'ASC');
     $query = $this->db->get();
     return $query->result();
@@ -52,7 +52,7 @@ class M_setoran extends CI_Model
     $this->db->from('tb_detail_setoran');
     $this->db->join('jns_sampah', 'jns_sampah.id_sampah = tb_detail_setoran.id_sampah', 'inner');
     $this->db->where('tanggal >=', $tglAwal);
-    $this->db->where('tanggal <=', $tglAkhir);
+    $this->db->where('tanggal <=', date('Y-m-d 23:59:59', strtotime($tglAkhir)));
     $query = $this->db->get();
     return $query->result();
   }

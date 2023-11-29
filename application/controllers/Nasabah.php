@@ -87,7 +87,7 @@ class Nasabah extends CI_Controller
 					'protocol' => 'smtp',
 					'smtp_host' => 'ssl://smtp.googlemail.com',
 					'smtp_user' => 'cikrakjatimulyo@gmail.com',
-					'smtp_pass' => 'mpsw yjod ohga qlsx',
+					'smtp_pass' => 'nypk qrne gwca exnu',
 					'smtp_port' => 465,
 					'mailtype' => 'html',
 					'charset' => 'utf-8',
@@ -115,8 +115,8 @@ class Nasabah extends CI_Controller
 					$redirect_url = site_url('/index.php/nasabah/cek_otp?nin=' . $nin . '&jumlah_penarikan=' . $jumlah_penarikan);
 					redirect($redirect_url);
 				} else {
-					$this->session->set_flashdata('gagal', 'Terjadi error');
-					redirect('index.php/nasabah/penarikan');
+					// $this->session->set_flashdata('gagal', 'Terjadi error');
+					// redirect('index.php/nasabah/penarikan');
 					echo $this->email->print_debugger();
 				}
 			} catch (Exception $e) {
