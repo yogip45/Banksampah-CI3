@@ -52,7 +52,7 @@
                                                   <thead>
                                                       <tr>
                                                           <th>No.</th>
-                                                          <th>Id Setor / Penarikan</th>
+                                                          <th>Jenis Transaksi</th>
                                                           <th>Tanggal Transaksi</th>
                                                           <th>Total</th>
                                                           <th>Status</th>
@@ -66,7 +66,7 @@
                                                             foreach ($riwayat_transaksi['setoran'] as $data) : ?>
                                                       <tr class="odd gradeX">
                                                           <td><?php echo $no++ ?></td>
-                                                          <td><?php echo $data->id_setor ?></td>
+                                                          <td>Setoran</td>
                                                           <td><?php echo date('d M Y', strtotime($data->tanggal_setor)) ?>
                                                           </td>
                                                           <td class="text-success">+ <?php echo $data->total ?></td>
@@ -92,11 +92,11 @@
                                                           </td>
                                                           <?php endforeach; ?>
                                                           <?php
-                                                                $no = 1;
+                                                                // $no = 1;
                                                                 foreach ($riwayat_transaksi['penarikan'] as $data) : ?>
                                                       <tr class="odd gradeX">
                                                           <td><?php echo $no++ ?></td>
-                                                          <td><?php echo $data->id_penarikan ?></td>
+                                                          <td>Penarikan</td>
                                                           <td><?php echo date('d M Y', strtotime($data->tgl_penarikan)); ?>
                                                           </td>
                                                           <?php if ($data->status == 3) : ?>
@@ -142,12 +142,12 @@
                                                         }
                                                     }
                                                     ?>
-                                                  <!-- <tr>
+                                                  <tr>
                                                       <td class="text-bold" style="width: 56%;">Saldo Nasabah</td>
                                                       <td class="text-success text-bold" style="width: 15%;">Rp.
-                                                          <?php echo $nasabah[0]->saldo; ?>
+                                                          <?php echo $saldo; ?>
                                                       </td>
-                                                  </tr> -->
+                                                  </tr>
                                                   <tr>
                                                       <td class="text-bold" style="width: 56%;">Total Setoran</td>
                                                       <td class="text-success text-bold" style="width: 15%;">Rp.

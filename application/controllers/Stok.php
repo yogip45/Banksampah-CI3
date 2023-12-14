@@ -74,6 +74,7 @@ class Stok extends CI_Controller
 			);
 			$this->m_stok->input_barangkeluar($data);
 			$this->m_stok->ambil_stok($jumlah, $id_sampah);
+			$this->session->set_flashdata('sukses', 'Data berhasil ditambahkan');
 			redirect('index.php/stok/barangkeluar');
 		} else {
 			$data['title'] = "Dashboard - Transaksi Barang Keluar";

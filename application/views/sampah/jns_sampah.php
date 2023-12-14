@@ -23,15 +23,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <?php if ($this->session->flashdata('sukses')): ?>
-                        <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
-                    <?php endif; ?>
-                    <?php if ($this->session->flashdata('hapus')): ?>
-                        <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
-                    <?php endif; ?>
-                    <?php if ($this->session->flashdata('gagal')): ?>
-                        <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
-                    <?php endif; ?>
                     <!-- ALERT -->
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambahSampah">
                         <i class="fa fa-plus"></i> Tambah
@@ -73,7 +64,8 @@
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
                                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal<?php echo $sampah->id_sampah; ?>">Edit</a>
-                                                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#hapusModal<?php echo $sampah->id_sampah; ?>">Hapus Data</a>
+                                                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#hapusModal<?php echo $sampah->id_sampah; ?>">Hapus
+                                                                Data</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -83,7 +75,8 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id_sampah="hapusModalLabel<?php echo $sampah->id_sampah; ?>">Konfirmasi Hapus</h5>
+                                                            <h5 class="modal-title" id_sampah="hapusModalLabel<?php echo $sampah->id_sampah; ?>">
+                                                                Konfirmasi Hapus</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -93,7 +86,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                            <?php echo anchor('index.php/jenissampah/hapus/'.$sampah->id_sampah, '<button type="button" class="btn btn-danger">OK</button>'); ?>
+                                                            <?php echo anchor('index.php/jenissampah/hapus/' . $sampah->id_sampah, '<button type="button" class="btn btn-danger">OK</button>'); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -104,14 +97,15 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="editModalLabel<?php echo $sampah->id_sampah; ?>">Edit Data Sampah</h5>
+                                                            <h5 class="modal-title" id="editModalLabel<?php echo $sampah->id_sampah; ?>">Edit
+                                                                Data Sampah</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <!-- Form untuk mengedit data sampah -->
-                                                            <form action="<?php echo base_url().'index.php/jenissampah/update/'.$sampah->id_sampah;?>" method="post">
+                                                            <form action="<?php echo base_url() . 'index.php/jenissampah/update/' . $sampah->id_sampah; ?>" method="post">
                                                                 <div class="form-group">
                                                                     <label for="jenisSampahEdit">Jenis Sampah</label>
                                                                     <input type="text" class="form-control" id="jenisSampahEdit" name="nama_sampah" value="<?php echo $sampah->nama_sampah; ?>" required>
@@ -123,11 +117,16 @@
                                                                 <div class="form-group">
                                                                     <label for="kategoriSampahEdit">Kategori Sampah</label>
                                                                     <select class="form-control" id="kategoriSampahEdit" name="kategori">
-                                                                        <option value="Plastik" <?php if ($sampah->kategori == 'Plastik') echo 'selected'; ?>>Plastik</option>
-                                                                        <option value="Kertas" <?php if ($sampah->kategori == 'Kertas') echo 'selected'; ?>>Kertas</option>
-                                                                        <option value="Logam" <?php if ($sampah->kategori == 'Logam') echo 'selected'; ?>>Logam</option>
-                                                                        <option value="Kaca" <?php if ($sampah->kategori == 'Kaca') echo 'selected'; ?>>Kaca</option>
-                                                                        <option value="Lain-lain" <?php if ($sampah->kategori == 'Lain-lain') echo 'selected'; ?>>Lain - Lain</option>
+                                                                        <option value="Plastik" <?php if ($sampah->kategori == 'Plastik') echo 'selected'; ?>>
+                                                                            Plastik</option>
+                                                                        <option value="Kertas" <?php if ($sampah->kategori == 'Kertas') echo 'selected'; ?>>
+                                                                            Kertas</option>
+                                                                        <option value="Logam" <?php if ($sampah->kategori == 'Logam') echo 'selected'; ?>>
+                                                                            Logam</option>
+                                                                        <option value="Kaca" <?php if ($sampah->kategori == 'Kaca') echo 'selected'; ?>>
+                                                                            Kaca</option>
+                                                                        <option value="Lain-lain" <?php if ($sampah->kategori == 'Lain-lain') echo 'selected'; ?>>
+                                                                            Lain - Lain</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -163,7 +162,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                <?php echo anchor('/index.php/jenissampah/hapus/'.$data->id_sampah, '<button type="button" class="btn btn-danger">OK</button>'); ?>
+                                                <?php echo anchor('/index.php/jenissampah/hapus/' . $data->id_sampah, '<button type="button" class="btn btn-danger">OK</button>'); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -183,7 +182,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <!-- Form untuk menambahkan jenis sampah -->
-                                            <form action="<?php echo base_url().'index.php/jenissampah/tambah_aksi';?>" method="post">
+                                            <form action="<?php echo base_url() . 'index.php/jenissampah/tambah_aksi'; ?>" method="post">
                                                 <div class="form-group">
                                                     <label for="jenisSampah">Jenis Sampah</label>
                                                     <input type="text" class="form-control" id="jenisSampah" name="nama_sampah" required placeholder="botol, kardus bekas">
@@ -235,4 +234,32 @@
 </div>
 <!-- ./wrapper -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    <?php if ($this->session->flashdata('sukses')) : ?>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '<?php echo $this->session->flashdata("sukses"); ?>',
+            showConfirmButton: false,
+            timer: 3000 // Tampilkan pesan selama 3 detik
+        });
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('hapus')) : ?>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '<?php echo $this->session->flashdata("hapus"); ?>',
+            showConfirmButton: false,
+            timer: 3000 // Tampilkan pesan selama 3 detik
+        });
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('gagal')) : ?>
+        Swal.fire({
+            icon: "error",
+            title: "Maaf...",
+            text: "<?php echo $this->session->flashdata("gagal"); ?>",
+            // footer: '<a href="#">Why do I have this issue?</a>'
+        });
+    <?php endif; ?>
+</script>

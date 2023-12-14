@@ -57,7 +57,9 @@ class Setoran extends CI_Controller
 		$data['riwayat_transaksi'] = $this->m_setoran->get_keyword($keyword);
 		$data['title'] = "Dashboard - Riwayat Transaksi Nasabah";
 		$data['nasabah'] = $this->m_nasabah->tampil_data();
+		$nasabah = $this->m_nasabah->getNamaByNin($keyword);
 		$data['nama'] = $nama;
+		$data['saldo'] = $nasabah->saldo;
 		$data['keyword'] = $keyword;
 		$data['user'] = $this->m_user->get_user();
 		$this->load->view('newtemplate/header', $data);
@@ -76,6 +78,7 @@ class Setoran extends CI_Controller
 		$data['nasabah'] = $this->m_nasabah->tampil_data();
 		$nasabah = $this->m_nasabah->getNamaByNin($nin);
 		$data['nama'] = $nasabah->nama;
+		$data['saldo'] = $nasabah->saldo;
 		$data['keyword'] = $keyword;
 		$data['user'] = $this->m_user->get_user();
 		$this->load->view('newtemplate/header', $data);
@@ -119,7 +122,7 @@ class Setoran extends CI_Controller
 			$this->session->set_flashdata('sukses', 'Transaksi ' . $id_setor . ' Selesai');
 		} else {
 			echo json_encode(array('status' => 'error'));
-			$this->session->set_flashdata('gagal', 'Transaksi ' . $id_setor . ' Gagal');
+			$this->session->set_flashdata('gagal', 'Transaksi berhasil' . $id_setor . ' Gagal');
 		}
 	}
 

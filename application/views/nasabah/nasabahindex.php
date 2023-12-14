@@ -22,16 +22,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <?php if ($this->session->flashdata('hapus')) : ?>
-                    <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
-                    <?php endif; ?>
-                    <?php if ($this->session->flashdata('gagal')) : ?>
-                    <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
-                    <?php endif; ?>
-                    <?php if ($this->session->flashdata('edit')) : ?>
-                    <div class="alert alert-success"><?php echo $this->session->flashdata('edit'); ?></div>
-                    <?php endif; ?>
-                    <!-- ALERT -->
                     <?php echo anchor('/index.php/petugas/tambah_nasabah/', '<button class="btn btn-info"><i class="fa fa-plus"></i> Tambah</button>'); ?>
                     <br><br>
                     <div class="card">
@@ -344,6 +334,15 @@ Swal.fire({
     icon: 'success',
     title: 'Berhasil!',
     text: '<?php echo $this->session->flashdata("sukses"); ?>',
+    showConfirmButton: false,
+    timer: 3000 // Tampilkan pesan selama 3 detik
+});
+<?php endif; ?>
+<?php if ($this->session->flashdata('edit')) : ?>
+Swal.fire({
+    icon: 'success',
+    title: 'Berhasil!',
+    text: '<?php echo $this->session->flashdata("edit"); ?>',
     showConfirmButton: false,
     timer: 3000 // Tampilkan pesan selama 3 detik
 });

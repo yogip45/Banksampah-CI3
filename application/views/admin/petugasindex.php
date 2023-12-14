@@ -20,17 +20,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <?php if ($this->session->flashdata('sukses')): ?>
-                    <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
-                    <?php endif; ?>
-                    <?php if ($this->session->flashdata('hapus')): ?>
-                    <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
-                    <?php endif; ?>
-                    <?php if ($this->session->flashdata('gagal')): ?>
-                    <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
-                    <?php endif; ?>
-                    <?php echo anchor('/index.php/admin/tambah_petugas/', '<button class="btn btn-info"><i class="fa fa-plus"></i> Tambah</button>'); ?>
-                    <br><br>
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -49,12 +38,12 @@
                                         $no = 1;
                                         foreach ($petugas as $data) : ?>
                                         <tr class="odd gradeX">
-                                            <td><?php echo $no++?></td>
+                                            <td><?php echo $no++ ?></td>
                                             <td><?php echo $data->username ?></td>
                                             <td><?php echo $data->nama_petugas ?></td>
                                             <td><?php echo $data->no_hp ?></td>
                                             <td>
-                                                <?php if ($data->role != 3): ?>
+                                                <?php if ($data->role != 3) : ?>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-warning"
                                                         data-toggle="dropdown">Pilih Aksi</button>
@@ -74,17 +63,17 @@
                                                         <a class="dropdown-item" href="#" data-toggle="modal"
                                                             data-target="#resetPassword<?php echo $data->id_user; ?>">
                                                             Reset Password</a>
-                                                        <?php if ($data->is_active == 1): ?>
+                                                        <?php if ($data->is_active == 1) : ?>
                                                         <a class="dropdown-item" href="#" data-toggle="modal"
                                                             data-target="#ubahStatus<?php echo $data->id_user; ?>">
                                                             Nonaktifkan</a>
                                                         <?php endif; ?>
-                                                        <?php if ($data->is_active == 0): ?>
+                                                        <?php if ($data->is_active == 0) : ?>
                                                         <a class="dropdown-item" href="#" data-toggle="modal"
                                                             data-target="#ubahStatus<?php echo $data->id_user; ?>">Aktifkan</a>
                                                         <?php endif; ?>
                                                     </div>
-                                                    <?php else: ?>
+                                                    <?php else : ?>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-warning"
                                                             data-toggle="dropdown">Pilih Aksi</button>
@@ -102,7 +91,7 @@
                                                                 href="<?= site_url('index.php/admin/edit_petugas/' . $data->id_user) ?>">
                                                                 Edit Petugas</a>
                                                         </div>
-                                                        <?php endif;?>
+                                                        <?php endif; ?>
                                                     </div>
                                             </td>
                                         </tr>
@@ -223,7 +212,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                    <?php echo anchor('/index.php/admin/ubahstatus/'.$data->id_user, '<button type="button" class="btn btn-danger">OK</button>'); ?>
+                                    <?php echo anchor('/index.php/admin/ubahstatus/' . $data->id_user, '<button type="button" class="btn btn-danger">OK</button>'); ?>
                                 </div>
                             </div>
                         </div>
@@ -246,7 +235,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                    <?php echo anchor('/index.php/admin/resetpassword/'.$data->id_user, '<button type="button" class="btn btn-danger">OK</button>'); ?>
+                                    <?php echo anchor('/index.php/admin/resetpassword/' . $data->id_user, '<button type="button" class="btn btn-danger">OK</button>'); ?>
                                 </div>
                             </div>
                         </div>
@@ -320,4 +309,33 @@ if (copyBtn != null) {
         copyBtn.disabled = true;
     }
 }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+<?php if ($this->session->flashdata('sukses')) : ?>
+Swal.fire({
+    icon: 'success',
+    title: 'Berhasil!',
+    text: '<?php echo $this->session->flashdata("sukses"); ?>',
+    showConfirmButton: false,
+    timer: 3000 // Tampilkan pesan selama 3 detik
+});
+<?php endif; ?>
+<?php if ($this->session->flashdata('hapus')) : ?>
+Swal.fire({
+    icon: 'success',
+    title: 'Berhasil!',
+    text: '<?php echo $this->session->flashdata("hapus"); ?>',
+    showConfirmButton: false,
+    timer: 3000 // Tampilkan pesan selama 3 detik
+});
+<?php endif; ?>
+<?php if ($this->session->flashdata('gagal')) : ?>
+Swal.fire({
+    icon: "error",
+    title: "Maaf...",
+    text: "<?php echo $this->session->flashdata("gagal"); ?>",
+    // footer: '<a href="#">Why do I have this issue?</a>'
+});
+<?php endif; ?>
 </script>

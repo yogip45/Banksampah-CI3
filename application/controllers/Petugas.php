@@ -224,24 +224,22 @@ class Petugas extends CI_Controller
 		if ($type == 'verify') {
 
 			$this->email->subject('Aktivasi Akun Banksampah');
-			$message = '<div style="text-align: center;">';
-			$message .= '<h3>Hallo, ' . $this->input->post('nama') . '</h3>';
-			$message .= '</div><br><br>';
-			$message .= '<div style="text-align: center;">';
-			$message .= 'Terima kasih telah mendaftar di Bank Sampah. Untuk melanjutkan, silakan aktifkan akun Anda dengan mengeklik tombol di bawah ini:<br><br>';
-			$message .= '</div><br><br>';
-			$message .= '<div style="text-align: center;">';
-			$message .= '<a href="' . base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token) . '" style="background-color:#4CAF50; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; display:inline-block;">Aktifkan Akun</a>';
-			$message .= '</div><br><br>';
-			$message .= '<div style="text-align: center;">';
-			$message .= 'Jika tombol di atas tidak berfungsi, Anda juga dapat menyalin dan menempelkan tautan berikut ini ke peramban web Anda:<br><br>';
-			$message .= '</div><br><br>';
-			$message .= '<div style="text-align: center;">';
-			$message .= base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token);
-			$message .= '</div><br><br>';
-			$message .= '<div style="text-align: center;">';
-			$message .= 'Terima kasih, dan selamat bergabung dengan Bank Sampah Cikrak Jatimulyo.';
-			$message .= '</div><br><br>';
+			$message = '
+			<div style="font-family: Arial, sans-serif; text-align: center; max-width: 600px; margin: 0 auto;">
+				<div style="background-color: #f5f5f5; padding: 20px;">
+					<h2>Hallo, ' . $this->input->post('nama') . '</h2>
+				</div>
+				<div style="margin: 20px;">
+					<p>Terima kasih telah mendaftar di Bank Sampah. Untuk melanjutkan, silakan aktifkan akun Anda dengan mengeklik tombol di bawah ini:</p>
+					<br>
+					<a href="' . base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token) . '" style="background-color:#4CAF50; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; display:inline-block;">Aktifkan Akun</a>
+					<br><br>
+					<p>Jika tombol di atas tidak berfungsi, Anda juga dapat menyalin dan menempelkan tautan berikut ini ke peramban web Anda:</p>
+					<p>' . base_url() . 'index.php/auth/verify?email=' . urlencode($this->input->post('email')) . '&token=' . urlencode($token) . '</p>
+					<br>
+					<p>Terima kasih, dan selamat bergabung dengan Bank Sampah Cikrak Jatimulyo.</p>
+				</div>
+			</div>';
 			$this->email->message($message);
 			if ($this->email->send()) {
 				return true;

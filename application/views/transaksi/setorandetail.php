@@ -23,15 +23,6 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <?php if ($this->session->flashdata('sukses')) : ?>
-              <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
-            <?php endif; ?>
-            <?php if ($this->session->flashdata('hapus')) : ?>
-              <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
-            <?php endif; ?>
-            <?php if ($this->session->flashdata('gagal')) : ?>
-              <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
-            <?php endif; ?>
             <!-- ALERT -->
             <div class="card">
               <!-- /.card-header -->
@@ -339,4 +330,32 @@
         });
       });
     });
+  </script>
+  <script>
+    <?php if ($this->session->flashdata('sukses')) : ?>
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '<?php echo $this->session->flashdata("sukses"); ?>',
+        showConfirmButton: false,
+        timer: 3000 // Tampilkan pesan selama 3 detik
+      });
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('hapus')) : ?>
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '<?php echo $this->session->flashdata("hapus"); ?>',
+        showConfirmButton: false,
+        timer: 3000 // Tampilkan pesan selama 3 detik
+      });
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('gagal')) : ?>
+      Swal.fire({
+        icon: "error",
+        title: "Maaf...",
+        text: "<?php echo $this->session->flashdata("gagal"); ?>",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    <?php endif; ?>
   </script>

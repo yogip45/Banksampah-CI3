@@ -77,4 +77,11 @@ class M_penarikan extends CI_Model
     $this->db->where('id_penarikan', $id_penarikan);
     return $this->db->update('tb_penarikan', array('status' => 3));
   }
+  public function get_jumlah_penarikan($id_penarikan)
+  {
+    $this->db->select('jumlah_penarikan');
+    $this->db->where('id_penarikan', $id_penarikan);
+    $query = $this->db->get('tb_penarikan');
+    return $query->row_array()['jumlah_penarikan'];
+  }
 }

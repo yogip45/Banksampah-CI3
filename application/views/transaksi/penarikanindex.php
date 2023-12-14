@@ -23,18 +23,6 @@
           <div class="container-fluid">
               <div class="row">
                   <div class="col-12">
-                      <?php if ($this->session->flashdata('sukses')) : ?>
-                          <div class="alert alert-success"><?php echo $this->session->flashdata('sukses'); ?></div>
-                      <?php endif; ?>
-                      <?php if ($this->session->flashdata('hapus')) : ?>
-                          <div class="alert alert-danger"><?php echo $this->session->flashdata('hapus'); ?></div>
-                      <?php endif; ?>
-                      <?php if ($this->session->flashdata('gagal')) : ?>
-                          <div class="alert alert-danger"><?php echo $this->session->flashdata('gagal'); ?></div>
-                      <?php endif; ?>
-                      <?php if ($this->session->flashdata('edit')) : ?>
-                          <div class="alert alert-danger"><?php echo $this->session->flashdata('edit'); ?></div>
-                      <?php endif; ?>
                       <!-- ALERT -->
                       <!-- TAMBAH -->
                       <!-- TAMBAH -->
@@ -136,7 +124,7 @@
                                                                       <span class="sr-only"> Toggle Dropdown</span>
                                                                   </button>
                                                                   <div class="dropdown-menu" role="menu">
-                                                                      <a class="dropdown-item text-success" href="#" data-toggle="modal" data-target="#Selesai<?php echo $data->id_penarikan; ?>"><i class="far fa-check-circle"></i> Konfirmasi</a>
+                                                                      <a class="dropdown-item text-success" href="#" data-toggle="modal" data-target="#Selesai<?php echo $data->id_penarikan; ?><?php echo $data->nin; ?>"><i class="far fa-check-circle"></i> Konfirmasi</a>
                                                                       <div class="dropdown-divider"></div>
                                                                       <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#Batalkan<?php echo $data->id_penarikan; ?>"><i class="far fa-window-close"></i> Batalkan
                                                                           Penarikan</a>
@@ -203,7 +191,7 @@
                                   </div>
                                   <!-- MODAL PILIH NASABAH -->
                                   <?php foreach ($penarikan as $data) : ?>
-                                      <div class="modal fade" id="Selesai<?php echo $data->id_penarikan; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                                      <div class="modal fade" id="Selesai<?php echo $data->id_penarikan; ?><?php echo $data->nin; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
                                           <div class="modal-dialog" role="document">
                                               <div class="modal-content">
                                                   <div class="modal-header">
@@ -217,7 +205,7 @@
                                                   </div>
                                                   <div class="modal-footer">
                                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                      <?php echo anchor('index.php/penarikan/konfirmasi/' . $data->id_penarikan, '<button type="button" class="btn btn-primary">OK</button>'); ?>
+                                                      <?php echo anchor('index.php/penarikan/konfirmasi/' . $data->id_penarikan . '/' . $data->nin, '<button type="button" class="btn btn-primary">OK</button>'); ?>
                                                   </div>
                                               </div>
                                           </div>
@@ -302,4 +290,24 @@
               },
           });
       }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+      <?php if ($this->session->flashdata('sukses')) : ?>
+          Swal.fire({
+              icon: 'success',
+              title: 'Berhasil!',
+              text: '<?php echo $this->session->flashdata("sukses"); ?>',
+              showConfirmButton: false,
+              timer: 3000 // Tampilkan pesan selama 3 detik
+          });
+      <?php endif; ?>
+      <?php if ($this->session->flashdata('gagal')) : ?>
+          Swal.fire({
+              icon: "error",
+              title: "Maaf...",
+              text: "<?php echo $this->session->flashdata("sukses"); ?>",
+              // footer: '<a href="#">Why do I have this issue?</a>'
+          });
+      <?php endif; ?>
   </script>

@@ -147,6 +147,27 @@ class M_nasabah extends CI_Model
     return $showHapusAkun;
   }
 
+  public function get_email($nin)
+  {
+    $this->db->select('id_user');
+    $this->db->where('nin', $nin);
+    $query = $this->db->get('tb_nasabah');
+
+    if ($query->num_rows() > 0) {
+      $row = $query->row();
+      $id_user = $row->id_user;
+      $this->db->select('email');
+      $this->db->where('id_user', $id_user);
+      $query_user = $this->db->get('tb_user');
+
+      if ($query_user->num_rows() > 0) {
+        $row_user = $query_user->row();
+        $email = $row_user->email;
+        return $email;
+      }
+    }
+  }
+
 
   public function get_kec_desa($id_kecamatan, $id_desa)
   {

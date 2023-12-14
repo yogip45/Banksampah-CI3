@@ -101,6 +101,7 @@ class Penarikan extends CI_Controller
 			$this->load->view('newtemplate/footer');
 		}
 	}
+
 	public function compare_with_saldo($input, $nin)
 	{
 		if ($nin != NULL) {
@@ -114,14 +115,81 @@ class Penarikan extends CI_Controller
 			}
 		}
 	}
-	public function konfirmasi($id_penarikan)
+	public function konfirmasi($id_penarikan, $nin)
 	{
+		$email = $this->m_nasabah->get_email($nin);
+		$jumlah_penarikan = $this->m_penarikan->get_jumlah_penarikan($id_penarikan);
 		if ($this->m_penarikan->konfirmasiPenarikan($id_penarikan)) {
-			$this->session->set_flashdata('sukses', 'Konfirmasi berhasil.');
+			$this->_sendReceipt('konfirmasi', $id_penarikan, $jumlah_penarikan, $email);
+			$this->session->set_flashdata('sukses', 'Bukti transaksi sudah dikirimkan ke email nasabah');
 		} else {
-			$this->session->set_flashdata('gagal', 'Konfirmasi gagal.');
+			$this->session->set_flashdata('gagal', 'Terjadi kesalahan');
 		}
 		redirect('/index.php/penarikan/penarikanindex');
+	}
+	private function _sendReceipt($type, $id_penarikan, $jumlah_penarikan, $email)
+	{
+		$config = [
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_user' => 'cikrakjatimulyo@gmail.com',
+			'smtp_pass' => 'nypk qrne gwca exnu',
+			'smtp_port' => 465,
+			'mailtype' => 'html',
+			'charset' => 'utf-8',
+			'newline' => "\r\n"
+		];
+		$this->load->library('email', $config);
+		$this->email->initialize($config);
+
+		$this->email->from('cikrakjatimulyo@gmail.com', 'Tim Cikrak Jatimulyo');
+		$this->email->to($email);
+
+		if ($type == 'konfirmasi') {
+
+			$this->email->subject('Transaksi Penarikan Selesai');
+			$date = date('Y-m-d H:i');
+			$timestamp = strtotime($date);
+			$tanggal = date('d F Y H:i', $timestamp);
+			$message = '
+			<div style="font-family: Arial, sans-serif;">
+				<div style="text-align: center; background-color: #f5f5f5; padding: 20px;">
+					<h2>Notifikasi Penarikan Saldo Berhasil</h2>
+				</div>
+				<div style="margin: 20px;">
+					<p>Hallo,</p>
+					<p>Terima kasih, penarikan saldo Anda berhasil diproses.</p>
+					<p>Berikut adalah detail penarikan anda :</p>
+					<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+						<tr style="background-color: #f5f5f5;">
+							<th style="padding: 10px; text-align: left;">Nomor Transaksi</th>
+							<td style="padding: 10px; text-align: left;">' . $id_penarikan . ' </td>
+						</tr>
+						<tr>
+							<th style="padding: 10px; text-align: left;">Tanggal</th>
+							<td style="padding: 10px; text-align: left;">' . $tanggal . '</td>
+						</tr>
+						<tr style="background-color: #f5f5f5;">
+							<th style="padding: 10px; text-align: left;">Jumlah Penarikan</th>
+							<td style="padding: 10px; text-align: left;">Rp. ' . $jumlah_penarikan . '</td>
+						</tr>
+						<!-- Tambahkan detail lainnya sesuai kebutuhan -->
+					</table>
+					<p>Terima kasih atas kepercayaan Anda kepada kami.</p>
+				</div>
+				<div style="text-align: center; background-color: #f5f5f5; padding: 10px;">
+					<p>Terima Kasih,</p>
+					<p>Tim Layanan Pelanggan</p>
+				</div>
+			</div>';
+			$this->email->message($message);
+			if ($this->email->send()) {
+				return true;
+			} else {
+				echo $this->email->print_debugger();
+				die;
+			}
+		}
 	}
 	public function batalkan($id_penarikan)
 	{

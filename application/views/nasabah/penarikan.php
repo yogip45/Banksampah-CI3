@@ -99,8 +99,8 @@
                                           </thead>
                                           <tbody>
                                               <?php
-                        $no = 1;
-                        foreach ($penarikan as $data) : ?>
+                                                $no = 1;
+                                                foreach ($penarikan as $data) : ?>
                                               <tr class="odd gradeX">
                                                   <td><?php echo $no++ ?></td>
                                                   <td><?php echo $data->id_penarikan ?></td>
@@ -139,3 +139,14 @@
   </div>
   <!-- ./wrapper -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+<?php if (form_error('jumlah_penarikan')) : ?>
+Swal.fire({
+    icon: "error",
+    title: "Maaf...",
+    text: "Saldo anda tidak mencukupi",
+    // footer: '<a href="#">Why do I have this issue?</a>'
+});
+<?php endif ?>
+  </script>
