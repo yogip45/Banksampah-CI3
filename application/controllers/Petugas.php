@@ -268,6 +268,30 @@ class Petugas extends CI_Controller
 				echo $this->email->print_debugger();
 				die;
 			}
+		} elseif ($type == 'disable') {
+			$this->email->to($user);
+			$this->email->subject('Akun Anda Dinonaktifkan');
+			$message = '<div style="font-family: Arial, sans-serif;">
+							<div style="text-align: center; background-color: #f5f5f5; padding: 20px;">
+								<h2>Notifikasi Akun Dinonaktifkan</h2>
+							</div>
+							<div style="margin: 20px;">
+								<p>Hallo,</p>
+								<p>Kami ingin memberitahu Anda bahwa akun Anda telah dinonaktifkan.</p>
+								<p>Silahkan hubungi petugas layanan pelanggan kami untuk informasi lebih lanjut.</p>
+							</div>
+							<div style="text-align: center; background-color: #f5f5f5; padding: 10px;">
+								<p>Terima Kasih,</p>
+								<p>Tim Layanan Pelanggan Bank Sampah</p>
+							</div>
+						</div>';
+			$this->email->message($message);
+			if ($this->email->send()) {
+				return true;
+			} else {
+				echo $this->email->print_debugger();
+				die;
+			}
 		}
 	}
 
@@ -324,15 +348,14 @@ class Petugas extends CI_Controller
 	public function ubahstatus_nasabah($id_user)
 	{
 		$this->load->model('m_user');
-
 		$where = array('id_user' => $id_user);
 		$table = 'tb_user';
 
 		// Ambil data user berdasarkan ID
 		$user = $this->m_user->get_user_by_id($id_user);
-
 		if ($user && isset($user['is_active'])) {
 			if ($user['is_active'] == 1) {
+				$this->_sendEmail(NULL, 'disable', $user['email']);
 				$data = array('is_active' => 0, 'diedit' => date('Y-m-d H:i:s'));
 			} else {
 				$data = array('is_active' => 1, 'diedit' => date('Y-m-d H:i:s'));
