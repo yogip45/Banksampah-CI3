@@ -16,9 +16,7 @@ class User extends CI_Controller
 		$this->data['petugas'] = $this->m_petugas->tampil_data()->result();
 	}
 
-	public function index()
-	{
-	}
+	public function index() {}
 
 	public function myprofile()
 	{
@@ -379,7 +377,7 @@ class User extends CI_Controller
 		if ($this->session->userdata('email')) {
 			if ($this->session->userdata('role') == 2 || $this->session->userdata('role') == 3) {
 				$this->load->model('m_user');
-				$default_password = 'password@_';
+				$default_password = 'password';
 				$where = array('id_user' => $id_user);
 				$table = 'tb_user';
 				// Hash default password							
